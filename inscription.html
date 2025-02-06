@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+</head>
+<body>
+    <div class="recherche">
+        <h2>Inscription</h2>
+        <form action="inscription.php" method="POST">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom..." required="true">
+            <br></br>
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom..." required="true">
+            <br></br>
+            <label for="lieu">Date de naissance :</label>
+            <input type="date" id="date_naissance" name="date_naissance" required="true">
+            <br></br>
+            <label for="options">Genre :</label>
+            <input type="radio" name="options" value="homme" required="true">Homme
+            <input type="radio" name="options" value="femme" required="true">Femme
+            <input type="radio" name="options" value="autre" required="true">Autre
+            <br></br>
+            <label for="email">Adresse courriel :</label>
+            <input type="email" id="email" name="email" placeholder="Entrez une adresse courriel valide..." required="true">
+            <br></br>
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp" placeholder="Entrez votre mot de passe..." required="true">
+            <br></br>
+            <button type="submit">Inscription</button>
+        </form>
+        <p></p>
+        <a href="connexion.html">Vous avez déjà un compte ?</a>
+    </div>
+</body>
+</html>
