@@ -1,4 +1,4 @@
-body.acceuil {
+body.accueil {
     background-color: white;
     margin: 0;
     padding: 0;
@@ -6,7 +6,7 @@ body.acceuil {
     position: relative;
 }
 
-body.acceuil .image_header {
+body.accueil .image_header {
     width: 100%;
     height: 100vh;
     background-image: url('https://hr-infos.fr/wp-content/uploads/2024/01/RU-Jussieu-060_%C2%A9Frederic-CHILLET.jpg');
@@ -15,7 +15,7 @@ body.acceuil .image_header {
     position: relative;
 }
 
-body.acceuil .texte_header {
+body.accueil .texte_header {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -31,7 +31,7 @@ body.acceuil .texte_header {
     white-space: normal;
 }
 
-body.acceuil .pres_agence {
+body.accueil .pres_agence {
     background-color: #f9f9f9;
     color: #333;
     padding: 50px 30px;
@@ -43,12 +43,12 @@ body.acceuil .pres_agence {
     line-height: 1.6;
 }
 
-body.acceuil .pres_agence:hover {
+body.accueil .pres_agence:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
-body.acceuil .pres_agence h2 {
+body.accueil .pres_agence h2 {
     font-size: 2.5em;
     color: #e30613;
     margin-bottom: 20px;
@@ -56,7 +56,7 @@ body.acceuil .pres_agence h2 {
     font-weight: bold;
 }
 
-body.acceuil .pres_agence p {
+body.accueil .pres_agence p {
     font-size: 1.2em;
     color: #555;
     margin-bottom: 15px;
@@ -64,6 +64,6 @@ body.acceuil .pres_agence p {
     line-height: 1.8;
 }
 
-body.acceuil .pres_agence p:last-child {
+body.accueil .pres_agence p:last-child {
     margin-bottom: 0;
 }
