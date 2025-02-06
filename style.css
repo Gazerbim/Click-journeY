@@ -1,1 +1,45 @@
 
+body.acceuil {
+    background-image: url('https://hr-infos.fr/wp-content/uploads/2024/01/RU-Jussieu-060_%C2%A9Frederic-CHILLET.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+
+body.acceuil .texte_header,
+body.acceuil .pres_agence {
+    text-align: center;
+    font-size: 1.5em;
+    background: rgba(227, 6, 19, 0.7); 
+    display: block; 
+    width: 80%; 
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word; 
+    white-space: normal;
+}
+
+body.acceuil .pres_agence {
+    background-color: white; 
+    color: black; 
+    padding: 50px 20px; 
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+
+
+
+body.acceuil .texte_header {
+    
+    padding: 40px;
+    border-radius: 10px;
+    width: 80%;
+    margin-top: 10vh; 
+    font-size: 2em; 
+}
+
