@@ -9,24 +9,27 @@
     <div class="recherche">
         <h2>Inscription</h2>
         <form action="inscription.php" method="POST">
-            <label for="nom">Nom :</label>
+            <label for="nom"><strong>Nom :</strong></label>
             <input type="text" id="nom" name="nom" placeholder="Votre nom..." required="true">
             <br></br>
-            <label for="prenom">Prénom :</label>
+            <label for="prenom"><strong>Prénom :</strong></label>
             <input type="text" id="prenom" name="prenom" placeholder="Votre prénom..." required="true">
             <br></br>
-            <label for="lieu">Date de naissance :</label>
+            <label for="lieu"><strong>Date de naissance :</strong></label>
             <input type="date" id="date_naissance" name="date_naissance" required="true">
             <br></br>
-            <label for="options">Genre :</label>
+            <label for="options"><strong>Genre :</strong></label>
             <input type="radio" name="options" value="homme" required="true">Homme
             <input type="radio" name="options" value="femme" required="true">Femme
             <input type="radio" name="options" value="autre" required="true">Autre
             <br></br>
-            <label for="email">Adresse courriel :</label>
+            <label for="telephone"><strong>Téléphone :</strong></label>
+            <input type="tel" id="telephone" name="telephone" value="Entrez votre numéro...">
+            <br></br>
+            <label for="email"><strong>Adresse courriel :</strong></label>
             <input type="email" id="email" name="email" placeholder="Entrez une adresse courriel valide..." required="true">
             <br></br>
-            <label for="mdp">Mot de passe :</label>
+            <label for="mdp"><strong>Mot de passe :</strong></label>
             <input type="password" id="mdp" name="mdp" placeholder="Entrez votre mot de passe..." required="true">
             <br></br>
             <button type="submit">Inscription</button>
