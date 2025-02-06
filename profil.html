@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil utilisateur</title>
+</head>
+<body>
+
+    <h1>Mon Profil</h1>
+
+    <form action="/modifier_nom" method="post">
+        <label for="nom"><strong>Nom :</strong></label>
+        <input type="text" id="nom" name="nom">
+        <button type="submit">Modifier</button>
+    </form>
+    <br></br>
+
+    <form action="/modifier_prenom" method="post">
+        <label for="nom"><strong>Prénom :</strong></label>
+        <input type="text" id="prenom" name="prenom">
+        <button type="submit">Modifier</button>
+    </form>
+    <br></br>
+
+    <form action="/modifier_email" method="post">
+        <label for="email"><strong>Email :</strong></label>
+        <input type="email" id="email" name="email">
+        <button type="submit">Modifier</button>
+    </form>
+    <br></br>
+
+    <form action="/modifier_telephone" method="post">
+        <label for="telephone"><strong>Téléphone :</strong></label>
+        <input type="tel" id="telephone" name="telephone">
+        <button type="submit">Modifier</button>
+    </form>
+    <br></br>
+
+    <form action="/modifier_date_naissance" method="post">
+        <label for="date_naissance"><strong>Date de naissance :</strong></label>
+        <input type="date" id="date_naissance" name="date_naissance">
+        <button type="submit">Modifier</button>
+    </form>
+    <br></br>
+
+    <form action="/modifier_mdp" method="post">
+        <label for="mdp"><strong>Mot de passe :</strong></label>
+        <input type="password" id="mdp" name="mdp">
+        <br></br>
+        <label for="cmdp"><strong>Confirmer le mot de passe :</strong></label>
+        <input type="password" id="cmdp" name="cmdp">
+        <button type="submit">Modifier</button>
+    </form>
+    <br></br>
+
+
+</body>
+</html>
