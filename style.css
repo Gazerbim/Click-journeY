@@ -32,10 +32,38 @@ body.acceuil .texte_header {
 }
 
 body.acceuil .pres_agence {
-    background-color: white;
-    color: black;
-    padding: 50px 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 50px 30px;
+    border-radius: 15px;
+    margin-top: -30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+body.acceuil .pres_agence:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+body.acceuil .pres_agence h2 {
+    font-size: 2.5em;
+    color: #e30613;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+body.acceuil .pres_agence p {
+    font-size: 1.2em;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+body.acceuil .pres_agence p:last-child {
+    margin-bottom: 0;
 }
