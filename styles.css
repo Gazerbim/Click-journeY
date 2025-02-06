@@ -53,7 +53,7 @@ body.accueil .pres_agence {
 }
 
 body.accueil .pres_agence:hover {
-    transform: translateY(-10px) scale(1.03) ;
+    transform: translateY(-10px) scale(1.01) ;
     
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
@@ -89,7 +89,7 @@ nav {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-nav p {
+nav  p {
     margin: 0;
     text-align: right;
 }
@@ -113,4 +113,22 @@ nav a button {
 nav a button:hover {
     background-color: #c30510;
     transform: translateY(-5px);
+}
+
+
+.crous button {
+    padding: 0; 
+    border: none; 
+    background-color: transparent; 
+    cursor: pointer; 
+}
+
+.crous button img {
+    width: 50px; 
+    height: auto; 
+    transition: transform 0.3s ease; 
+}
+
+.crous button img:hover {
+    transform: scale(1.1); 
 }
