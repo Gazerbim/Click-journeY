@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Recherche]</title>
+</head>
+<body>
+    <div class="recherche">
+        <h2>Recherche rapide</h2>
+        <form action="recherche_voyage.php" method="GET">
+            <label for="lieu">Crous à rechercher :</label>
+            <input type="text" id="lieu" name="lieu" placeholder="Entrez un crous que vous voulez visiter...">
+            <br></br>
+            <label for="lieu">Quand voulez-vous partir ?</label>
+            <input type="date" id="date" name="date">
+            <br></br>
+            <label for="options">Options :</label>
+            <input type="checkbox" id="options" name="options" value="a">A
+            <input type="checkbox" id="options" name="options" value="b">B
+            <input type="checkbox" id="options" name="options" value="c">C
+            <input type="checkbox" id="options" name="options" value="d">D
+            <br></br>
+            <button type="submit">Rechercher</button>
+        </form>
+    </div>
+</body>
+</html>
