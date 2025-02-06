@@ -16,10 +16,11 @@ body.accueil .image_header {
 }
 
 body.accueil .texte_header {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    top: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    
     text-align: center;
     font-size: 2em;
     background: rgba(227, 6, 19, 0.7);
@@ -29,22 +30,31 @@ body.accueil .texte_header {
     color: white;
     word-wrap: break-word;
     white-space: normal;
+    transition: transform 1s;
+}
+
+body.accueil .texte_header:hover {
+  transform: scale(1.05) ;
+  
+  
 }
 
 body.accueil .pres_agence {
+    position: absolute;
     background-color: #f9f9f9;
     color: #333;
     padding: 50px 30px;
     border-radius: 15px;
     margin-top: -30px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
 }
 
 body.accueil .pres_agence:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.03) ;
+    
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
@@ -66,4 +76,41 @@ body.accueil .pres_agence p {
 
 body.accueil .pres_agence p:last-child {
     margin-bottom: 0;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    padding: 10px 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav p {
+    margin: 0;
+    text-align: right;
+}
+
+nav a {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+nav a button {
+    background-color: #e30613;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+nav a button:hover {
+    background-color: #c30510;
+    transform: translateY(-5px);
 }
