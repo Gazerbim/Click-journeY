@@ -1,5 +1,6 @@
 
-------------------------------------------------------------------- CSS index 
+
+/*------------------------------------------------------------------- CSS index */
 body.accueil {
     background-color: white;
     margin: 0;
@@ -148,6 +149,18 @@ nav .crous button:hover {
 nav .crous {
     margin-right: auto; 
 }
+
+/*-------------------------------------CSS profil */
+.conteuneur-profil {
+    width: 60%;
+    margin: 100px auto;
+    padding: 40px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
 .conteuneur-profil {
     width: 60%;
     margin: 100px auto;
@@ -203,3 +216,106 @@ nav .crous {
     background-color: #c30510;
     transform: translateY(-5px);
 }
+
+/*-----------------------CSS inscription*/
+
+
+body.inscription {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+
+body.inscription .recherche {
+    width: 60%;
+    margin: 100px auto;
+    padding: 40px;
+    background: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+body.inscription .recherche h2 {
+    font-size: 2.5em;
+    color: #e30613;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+body.inscription .recherche form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body.inscription .recherche label {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+body.inscription .recherche input {
+    width: 80%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+body.inscription .recherche input:focus {
+    border-color: #e30613;
+    outline: none;
+}
+
+body.inscription .recherche button {
+    background-color: #e30613;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+body.inscription .recherche button:hover {
+    background-color: #c30510;
+    transform: translateY(-5px);
+}
+
+body.inscription a {
+    color: #e30613;
+    text-decoration: none;
+}
+
+body.inscription a:hover {
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
