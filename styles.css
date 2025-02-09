@@ -215,10 +215,11 @@ body.profil {
 }
 
 
-/*-----------------------CSS inscription*/
+/*-----------------------CSS inscription et connexion*/
 
 
-body.inscription {
+body.inscription,
+body.connexion {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -226,7 +227,7 @@ body.inscription {
 }
 
 
-body.inscription .recherche {
+.recherche{
     width: 60%;
     margin: 100px auto;
     padding: 40px;
@@ -236,7 +237,7 @@ body.inscription .recherche {
     text-align: center;
 }
 
-body.inscription .recherche h2 {
+.recherche h2 {
     font-size: 2.5em;
     color: #e30613;
     margin-bottom: 30px;
@@ -244,19 +245,19 @@ body.inscription .recherche h2 {
     font-weight: bold;
 }
 
-body.inscription .recherche form {
+.recherche form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-body.inscription .recherche label {
+.recherche label {
     font-size: 20px;
     color: #333;
     margin-bottom: 5px;
 }
 
-body.inscription .recherche input {
+.recherche input {
     width: 80%;
     padding: 10px;
     font-size: 16px;
@@ -266,12 +267,12 @@ body.inscription .recherche input {
     transition: all 0.3s ease-in-out;
 }
 
-body.inscription .recherche input:focus {
+.recherche input:focus {
     border-color: #e30613;
     outline: none;
 }
 
-body.inscription .recherche button {
+.recherche button {
     background-color: #e30613;
     color: white;
     border: none;
@@ -282,23 +283,21 @@ body.inscription .recherche button {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-body.inscription .recherche button:hover {
+.recherche button:hover {
     background-color: #c30510;
     transform: translateY(-5px);
 }
 
-body.inscription a {
+body.inscription a,
+body.connexion a {
     color: #e30613;
     text-decoration: none;
 }
 
-body.inscription a:hover {
+body.inscription a:hover
+body.connexion a:hover {
     text-decoration: underline;
 }
-
-
-
-
 
 
 
