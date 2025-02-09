@@ -151,12 +151,12 @@ nav .crous {
 }
 
 /*-------------------------------------CSS profil */
-body.profil {
-	font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
-    margin: 0;
-    padding: 0;
-}
+/*body.profil {*/
+	/*font-family: Arial, sans-serif;*/
+   /* background-color: #f2f2f2;*/
+   /* margin: 0;*/
+   /* padding: 0;*/
+/*}*/
 
 .conteuneur-profil {
     width: 60%;
@@ -215,11 +215,12 @@ body.profil {
 }
 
 
-/*-----------------------CSS inscription et connexion*/
+/*-----------------------CSS inscription et connexion et recherche*/
 
 
 body.inscription,
-body.connexion {
+body.connexion,
+body.rech {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -255,6 +256,8 @@ body.connexion {
     font-size: 20px;
     color: #333;
     margin-bottom: 5px;
+    
+    
 }
 
 .recherche input {
@@ -299,7 +302,20 @@ body.connexion a:hover {
     text-decoration: underline;
 }
 
+.radio-groupe,
+.checkbox-groupe {
+    display: flex;
+    gap: 20px; /* Espacement entre les options */
+    justify-content: center; /* Centre les éléments horizontalement */
+    align-items: center; /* Aligne verticalement */
+}
 
+.radio-groupe label,
+.checkbox-groupe label {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacement entre le bouton radio et le texte */
+}
 
 
 
