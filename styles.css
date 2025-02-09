@@ -151,14 +151,11 @@ nav .crous {
 }
 
 /*-------------------------------------CSS profil */
-.conteuneur-profil {
-    width: 60%;
-    margin: 100px auto;
-    padding: 40px;
-    background: #f9f9f9;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
+body.profil {
+	font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
 }
 
 .conteuneur-profil {
@@ -216,6 +213,7 @@ nav .crous {
     background-color: #c30510;
     transform: translateY(-5px);
 }
+
 
 /*-----------------------CSS inscription*/
 
