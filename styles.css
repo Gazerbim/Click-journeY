@@ -218,7 +218,8 @@ body{
 
 body.inscription,
 body.connexion,
-body.rech {
+body.rech,
+body.profil {
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
@@ -234,6 +235,7 @@ body.rech {
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
+    
 }
 
 .recherche h2 {
@@ -254,6 +256,8 @@ body.rech {
     font-size: 20px;
     color: #333;
     margin-bottom: 5px;
+    padding-top: 30px;
+    
     
     
 }
