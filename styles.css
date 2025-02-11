@@ -92,13 +92,20 @@ nav {
     padding: 10px 20px;
 }
 
+.nav-center {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.nav-spacer {
+    flex: 1.2;
+}
+
 .nav-titre {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
     font-size: 50px;
     font-weight: bold;
     color: #e30613;
+    margin: 0;
 }
 
 .nav-liens {
@@ -110,7 +117,6 @@ nav {
 .nav-liens a.selected button {
     background-color: #c59e9e;
     color: white;
-    font-weight: bold;
 }
 
 .nav-liens a.selected button:hover {
@@ -136,15 +142,14 @@ nav h2 {
 
 nav a {
     text-decoration: none;
-    margin-right: 10px;
 }
 
 nav a button {
     background-color: #e30613;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 1.1em;
+    padding: 10px 10px;
+    font-size: 20px;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
