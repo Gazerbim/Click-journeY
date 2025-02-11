@@ -126,6 +126,7 @@ nav p {
     padding: 0 20px;
 }
 
+
 nav h2 {
     display: inline;
     align-items: right;
@@ -250,19 +251,27 @@ body.profil {
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+}
+
+.recherche .input-groupe {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    gap: 10px; 
+    width: 80%;
 }
 
 .recherche label {
+    display: flex;
     font-size: 20px;
     color: #333;
     margin-bottom: 5px;
     padding-top: 30px;
-    
-    
-    
 }
 
 .recherche input {
+    
     width: 80%;
     padding: 10px;
     font-size: 16px;
@@ -272,12 +281,8 @@ body.profil {
     transition: all 0.3s ease-in-out;
 }
 
-.recherche input:focus {
-    border-color: #e30613;
-    outline: none;
-}
-
 .recherche button {
+    
     background-color: #e30613;
     color: white;
     border: none;
@@ -286,6 +291,11 @@ body.profil {
     cursor: pointer;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.recherche input:focus {
+    border-color: #e30613;
+    outline: none;
 }
 
 .recherche button:hover {
