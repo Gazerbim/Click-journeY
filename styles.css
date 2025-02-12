@@ -117,6 +117,10 @@ nav {
 .nav-liens a.selected button {
     background-color: #c59e9e;
     color: white;
+    transform: scale(1.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    
+    
 }
 
 .nav-liens a.selected button:hover {
@@ -188,13 +192,13 @@ nav .crous {
     margin-right: auto; 
 }
 
-/*-------------------------------------CSS profil */
-/*body.profil {*/
-	/*font-family: Arial, sans-serif;*/
-   /* background-color: #f2f2f2;*/
-   /* margin: 0;*/
-   /* padding: 0;*/
-/*}*/
+.contact {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  background-color: #f9f9f9;
+  
+}
 
 .conteuneur-profil {
     width: 60%;
