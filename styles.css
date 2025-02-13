@@ -40,7 +40,7 @@ body.accueil .texte_header:hover {
 }
 
 body.accueil .pres_agence {
-    position: absolute;
+    position: relative;
     background-color: #f9f9f9;
     color: #333;
     padding: 50px 30px;
