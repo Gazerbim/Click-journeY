@@ -237,7 +237,7 @@ body.profil {
 }
 
 
-.recherche{
+.recherche {
     width: 60%;
     margin: 100px auto;
     padding: 40px;
@@ -247,6 +247,12 @@ body.profil {
     text-align: center;
     
 }
+
+.deconnexion {
+  text-align: center;
+  padding-bottom: 40px;
+}
+
 
 .recherche h2 {
     font-size: 2.5em;
@@ -290,7 +296,8 @@ body.profil {
     transition: all 0.3s ease-in-out;
 }
 
-.recherche button {
+.recherche button,
+.deconnexion button {
     
     background-color: #e30613;
     color: white;
@@ -302,12 +309,14 @@ body.profil {
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.recherche input:focus {
+.recherche input:focus,
+.deconnexion input:focus {
     border-color: #e30613;
     outline: none;
 }
 
-.recherche button:hover {
+.recherche button:hover,
+.deconnexion button:hover {
     background-color: #c30510;
     transform: translateY(-5px);
 }
