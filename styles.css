@@ -200,6 +200,28 @@ nav .crous {
   
 }
 
+
+
+.contact button {
+  width: 50px;
+  border: none;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: none;
+}
+
+.contact img {
+  width: 50px;
+  background-color: #f9f9f9 ;
+  cursor: pointer;
+}
+
+.contact button:hover {
+    transform: scale(1.2);
+}
+
+
+
 .conteuneur-profil {
     width: 60%;
     margin: 100px auto;
@@ -230,7 +252,6 @@ body.inscription,
 body.connexion,
 body.rech,
 body.profil {
-    font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     margin: 0;
     padding: 0;
