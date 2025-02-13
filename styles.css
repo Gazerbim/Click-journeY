@@ -430,6 +430,26 @@ body.connexion a:hover {
     margin-bottom: 0;
 }
 
+.lien{
+    margin-right: 80%;
+    color: #e30613;
+}
+
+.lien2 {
+    color: #e30613;
+}
+
+.lien:hover, 
+.lien2:hover {
+    opacity: 0.6;
+}
+
+
+.recherche textarea {
+    width: 80%;
+    padding: 5px;
+}
+
 .admin-table {
     width: 100%;
     margin: auto;
@@ -455,15 +475,6 @@ body.connexion a:hover {
     width: 90%;
     background-color: #f9f9f9;
 }
-
-
-
-
-
-
-
-
-
 
 
 
