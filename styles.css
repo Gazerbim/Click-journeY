@@ -427,7 +427,7 @@ body.connexion a:hover {
 }
 
 .presentation p:last-child {
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 
 .lien{
@@ -476,6 +476,28 @@ body.connexion a:hover {
     background-color: #f9f9f9;
 }
 
+.image {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
 
+.image img {
+    flex: 1 1 25%;
+    max-width: 25%;
+    height: 700px;
+    object-fit: cover;
+}
 
+.image1 {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
 
+.image1 img {
+    flex: 1 1 33.333333%;
+    max-width: 33.333333%;
+    height: 700px;
+    object-fit: cover;
+}
