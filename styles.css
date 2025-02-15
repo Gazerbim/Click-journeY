@@ -435,11 +435,7 @@ body.connexion a:hover {
     line-height: 1.8;
 }
 
-.lien{
-    color: #e30613;
-    text-align: center;
-}
-
+.lien,
 .lien2 {
     color: #e30613;
     text-align: center;
@@ -482,7 +478,8 @@ body.connexion a:hover {
     background-color: #f9f9f9;
 }
 
-.image {
+.image,
+.image1 {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
@@ -493,12 +490,6 @@ body.connexion a:hover {
     max-width: 25%;
     height: 700px;
     object-fit: cover;
-}
-
-.image1 {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
 }
 
 .image1 img {
