@@ -421,13 +421,9 @@ body.connexion a:hover {
 .presentation p {
     font-size: 1.2em;
     color: #555;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: justify;
     line-height: 1.8;
-}
-
-.presentation p:last-child {
-    margin-bottom: 20px;
 }
 
 .lien{
