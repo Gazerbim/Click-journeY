@@ -381,6 +381,7 @@ body.connexion a:hover {
 .presentation h1 {
     font-size: 2.5em;
     color: #e30613;
+    margin-top: 20px;
     margin-bottom: 30px;
     text-transform: uppercase;
     font-weight: bold;
@@ -407,9 +408,17 @@ body.connexion a:hover {
 .presentation h4 {
     font-size: 1.5em;
     color: #000000;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     font-weight: bold;
     text-align: left;
+}
+
+.presentation h4.center {
+    font-size: 1.5em;
+    color: #000000;
+    margin-bottom: 50px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .presentation ul {
@@ -475,7 +484,7 @@ body.connexion a:hover {
 .image {
     display: flex;
     align-items: center;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
 .image img {
@@ -488,7 +497,7 @@ body.connexion a:hover {
 .image1 {
     display: flex;
     align-items: center;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
 .image1 img {
@@ -496,4 +505,8 @@ body.connexion a:hover {
     max-width: 33.333333%;
     height: 700px;
     object-fit: cover;
+}
+
+img {
+    margin-bottom: 50px;
 }
