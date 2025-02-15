@@ -436,12 +436,13 @@ body.connexion a:hover {
 }
 
 .lien{
-    margin-right: 80%;
     color: #e30613;
+    text-align: center;
 }
 
 .lien2 {
     color: #e30613;
+    text-align: center;
 }
 
 .lien:hover, 
