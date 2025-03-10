@@ -109,7 +109,18 @@
 		}
 	}
 
-	
+	function supprimerUtilisateur($id){
+		$file_content = file_get_contents($file);
+		$content = json_decode($file_content, true);
+		$line = findUserWithId($content, $id);
+		if($line != 0){
+			unset($content[$line-1]);
+			file_put_contents($file,json_encode($content));
+			return 0;
+		}
+	}
+
+
 
 	//EXP UTILISATION
 
