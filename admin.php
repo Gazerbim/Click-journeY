@@ -10,7 +10,7 @@
 <body class="rech">
 <?php
 require("requires/json_utilities.php");
-$tab = readJSONContent("./databases/users.json");
+$tab = lireFichierJson("./databases/users.json");
 ?>
     <nav>
         <a class="crous" href="https://www.crous-paris.fr/">
