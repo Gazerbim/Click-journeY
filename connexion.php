@@ -27,7 +27,7 @@
 
     <div class="recherche">
         <h2>Connexion</h2>
-
+ 
         <?php
             session_start();
             if (isset($_SESSION['error'])) {

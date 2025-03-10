@@ -23,15 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
+    $utilisateur_trouve = checkIdentifiants($email, $mdp);
     
-    $utilisateur_trouve = false;
-    foreach ($utilisateurs as $utilisateur) {
-        if ($utilisateur['courriel'] === $email && $utilisateur['mdp'] === $mdp) {
-            $utilisateur_trouve = true;
-            break;
-        }
-    }
-
     if ($utilisateur_trouve) {
         header('Location: index.html'); 
         exit;

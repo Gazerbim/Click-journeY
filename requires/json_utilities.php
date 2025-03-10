@@ -140,14 +140,14 @@
 	}
 
 	function checkIdentifiants($courriel, $mdp){
-		$file_content = file_get_contents($file);
+		$file_content = file_get_contents("databases/users.json");
 		$content = json_decode($file_content, true);
 		foreach ($content as $key => $value) {
 			if($value["courriel"] == $courriel && $value["mdp"] == $mdp){
-				return 1;
+				return true;
 			}
 		}
-		return 0;
+		return false;
 	}
 
 
