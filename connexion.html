@@ -31,7 +31,7 @@
         <?php
             session_start();
             if (isset($_SESSION['error'])) {
-                echo "<p style='color: red;'>" . $_SESSION['error'] . "</p>";
+                echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
                 unset($_SESSION['error']); // Supprime l'erreur après affichage
             }
         ?>
