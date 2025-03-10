@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    
     if (empty($email) || empty($mdp)) {
-        $_SESSION['error'] = "Veuillez remplir tous les champs.";
+        $_SESSION['error'] = "Veuillez remplir tous les champs";
         header('Location: connexion.php');
         exit;
     }
@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $utilisateurs = lireFichierJson("./databases/users.json");
 
     if (!$utilisateurs) {
-        $_SESSION['error'] = "Erreur de lecture des utilisateurs.";
+        $_SESSION['error'] = "Erreur de lecture des utilisateurs";
         header('Location: connexion.php');
         exit;
     }
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: index.html'); 
         exit;
     } else {
-        $_SESSION['error'] = "Email ou mot de passe incorrect.";
+        $_SESSION['error'] = "Email ou mot de passe incorrect";
         header('Location: connexion.php');         exit;
     }
 }
