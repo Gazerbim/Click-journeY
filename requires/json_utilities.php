@@ -120,6 +120,36 @@
 		}
 	}
 
+	function recupereInfosUtilisateur($id){
+		$file_content = file_get_contents($file);
+		$content = json_decode($file_content, true);
+		$line = findUserWithId($content, $id);
+		if($line != 0){
+			return $content[$line-1];
+		}
+	}
+
+	function existeUtilisateur($id){
+		$file_content = file_get_contents($file);
+		$content = json_decode($file_content, true);
+		$line = findUserWithId($content, $id);
+		if($line != 0){
+			return 1;
+		}
+		return 0;
+	}
+
+	function checkIdentifiants($courriel, $mdp){
+		$file_content = file_get_contents($file);
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["courriel"] == $courriel && $value["mdp"] == $mdp){
+				return 1;
+			}
+		}
+		return 0;
+	}
+
 
 
 	//EXP UTILISATION
