@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Lire les utilisateurs depuis users.json
+    
     $utilisateurs = lireFichierJson("./databases/users.json");
 
     if (!$utilisateurs) {
