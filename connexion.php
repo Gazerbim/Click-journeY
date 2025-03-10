@@ -20,7 +20,7 @@
             <a href="index.html"><button>Accueil</button></a>
             <a href="presentation.html"><button>Présentation</button></a>
             <a href="recherche.html"><button>Recherche</button></a>
-            <a class="selected" href="connexion.html"><button>Connexion</button></a>
+            <a class="selected" href="connexion.php"><button>Connexion</button></a>
             <a href="profil.html"><button>Profil</button></a>
         </div>
     </nav>
@@ -32,11 +32,11 @@
             session_start();
             if (isset($_SESSION['error'])) {
                 echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
-                unset($_SESSION['error']); // Supprime l'erreur après affichage
+                unset($_SESSION['error']);
             }
         ?>
 
-        <form action="connexion.php" method="POST">
+        <form action="connexionP.php" method="POST">
             <label for="email"><strong>Courriel :</strong></label>
             <input type="email" id="email" name="email" placeholder="Entrez une adresse courriel valide..." required="true">
             <br></br>
