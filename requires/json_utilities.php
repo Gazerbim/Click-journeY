@@ -150,6 +150,45 @@
 		return false;
 	}
 
+	function recupererVoyagesUtilisateur($id){
+		$path = "databases/utilisateurs/".$id."/voyages.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		return $content;
+	}
+
+	function creerVoyage($id, $nom, $description, $tarif, $debut, $fin, $etapes){
+		$path = "databases/voyages.json";
+		$tab = lireFichierJson($path);
+		$tab[] = array("nom"=>$nom, "description"=>$description, "etapes"=>$etapes, "tarif"=>$tarif, "debut"=>$debut, "fin"=>$fin);
+		file_put_contents($path, json_encode($tab));
+	}
+
+	function ajouterUtilisateur($nom, $prenom, $id, $mdp, $role, $naissance, $genre, $tel, $courriel){
+		$path = "databases/users.json";
+		$tab = lireFichierJson($path);
+		$tab[] = array("nom"=>$nom, "prenom"=>$prenom, "id"=>$id, "mdp"=>$mdp, "role"=>$role, "naissance"=>$naissance, "genre"=>$genre, "tel"=>$tel, "courriel"=>$courriel);
+		file_put_contents($path, json_encode($tab));
+	}
+
+	
+
+	function trouverVoyageAvecId($tab_voyage, $id){ # Retourne la ligne avec l'id correspondant dans le tableau (0 si non trouvé). Ca commence à 1
+		foreach ($tab_voyage as $key => $value) {
+			if($value["id"] == $id){
+				return $key+1;
+			}
+		}
+		return 0;
+	}
+
+	function recupererEtapesVoyage($id){
+		$path = "databases/voyages.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		$indice = trouverVoyageAvecId($content, $id);
+		return $content[$indice-1]["etapes"];
+	}
 
 
 	//EXP UTILISATION
