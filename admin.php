@@ -11,6 +11,7 @@
 <?php
 require("requires/json_utilities.php");
 $tab = lireFichierJson("./databases/users.json");
+const ligneParPage = 20;
 ?>
     <nav>
         <a class="crous" href="https://www.crous-paris.fr/">
@@ -45,24 +46,73 @@ $tab = lireFichierJson("./databases/users.json");
                 </thead>
                 <tbody>
                     <?php
-                        echo "<tr>";
-                        foreach ($tab as $line) {
-                            echo "<td>" . $line['id'] . "</td>";
-                            echo "<td>" . $line['nom'] . "</td>";
-                            echo "<td>" . $line['prenom'] . "</td>";
-                            echo "<td>" . $line['courriel'] . "</td>";
-                            echo "<td>" . $line['role'] . "</td>";
-                            echo "<td>";
-                            echo "<button>Modifier</button>";
-                            echo "<button>Supprimer</button>";
-                            echo "<button>Ajouter Reduction</button>";
-                            echo "</td>";
-                            echo "</tr>";
+                        $page = $_GET['page'];
+                        
+                        if ($page == NULL) {
+                            $page = 0;
                         }
+                        if (count($tab) <= ligneParPage) {
+                            foreach ($tab as $line) {
+                                echo "<tr>";
+                                echo "<td>" . $line['id'] . "</td>";
+                                echo "<td>" . $line['nom'] . "</td>";
+                                echo "<td>" . $line['prenom'] . "</td>";
+                                echo "<td>" . $line['courriel'] . "</td>";
+                                echo "<td>" . $line['role'] . "</td>";
+                                echo "<td>";
+                                echo "<button>Modifier</button>";
+                                echo "<button>Supprimer</button>";
+                                //echo "<button>Ajouter Reduction</button>";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        }else{
+                            for ($i = $page*ligneParPage; $i <= min($page*ligneParPage+10, count($tab)-1); $i++) {
+                                $line = $tab[$i];
+                                echo "<tr>";
+                                echo "<td>" . $line['id'] . "</td>";
+                                echo "<td>" . $line['nom'] . "</td>";
+                                echo "<td>" . $line['prenom'] . "</td>";
+                                echo "<td>" . $line['courriel'] . "</td>";
+                                echo "<td>" . $line['role'] . "</td>";
+                                echo "<td>";
+                                echo "<button>Modifier</button>";
+                                echo "<button>Supprimer</button>";
+                                //echo "<button>Ajouter Reduction</button>";
+                                echo "</td>";
+                                echo "</tr>";
+                            }
+                        }
+                        
+                        
+
+                        
                     ?>
                 </tbody>
             </table>
+            <div class="pagination">
+            <?php
+                $nbPages = ceil(count($tab)/ligneParPage);
+                if($nbPages != 1){
+                    for ($i = 0; $i < $nbPages; $i++) {
+                        echo "<a href='admin.php?page=$i'>" . ($i+1) . "</a><a> </a>";
+                    }
+                    echo "<br>";
+                    $pageM = $page-1;
+                    $pageP = $page+1;
+                    if ($pageM < 0) {
+                        $pageM = 0;
+                    }
+                    if ($pageP >= $nbPages) {
+                        $pageP = $nbPages-1;
+                    }
+                    echo "<a href='admin.php?page=$pageM'>"."<"."</a>";
+                    echo "<a href='admin.php?page=$pageP'>".">"."</a>";
+                }
+            ?>
         </div>
+        </div>
+        
     </main>
 </body>
 </html>

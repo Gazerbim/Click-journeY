@@ -164,11 +164,15 @@
 		file_put_contents($path, json_encode($tab));
 	}
 
-	function ajouterUtilisateur($nom, $prenom, $id, $mdp, $role, $naissance, $genre, $tel, $courriel){
+	function ajouterUtilisateur($nom, $prenom, $mdp, $role, $naissance, $genre, $tel, $courriel){
+		$id = rand(10000, 99999);
 		$path = "databases/users.json";
 		$tab = lireFichierJson($path);
 		$tab[] = array("nom"=>$nom, "prenom"=>$prenom, "id"=>$id, "mdp"=>$mdp, "role"=>$role, "naissance"=>$naissance, "genre"=>$genre, "tel"=>$tel, "courriel"=>$courriel);
 		file_put_contents($path, json_encode($tab));
+		mkdir("databases/utilisateurs/".$id);
+		file_put_contents("databases/utilisateurs/".$id."/voyages.json", json_encode(array()));
+		return $id;
 	}
 
 	
@@ -188,6 +192,17 @@
 		$content = json_decode($file_content, true);
 		$indice = trouverVoyageAvecId($content, $id);
 		return $content[$indice-1]["etapes"];
+	}
+
+	function isAdmin($id){
+		$path = "databases/users.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		$indice = trouverUtilisateurAvecId($content, $id);
+		if($content[$indice-1]["role"] == "adm"){
+			return true;
+		}
+		return false;
 	}
 
 
