@@ -26,7 +26,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["nom"] = $newName;
+			$content[$line-1]["nom"] = $nouveauNom;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
@@ -36,7 +36,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["prenom"] = $newName;
+			$content[$line-1]["prenom"] = $nouveauPrenom;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
@@ -46,7 +46,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["courriel"] = $newMail;
+			$content[$line-1]["courriel"] = $nouveauCourriel;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
@@ -56,7 +56,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["role"] = $newRole;
+			$content[$line-1]["role"] = $nouveauRole;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
@@ -66,7 +66,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["mdp"] = $newMdp;
+			$content[$line-1]["mdp"] = $nouveauMdp;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
@@ -76,7 +76,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["naissance"] = $newNaissance;
+			$content[$line-1]["naissance"] = $nouvelleNaissance;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
@@ -86,7 +86,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["genre"] = $newGenre;
+			$content[$line-1]["genre"] = $nouveauGenre;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
@@ -96,7 +96,7 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["tel"] = $newTel;
+			$content[$line-1]["tel"] = $nouveauTel;
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
