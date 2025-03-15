@@ -23,106 +23,97 @@
 	}
 
 	function modifierNomUtilisateur($id, $nouveauNom){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["nom"] = $newName;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
+
 	function modifierPrenomUtilisateur($id, $nouveauPrenom){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["prenom"] = $newName;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 
 	function modifierCourrielUtilisateur($id, $nouveauCourriel){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["courriel"] = $newMail;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 	
 	function modifierRoleUtilisateur($id, $nouveauRole){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["role"] = $newRole;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 
 	function modifierMotDePasseUtilisateur($id, $nouveauMdp){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["mdp"] = $newMdp;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 
 	function modifierNaissanceUtilisateur($id, $nouvelleNaissance){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["naissance"] = $newNaissance;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 
 	function modifierGenreUtilisateur($id, $nouveauGenre){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["genre"] = $newGenre;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 
 	function modifierTelUtilisateur($id, $nouveauTel){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["tel"] = $newTel;
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 
 	function supprimerUtilisateur($id){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			unset($content[$line-1]);
-			file_put_contents($file,json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
 
-	function recupereInfosUtilisateur($id, $file){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+	function recupereInfosUtilisateur($id){
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			return $content[$line-1];
@@ -130,8 +121,7 @@
 	}
 
 	function existeUtilisateur($id){
-		$file_content = file_get_contents($file);
-		$content = json_decode($file_content, true);
+		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			return 1;
