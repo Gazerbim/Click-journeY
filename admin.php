@@ -26,7 +26,7 @@ const ligneParPage = 20;
             <a href="presentation.html"><button>Présentation</button></a>
             <a href="recherche.html"><button>Recherche</button></a>
             <a href="connexion.php"><button>Connexion</button></a>
-            <a href="profil.html"><button>Profil</button></a>
+            <a href="profil.php"><button>Profil</button></a>
         </div>
     </nav>
 
@@ -60,7 +60,9 @@ const ligneParPage = 20;
                                 echo "<td>" . $line['courriel'] . "</td>";
                                 echo "<td>" . $line['role'] . "</td>";
                                 echo "<td>";
-                                echo "<button>Modifier</button>";
+                                echo "<form action='profil.php' method='get'>";
+                                echo "<input type='hidden' name='id' value='" . $line['id'] . "'>";
+                                echo "<button type='submit'>Modifier</button>";
                                 echo "<button>Supprimer</button>";
                                 //echo "<button>Ajouter Reduction</button>";
                                 echo "</td>";
@@ -76,6 +78,8 @@ const ligneParPage = 20;
                                 echo "<td>" . $line['courriel'] . "</td>";
                                 echo "<td>" . $line['role'] . "</td>";
                                 echo "<td>";
+                                echo "<form action='profil.php' method='get'>";
+                                echo "<input type='hidden' name='id' value='" . $line['id'] . "'>";
                                 echo "<button>Modifier</button>";
                                 echo "<button>Supprimer</button>";
                                 //echo "<button>Ajouter Reduction</button>";

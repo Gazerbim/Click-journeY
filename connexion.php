@@ -21,7 +21,7 @@
             <a href="presentation.html"><button>Présentation</button></a>
             <a href="recherche.html"><button>Recherche</button></a>
             <a class="selected" href="connexion.php"><button>Connexion</button></a>
-            <a href="profil.html"><button>Profil</button></a>
+            <a href="profil.php"><button>Profil</button></a>
         </div>
     </nav>
 
