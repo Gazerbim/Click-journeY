@@ -80,7 +80,7 @@ const ligneParPage = 20;
                                 echo "<td>";
                                 echo "<form action='profil.php' method='get'>";
                                 echo "<input type='hidden' name='id' value='" . $line['id'] . "'>";
-                                echo "<button>Modifier</button>";
+                                echo "<button type='submit'>Modifier</button>";
                                 echo "<button>Supprimer</button>";
                                 //echo "<button>Ajouter Reduction</button>";
                                 echo "</td>";
