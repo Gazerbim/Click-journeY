@@ -21,7 +21,7 @@
             <a href="presentation.html"><button>Présentation</button></a>
             <a href="recherche.html"><button>Recherche</button></a>
             <a class="selected" href="connexion.php"><button>Connexion</button></a>
-            <a href="profil.php"><button>Profil</button></a>
+            <a href="profil.html"><button>Profil</button></a>
         </div>
     </nav>
 
@@ -30,13 +30,48 @@
  
         <?php
             session_start();
+	    require_once 'requires/json_utilities.php';
             if (isset($_SESSION['error'])) {
                 echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
                 unset($_SESSION['error']);
             }
+	   
+ 
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    		$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    		$mdp = isset($_POST['mdp']) ? trim($_POST['mdp']) : '';
+
+   
+    		if (empty($email) || empty($mdp)) {
+        		$_SESSION['error'] = "Veuillez remplir tous les champs";
+        		header('Location: connexion.php');
+        		exit;
+   		}
+
+    
+    		$utilisateurs = lireFichierJson("./databases/users.json");
+
+    		if (!$utilisateurs) {
+        		$_SESSION['error'] = "Erreur de lecture des utilisateurs";
+        		header('Location: connexion.php');
+        		exit;
+    		}
+
+    		$utilisateur_trouve = checkIdentifiants($email, $mdp);
+    
+    		if ($utilisateur_trouve) {
+        		header('Location: index.html'); 
+        		exit;
+    		} else {
+        		$_SESSION['error'] = "Email ou mot de passe incorrect";
+        		header('Location: connexion.php');         
+			exit;
+    		}
+	    }
         ?>
 
-        <form action="connexionP.php" method="POST">
+        <form action="connexion.php" method="POST">
             <label for="email"><strong>Courriel :</strong></label>
             <input type="email" id="email" name="email" placeholder="Entrez une adresse courriel valide..." required="true">
             <br></br>
