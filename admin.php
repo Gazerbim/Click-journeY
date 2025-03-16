@@ -27,17 +27,22 @@ const ligneParPage = 20;
                 <a href="index.php"><button>Accueil</button></a>
                 <a href="presentation.php"><button>Présentation</button></a>
                 <a href="recherche.php"><button>Recherche</button></a>
-                <a href="connexion.php"><button>Connexion</button></a>
+                <?php
+                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+                        echo "<a href='deconnexion.php'><button>Déconnexion</button></a>";
+                    } else {
+                        echo "<a href='connexion.php'><button>Connexion</button></a>";
+                    }
+                ?>
                 <a href="profil.php"><button>
-		    <?php
-        	
-        		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
-            			echo $_SESSION['prenom'];
-        		} 
-			    else {
-            			echo "Profil";
-        		}
-        	?>
+                <?php
+                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+                        echo $_SESSION['prenom'];
+                    } 
+                    else {
+                        echo "Profil";
+                    }
+                ?>
 		</button></a>
             </div>
         </nav>
@@ -58,7 +63,15 @@ const ligneParPage = 20;
                 </thead>
                 <tbody>
                     <?php
-                        $page = $_GET['page'];
+                        if ($_SESSION['role'] != "adm") {
+                            header('Location: index.php');
+                        }
+
+                        if(isset($_GET['page'])){
+                            $page = $_GET['page'];
+                        }else{
+                            $page = 0;
+                        }
                         
                         if ($page == NULL) {
                             $page = 0;

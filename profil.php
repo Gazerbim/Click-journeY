@@ -9,7 +9,7 @@
 </head>
 <body class="profil" >
 <?php
-    //session_start();
+    session_start();
   ?>
     <div class="image_header">
         <nav>
@@ -24,19 +24,23 @@
                 <a href="index.php"><button>Accueil</button></a>
                 <a href="presentation.php"><button>Présentation</button></a>
                 <a href="recherche.php"><button>Recherche</button></a>
-                <a href="connexion.php"><button>Connexion</button></a>
+                <?php
+                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+                        echo "<a href='deconnexion.php'><button>Déconnexion</button></a>";
+                    } else {
+                        echo "<a href='connexion.php'><button>Connexion</button></a>";
+                    }
+                ?>
                 <a class="selected" href="profil.php"><button>
-		<?php
-        	session_start(); 
-            
-        		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
-            			echo $_SESSION['prenom'];
-        		} 
-			else {
-            			echo "Profil";
+                <?php
+                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+                        echo $_SESSION['prenom'];
+                        } 
+                    else {
+                        echo "Profil";
                         header('Location: connexion.php');
-        		}
-        	?>
+                    }
+                ?>
 		</button></a>
             </div>
         </nav>
@@ -45,9 +49,11 @@
         <h2>Mon Profil</h2>
 
         <?php
-
+            
             require("requires/json_utilities.php");
-
+            if($_SESSION['role'] == "adm") {
+                echo "<a href='admin.php'><button>VOIR UTILISATEURS</button></a>";
+            }
             $nom = $_SESSION['nom'];
             $prenom = $_SESSION['prenom'];
             $email = $_SESSION['courriel'];

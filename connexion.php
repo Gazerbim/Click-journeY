@@ -27,12 +27,11 @@
                 <a class="selected" href="connexion.php"><button>Connexion</button></a>
                 <a href="profil.php"><button>
 		    <?php
-        		
         		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
-            			echo $_SESSION['prenom'];
+            		echo $_SESSION['prenom'];
         		} 
 			    else {
-            			echo "Profil";
+            		echo "Profil";
         		}
         	?>
 		</button></a>
@@ -84,7 +83,7 @@
 			$genre = getGenre($id);
 			
 			$_SESSION['id'] = $id;
-			$_SESSION['mdp'] = $mdp;
+			//$_SESSION['mdp'] = $mdp;
 			$_SESSION['courriel'] = $email;
 			$_SESSION['nom'] = $nom;
 			$_SESSION['prenom'] = $prenom;

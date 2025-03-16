@@ -25,15 +25,14 @@
                 <a href="recherche.php"><button>Recherche</button></a>
                 <a class="selected" href="connexion.php"><button>Connexion</button></a>
                 <a href="profil.php"><button>
-		<?php
-        		
-        		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
-            			echo $_SESSION['prenom'];
-        		} 
-			else {
-            			echo "Profil";
-        		}
-        	?>
+                <?php
+                        if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+                                echo $_SESSION['prenom'];
+                        } 
+                    else {
+                                echo "Profil";
+                        }
+                ?>
 		</button></a>
             </div>
         </nav>
