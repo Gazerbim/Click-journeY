@@ -43,6 +43,10 @@
 	
 	<?php
 	    require_once 'requires/json_utilities.php';
+	    if (isset($_SESSION['error'])) {
+                echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
+                unset($_SESSION['error']);
+            }
 	    if ($_SERVER["REQUEST_METHOD"] == "POST") {
     		$email = isset($_POST['email']) ? trim($_POST['email']) : '';
     		$mdp = isset($_POST['mdp']) ? trim($_POST['mdp']) : '';
