@@ -61,54 +61,54 @@
             $date_naissance = $_SESSION['naissance'];
         ?>
 
-        <form action="/modifier_nom" method="post" class="formulaire-classique">
+        <form action="modifier_profil.php" method="post" class="formulaire-classique">
             <label for="nom"><strong>Nom :</strong></label>
             <div class="input-groupe">
             <input type="text" id="nom" name="nom" <?php echo "value='$nom'"; ?>>
-            <button type="submit">Modifier</button>
+            <button type="submit" name="action" value="modifier_nom">Modifier</button>
             </div>
         </form>
 
-        <form action="/modifier_prenom" method="post" class="formulaire-classique">
+        <form action="modifier_profil.php" method="post" class="formulaire-classique">
             <label for="prenom"><strong>Prénom :</strong></label>
             <div class="input-groupe">
             <input type="text" id="prenom" name="prenom" <?php echo "value='$prenom'"; ?>>
-            <button type="submit">Modifier</button>
+            <button type="submit" name="action" value="modifier_prenom">Modifier</button>
             </div>
         </form>
 
-        <form action="/modifier_email" method="post" class="formulaire-classique">
+        <form action="modifier_profil.php" method="post" class="formulaire-classique">
             <label for="email"><strong>Email :</strong></label>
             <div class="input-groupe">
             <input type="email" id="email" name="email"<?php echo "value='$email'"; ?>>
-            <button type="submit">Modifier</button>
+            <button type="submit" name="action" value="modifier_email">Modifier</button>
             </div>
         </form>
 
-        <form action="/modifier_telephone" method="post" class="formulaire-classique">
+        <form action="modifier_profil.php" method="post" class="formulaire-classique">
             <label for="telephone"><strong>Téléphone :</strong></label>
             <div class="input-groupe">
             <input type="tel" id="telephone" name="telephone" <?php echo "value='$telephone'"; ?>>
-            <button type="submit">Modifier</button>
+            <button type="submit" name="action" value="modifier_telephone">Modifier</button>
             </div>
         </form>
 
-        <form action="/modifier_date_naissance" method="post" class="formulaire-classique">
+        <form action="modifier_profil.php" method="post" class="formulaire-classique">
             <label for="date_naissance"><strong>Date de naissance :</strong></label>
             <div class="input-groupe">
             <input type="date" id="date_naissance" name="date_naissance"<?php echo "value='$date_naissance'"; ?>>
-            <button type="submit">Modifier</button>
+            <button type="submit" name="action" value="modifier_date_naissance">Modifier</button>
             </div>
         </form>
 
-        <form action="/modifier_mdp" method="post" class="formulaire-classique">
+        <form action="modifier_profil.php" method="post" class="formulaire-classique">
             <label for="mdp"><strong>Mot de passe :</strong></label>
             <input type="password" id="mdp" name="mdp">
             
             <label for="cmdp"><strong>Confirmer le mot de passe :</strong></label>
             <input type="password" id="cmdp" name="cmdp">
             
-            <button type="submit">Modifier</button>
+            <button type="submit" name="action" value="modifier_mdp">Modifier</button>
         </form>
     </div>
 
