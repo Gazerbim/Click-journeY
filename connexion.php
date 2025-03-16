@@ -81,7 +81,7 @@
             <button type="submit">Connexion</button>
         </form>
         <p></p>
-        <a href="inscription.html">Vous n'avez pas de compte ?</a>
+        <a href="inscription.php">Vous n'avez pas de compte ?</a>
     </div>
     <div class="contact">
       <br>
