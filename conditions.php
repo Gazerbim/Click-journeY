@@ -21,7 +21,7 @@
                 <h1 class="nav-titre">Rush&Krous</h1>
             </div>
             <div class="nav-liens">
-                <a class="selected" href="index.php"><button>Accueil</button></a>
+                <a href="index.php"><button>Accueil</button></a>
                 <a href="presentation.php"><button>Présentation</button></a>
                 <a href="recherche.php"><button>Recherche</button></a>
                 <a href="connexion.php"><button>Connexion</button></a>
