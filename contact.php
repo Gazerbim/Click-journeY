@@ -27,7 +27,7 @@
                 <a href="connexion.php"><button>Connexion</button></a>
                 <a href="profil.php"><button>
 		<?php
-        		session_start(); 
+        		
         		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
             			echo $_SESSION['prenom'];
         		} 
