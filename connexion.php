@@ -61,6 +61,23 @@
     		$utilisateur_trouve = checkIdentifiants($email, $mdp);
     
     		if ($utilisateur_trouve) {
+			$id = getId($email, $mdp);
+			$nom = getNom($id);
+			$prenom = getPrenom($id);
+			$tel = getTel($id);
+			$naissance = getNaissance($id);
+			$role = getRole($id);
+			$genre = getGenre($id);
+			
+			$_SESSION['id'] = $id;
+			$_SESSION['mdp'] = $mdp;
+			$_SESSION['courriel'] = $email;
+			$_SESSION['nom'] = $nom;
+			$_SESSION['prenom'] = $prenom;
+			$_SESSION['tel'] = $tel;
+			$_SESSION['naissance'] = $naissance;
+			$_SESSION['role'] = $role;
+			$_SESSION['genre'] = $genre;
         		header('Location: index.html'); 
         		exit;
     		} else {
