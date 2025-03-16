@@ -9,7 +9,7 @@
 </head>
 <body class="profil" >
 <?php
-    session_start();
+    //session_start();
   ?>
     <div class="image_header">
         <nav>
@@ -27,7 +27,7 @@
                 <a href="connexion.php"><button>Connexion</button></a>
                 <a class="selected" href="profil.php"><button>
 		<?php
-        		 
+        		session_start(); 
         		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
             			echo $_SESSION['prenom'];
         		} 
@@ -45,9 +45,6 @@
         <?php
 
             require("requires/json_utilities.php");
-
-            $id = $_GET['id'];
-            $user = recupereInfosUtilisateur($id, "./databases/users.json");
 
             $nom = $_SESSION['nom'];
             $prenom = $_SESSION['prenom'];
