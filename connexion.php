@@ -43,7 +43,7 @@
         <h2>Connexion</h2>
  
         <?php
-            session_start();
+            
 	    require_once 'requires/json_utilities.php';
             if (isset($_SESSION['error'])) {
                 echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
