@@ -92,7 +92,7 @@
 			$_SESSION['naissance'] = $naissance;
 			$_SESSION['role'] = $role;
 			$_SESSION['genre'] = $genre;
-        		header('Location: index.html'); 
+        		header('Location: index.php'); 
         		exit;
     		} else {
         		$_SESSION['error'] = "Email ou mot de passe incorrect";
