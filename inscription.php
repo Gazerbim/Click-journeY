@@ -76,7 +76,7 @@
 		$_SESSION['genre'] = $genre;
 		$_SESSION['naissance'] = $date_naissance;
 		$_SESSION['mdp'] = $mdp;
-        	header('Location: index.html'); 
+        	header('Location: index.php'); 
         	exit;
     	    } else {
         	$_SESSION['error'] = "Votre compte n'a pas bien été créé, veuillez recommencer";
