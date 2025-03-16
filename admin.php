@@ -9,26 +9,43 @@
 </head>
 <body class="rech">
 <?php
+session_start();
 require("requires/json_utilities.php");
 $tab = lireFichierJson("./databases/users.json");
 const ligneParPage = 20;
 ?>
-    <nav>
-        <a class="crous" href="https://www.crous-paris.fr/">
-            <button><img src="images/Krous.png" alt="Crous"></button>
-        </a>
-        <div class="nav-spacer"></div>
-        <div class="nav-center">
-            <h1 class="nav-titre">Rush&Krous</h1>
-        </div>
-        <div class="nav-liens">
-            <a href="index.html"><button>Accueil</button></a>
-            <a href="presentation.html"><button>Présentation</button></a>
-            <a href="recherche.html"><button>Recherche</button></a>
-            <a href="connexion.php"><button>Connexion</button></a>
-            <a href="profil.php"><button>Profil</button></a>
-        </div>
-    </nav>
+    <div class="image_header">
+        <nav>
+            <a class="crous" href="https://www.crous-paris.fr/">
+                <button><img src='images/Krous.png'></button>
+            </a>
+            <div class="nav-spacer"></div>
+            <div class="nav-center">
+                <h1 class="nav-titre">Rush&Krous</h1>
+            </div>
+            <div class="nav-liens">
+                <a href="index.php"><button>Accueil</button></a>
+                <a href="presentation.php"><button>Présentation</button></a>
+                <a href="recherche.php"><button>Recherche</button></a>
+                <?php
+                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+                        echo "<a href='deconnexion.php'><button>Déconnexion</button></a>";
+                    } else {
+                        echo "<a href='connexion.php'><button>Connexion</button></a>";
+                    }
+                ?>
+                <a href="profil.php"><button>
+                <?php
+                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+                        echo $_SESSION['prenom'];
+                    } 
+                    else {
+                        echo "Profil";
+                    }
+                ?>
+		</button></a>
+            </div>
+        </nav>
 
     <main>
         <div class="recherche admin">
@@ -46,7 +63,15 @@ const ligneParPage = 20;
                 </thead>
                 <tbody>
                     <?php
-                        $page = $_GET['page'];
+                        if ($_SESSION['role'] != "adm") {
+                            header('Location: index.php');
+                        }
+
+                        if(isset($_GET['page'])){
+                            $page = $_GET['page'];
+                        }else{
+                            $page = 0;
+                        }
                         
                         if ($page == NULL) {
                             $page = 0;
@@ -62,6 +87,7 @@ const ligneParPage = 20;
                                 echo "<td>";
                                 echo "<form action='profil.php' method='get'>";
                                 echo "<input type='hidden' name='id' value='" . $line['id'] . "'>";
+                                echo "</form>";
                                 echo "<button type='submit'>Modifier</button>";
                                 echo "<button>Supprimer</button>";
                                 //echo "<button>Ajouter Reduction</button>";

@@ -195,7 +195,94 @@
 		return false;
 	}
 
+	function checkUtilisateur($courriel, $mdp, $prenom, $nom, $tel, $naissance, $genre, $role){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["courriel"] == $courriel && $value["mdp"] == $mdp && $value["prenom"] == $prenom && $value["nom"] == $nom && $value["tel"] == $tel && $value["naissance"] == $naissance && $value["genre"] == $genre && $value["role"] == $role){
+				return true;
+			}
+		}
+		return false;
+	}
 
+	function getId($courriel, $mdp){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["courriel"] == $courriel && $value["mdp"] == $mdp){
+				return $value["id"];
+			}
+		}
+		return false;
+	}
+
+	function getNom($id){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["id"] == $id){
+				return $value["nom"];
+			}
+		}
+		return false;
+	}
+
+	function getPrenom($id){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["id"] == $id){
+				return $value["prenom"];
+			}
+		}
+		return false;
+	}
+
+	function getTel($id){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["id"] == $id){
+				return $value["tel"];
+			}
+		}
+		return false;
+	}
+
+	function getRole($id){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["id"] == $id){
+				return $value["role"];
+			}
+		}
+		return false;
+	}
+
+	function getGenre($id){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["id"] == $id){
+				return $value["genre"];
+			}
+		}
+		return false;
+	}
+
+	function getNaissance($id){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["id"] == $id){
+				return $value["naissance"];
+			}
+		}
+		return false;
+	}
+	
 	//EXP UTILISATION
 
 	//$tab = readJSONContent("users.json");
