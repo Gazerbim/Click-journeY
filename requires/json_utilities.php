@@ -195,6 +195,17 @@
 		return false;
 	}
 
+	function checkUtilisateur($courriel, $mdp, $prenom, $nom, $tel, $naissance, $genre, $role){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["courriel"] == $courriel && $value["mdp"] == $mdp && $value["prenom"] == $prenom && $value["nom"] == $nom && $value["tel"] == $tel && $value["naissance"] == $naissance && $value["genre"] == $genre && $value["role"] == $role){
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	//EXP UTILISATION
 
