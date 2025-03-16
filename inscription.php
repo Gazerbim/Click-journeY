@@ -55,6 +55,15 @@
 	    $utilisateur_trouve = checkUtilisateur($email, $mdp, $prenom, $nom, $telephone, $date_naissance, $genre, $role);
 		
 	    if ($utilisateur_trouve) {
+		$_SESSION['id'] = $user_id;
+        	$_SESSION['nom'] = $nom;
+        	$_SESSION['prenom'] = $prenom;
+        	$_SESSION['courriel'] = $email;
+        	$_SESSION['role'] = $role;
+		$_SESSION['tel'] = $telephone;
+		$_SESSION['genre'] = $genre;
+		$_SESSION['naissance'] = $date_naissance;
+		$_SESSION['mdp'] = $mdp;
         	header('Location: index.html'); 
         	exit;
     	    } else {
