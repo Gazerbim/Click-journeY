@@ -8,23 +8,36 @@
     <title>Rush&Krous - Présentation</title>
 </head>
 <body>
-    <nav>
-        <a class="crous" href="https://www.crous-paris.fr/">
-            <button><img src='images/Krous.png'></button>
-        </a>
-        <div class="nav-spacer"></div>
+ <?php
+    session_start();
+  ?>
+    <div class="image_header">
+        <nav>
+            <a class="crous" href="https://www.crous-paris.fr/">
+                <button><img src='images/Krous.png'></button>
+            </a>
+            <div class="nav-spacer"></div>
             <div class="nav-center">
                 <h1 class="nav-titre">Rush&Krous</h1>
             </div>
-        <div class="nav-liens">
-            <a href="index.html"><button>Accueil</button></a>
-            <a class="selected" href="presentation.html"><button>Présentation</button></a>
-            <a href="recherche.html"><button>Recherche</button></a>
-            <a href="connexion.php"><button>Connexion</button></a>
-            <a href="profil.php"><button>Profil</button></a>
-        </div>
-    </nav>
-
+            <div class="nav-liens">
+                <a href="index.php"><button>Accueil</button></a>
+                <a class="selected" href="presentation.php"><button>Présentation</button></a>
+                <a href="recherche.php"><button>Recherche</button></a>
+                <a href="connexion.php"><button>Connexion</button></a>
+                <a href="profil.php"><button>
+		<?php
+        		session_start(); 
+        		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+            			echo $_SESSION['prenom'];
+        		} 
+			else {
+            			echo "Profil";
+        		}
+        	?>
+		</button></a>
+            </div>
+        </nav>
     <div class="presentation">
         <h1>Bienvenue chez Rush&Krous : L'agence de voyage des étudiants !</h1>
 
@@ -88,8 +101,8 @@
       <p><strong>Rush&Krous</strong></p>
       
       <p>Av. du Parc, 95000 Cergy - t.lemenand@Rush&Krous.com - 06 52 60 77 34</p> 
-      <a class="lien" href="conditions.html">Conditions d'utilisation</a><br>
-      <a class="lien2" href="contact.html">Contact</a>
+      <a class="lien" href="conditions.php">Conditions d'utilisation</a><br>
+      <a class="lien2" href="contact.php">Contact</a>
       <br>
       <a href="https://www.instagram.com/etudiantgouv/"><button><img class="instagram" src="https://cdn.iconscout.com/icon/free/png-256/free-instagram-1722380-1466166.png?f=webp" alt="instagram" ></button></a>
       <a href="https://www.facebook.com/etudiantgouv/"><button><img class="facebook" src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/2048/facebook_2048_black.png" alt="Facebook" ></button></a>
