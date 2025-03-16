@@ -21,13 +21,54 @@
             <a href="presentation.html"><button>Présentation</button></a>
             <a href="recherche.html"><button>Recherche</button></a>
             <a class="selected" href="connexion.php"><button>Connexion</button></a>
-            <a href="profil.php"><button>Profil</button></a>
+            <a href="profil.html"><button>Profil</button></a>
         </div>
     </nav>
     
     <div class="recherche">
         <h2>Inscription</h2>
-        <form action="inscription.html" method="POST">
+	
+	<?php
+            session_start();
+            if (isset($_SESSION['error'])) {
+                echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
+                unset($_SESSION['error']);
+            }
+	    require_once 'requires/json_utilities.php';
+	    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    		$email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    		$mdp = isset($_POST['mdp']) ? trim($_POST['mdp']) : '';
+		$telephone = isset($_POST['telephone']) ? trim($_POST['telephone']) : '';
+		$nom = isset($_POST['nom']) ? trim($_POST['nom']) : '';
+		$prenom = isset($_POST['prenom']) ? trim($_POST['prenom']) : '';
+		$date_naissance = isset($_POST['date_naissance']) ? trim($_POST['date_naissance']) : '';
+		$genre = isset($_POST['options']) ? trim($_POST['options']) : '';
+		$role = "user";
+		
+		if (empty($email) || empty($mdp) || empty($telephone) || empty($nom) || empty($prenom) || empty($date_naissance) || empty($genre)) {
+        		$_SESSION['error'] = "Veuillez remplir tous les champs";
+        		header('Location: inscription.php');
+       			exit;
+	        }
+	
+            $user_id = ajouterUtilisateur($nom, $prenom, $mdp, $role, $date_naissance, $genre, $telephone, $email);
+	    $utilisateur_trouve = checkUtilisateur($email, $mdp, $prenom, $nom, $telephone, $date_naissance, $genre, $role);
+		
+	    if ($utilisateur_trouve) {
+        	header('Location: index.html'); 
+        	exit;
+    	    } else {
+        	$_SESSION['error'] = "Votre compte n'a pas bien été créé, veuillez recommencer";
+        	header('Location: inscription.php');         
+	        exit;
+    	    }
+
+            }
+
+		
+        ?>
+
+        <form action="inscription.php" method="POST">
             <label for="nom"><strong>Nom :</strong></label>
             <input type="text" id="nom" name="nom" placeholder="Votre nom..." required="true">
             <br></br>
@@ -45,7 +86,7 @@
 	    </div>
             <br></br>
             <label for="telephone"><strong>Téléphone :</strong></label>
-            <input type="tel" id="telephone" name="telephone" placeholder="Entrez votre numéro...">
+            <input type="tel" id="telephone" name="telephone" placeholder="Entrez votre numéro..." required="true">
             <br></br>
             <label for="email"><strong>Adresse courriel :</strong></label>
             <input type="email" id="email" name="email" placeholder="Entrez une adresse courriel valide..." required="true">
