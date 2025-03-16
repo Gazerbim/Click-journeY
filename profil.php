@@ -27,12 +27,14 @@
                 <a href="connexion.php"><button>Connexion</button></a>
                 <a class="selected" href="profil.php"><button>
 		<?php
-        		session_start(); 
+        	session_start(); 
+            
         		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
             			echo $_SESSION['prenom'];
         		} 
 			else {
             			echo "Profil";
+                        header('Location: connexion.php');
         		}
         	?>
 		</button></a>
