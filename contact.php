@@ -59,8 +59,8 @@
       <p><strong>Rush&Krous</strong></p>
       
       <p>Av. du Parc, 95000 Cergy - t.lemenand@Rush&Krous.com - 06 52 60 77 34</p> 
-      <a class="lien" href="conditions.html">Conditions d'utilisation</a><br>
-      <a class="lien2" href="contact.html">Contact</a>
+      <a class="lien" href="conditions.php">Conditions d'utilisation</a><br>
+      <a class="lien2" href="contact.php">Contact</a>
       <br>
       <a href="https://www.instagram.com/etudiantgouv/"><button><img class="instagram" src="https://cdn.iconscout.com/icon/free/png-256/free-instagram-1722380-1466166.png?f=webp" alt="instagram" ></button></a>
       <a href="https://www.facebook.com/etudiantgouv/"><button><img class="facebook" src="https://images.freeimages.com/fic/images/icons/2779/simple_icons/2048/facebook_2048_black.png" alt="Facebook" ></button></a>
