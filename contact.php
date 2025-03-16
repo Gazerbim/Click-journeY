@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="contact-page">
-  
-    <nav>
+<?php
+    session_start();
+  ?>
+    <div class="image_header">
+        <nav>
             <a class="crous" href="https://www.crous-paris.fr/">
                 <button><img src='images/Krous.png'></button>
             </a>
@@ -18,11 +21,21 @@
                 <h1 class="nav-titre">Rush&Krous</h1>
             </div>
             <div class="nav-liens">
-                <a href="index.html"><button>Accueil</button></a>
-                <a href="presentation.html"><button>Présentation</button></a>
-                <a href="recherche.html"><button>Recherche</button></a>
+                <a href="index.php"><button>Accueil</button></a>
+                <a href="presentation.php"><button>Présentation</button></a>
+                <a href="recherche.php"><button>Recherche</button></a>
                 <a href="connexion.php"><button>Connexion</button></a>
-                <a href="profil.php"><button>Profil</button></a>
+                <a href="profil.php"><button>
+		<?php
+        		session_start(); 
+        		if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
+            			echo $_SESSION['prenom'];
+        		} 
+			else {
+            			echo "Profil";
+        		}
+        	?>
+		</button></a>
             </div>
         </nav>
     <section class="recherche">
