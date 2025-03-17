@@ -38,6 +38,7 @@
                         } 
                     else {
                         echo "Profil";
+			$_SESSION['error'] = "Vous devez vous connecter a votre compte";
                         header('Location: connexion.php');
                     }
                 ?>
