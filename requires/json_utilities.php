@@ -282,6 +282,17 @@
 		}
 		return false;
 	}
+
+	function verifCourriel($courriel){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["courriel"] == $courriel){
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	//EXP UTILISATION
 
