@@ -56,10 +56,16 @@
 		$genre = isset($_POST['options']) ? trim($_POST['options']) : '';
 		$role = "user";
 		
-		if (empty($email) || empty($mdp) || empty($telephone) || empty($nom) || empty($prenom) || empty($date_naissance) || empty($genre)) {
-        		$_SESSION['error'] = "Veuillez remplir tous les champs";
-        		header('Location: inscription.php');
-       			exit;
+		//if (empty($email) || empty($mdp) || empty($telephone) || empty($nom) || empty($prenom) || empty($date_naissance) || empty($genre)) {
+        		//$_SESSION['error'] = "Veuillez remplir tous les champs";
+        		//header('Location: inscription.php');
+       			//exit;
+	        //}
+
+		if (!verifCourriel($email){
+		    $_SESSION['error'] = "Cette adresse Email existe dèjà sur Rush&Krous";
+		    header('location: inscription.php');
+		    exit;
 	        }
 	
             $user_id = ajouterUtilisateur($nom, $prenom, $mdp, $role, $date_naissance, $genre, $telephone, $email);
@@ -74,7 +80,7 @@
 		$_SESSION['tel'] = $telephone;
 		$_SESSION['genre'] = $genre;
 		$_SESSION['naissance'] = $date_naissance;
-		$_SESSION['mdp'] = $mdp;
+		//$_SESSION['mdp'] = $mdp;
         	header('Location: index.php'); 
         	exit;
     	    } else {
