@@ -163,6 +163,9 @@
 		return $content;
 	}
 
+	
+	
+
 	function creerVoyage($nom, $description, $tarif, $debut, $fin, $etapes){
 		$id = creeId();
 		$path = "databases/voyages.json";
@@ -212,6 +215,21 @@
 			}
 		}
 		return 0;
+	}
+
+	function recupererVoyageAvecId($id){
+		$path = "databases/voyages.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		$indice = trouverVoyageAvecId($content, $id);
+		return $content[$indice-1];
+	}
+
+	function recupererVoyages(){
+		$path = "databases/voyages.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		return $content;
 	}
 
 	function recupererEtapesVoyage($id){
