@@ -195,7 +195,7 @@
 				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	function creeId(){
