@@ -45,12 +45,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             modifierProfileUtilisateur($id, 'naissance', $value);
             $_SESSION['naissance'] = $value;
             break;
+        case 'modifier_role':
+            $value = $_POST['role'];
+            modifierProfileUtilisateur($id, 'role', $value);
+            $_SESSION['role'] = $value;
+            break;
+        case 'modifier_genre':
+            $value = $_POST['genre'];
+            modifierProfileUtilisateur($id, 'genre', $value);
+            $_SESSION['genre'] = $value;
+            break;
         case 'modifier_mdp':
             if ($_POST['mdp'] == $_POST['cmdp']) {
                 $value = $_POST['mdp'];
                 modifierProfileUtilisateur($id, 'mdp', $value);
             }
-            break;
+            break;  
     }
     header('Location: profil.php');
     exit();
