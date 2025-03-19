@@ -62,7 +62,7 @@
        			//exit;
 	        //}
 
-		if (!verifCourriel($email){
+		if (!verifCourriel($email)){
 		    $_SESSION['error'] = "Cette adresse Email existe dèjà sur Rush&Krous";
 		    header('location: inscription.php');
 		    exit;
