@@ -105,12 +105,15 @@
 	function supprimerUtilisateur($id){
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
+		rrmdir("databases/utilisateurs/".$id);
 		if($line != 0){
 			unset($content[$line-1]);
 			file_put_contents("databases/users.json",json_encode($content));
 			return 0;
 		}
 	}
+
+	supprimerUtilisateur(49385);
 
 	function recupereInfosUtilisateur($id){
 		$content = lireFichierJson("databases/users.json");
@@ -154,8 +157,27 @@
 		file_put_contents($path, json_encode($tab));
 	}
 
-	function ajouterUtilisateur($nom, $prenom, $mdp, $role, $naissance, $genre, $tel, $courriel){
+	function estIdValide($id){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["id"] == $id){
+				return false;
+			}
+		}
+		return false;
+	}
+
+	function creeId(){
 		$id = rand(10000, 99999);
+		while(!estIdValide($id)){
+			$id = rand(10000, 99999);
+		}
+		return $id;
+	}
+
+	function ajouterUtilisateur($nom, $prenom, $mdp, $role, $naissance, $genre, $tel, $courriel){
+		$id = creeId();
 		$path = "databases/users.json";
 		$tab = lireFichierJson($path);
 		$tab[] = array("nom"=>$nom, "prenom"=>$prenom, "id"=>$id, "mdp"=>$mdp, "role"=>$role, "naissance"=>$naissance, "genre"=>$genre, "tel"=>$tel, "courriel"=>$courriel);
@@ -281,17 +303,6 @@
 			}
 		}
 		return false;
-	}
-
-	function verifCourriel($courriel){
-		$file_content = file_get_contents("databases/users.json");
-		$content = json_decode($file_content, true);
-		foreach ($content as $key => $value) {
-			if($value["courriel"] == $courriel){
-				return false;
-			}
-		}
-		return true;
 	}
 	
 	//EXP UTILISATION
