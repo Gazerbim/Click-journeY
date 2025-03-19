@@ -95,9 +95,9 @@
     <div class="recherche">
         <h2>Recherche rapide</h2>
         <p>Vous cherchez un voyage en particulier ? Utilisez la recherche rapide pour trouver la destination qui vous convient :</p>
-        <form action="#" method="GET">
-            <label for="search">Recherchez :</label>
-            <input type="text" id="search" name="search" placeholder="Entrez un mot-clé...">
+        <form action="liste_voyages.php" method="GET">
+            <label for="mot_clef">Recherchez :</label>
+            <input type="text" id="mot_clef" name="mot_clef" placeholder="Entrez un mot-clé...">
             <button type="submit">Rechercher</button>
         </form>
     </div>
