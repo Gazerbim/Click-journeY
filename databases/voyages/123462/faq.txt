@@ -1,0 +1,23 @@
+Q: Où se trouve le logement à Strasbourg ?
+R: Le logement est situé au 18 rue de la Cathédrale, en plein centre historique, à proximité immédiate de la célèbre cathédrale de Strasbourg.
+
+Q: Comment quitter Strasbourg ?
+R: Un train est prévu pour rejoindre la deuxième étape du voyage, à Bordeaux.
+
+Q: Où se trouve le logement à Bordeaux ?
+R: Vous serez logé au 6 place des Quinconces, l’une des plus grandes places d’Europe, à quelques pas des principaux monuments de la ville.
+
+Q: Comment quitter Bordeaux ?
+R: Un bus est prévu pour rejoindre la troisième étape du voyage, à Carcassonne.
+
+Q: Où se trouve le logement à Carcassonne ?
+R: Le logement est situé au 12 rue du Château, à proximité de la cité médiévale de Carcassonne.
+
+Q: Quel est le mode de transport pour quitter Carcassonne ?
+R: Un train est prévu pour rejoindre la dernière étape du voyage, à Paris.
+
+Q: Où se trouve le logement à Paris ?
+R: Vous serez logé au 22 rue de Rivoli, en plein cœur de la capitale, à quelques minutes des principaux monuments historiques.
+
+Q: Le tarif du voyage est-il fixe ?
+R: Oui, le tarif est fixé à 350€, couvrant les logements, les transports entre les étapes et certaines activités incluses.
