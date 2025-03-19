@@ -75,12 +75,13 @@
     
     		if ($utilisateur_trouve) {
 			$id = getId($email, $mdp);
-			$nom = getNom($id);
-			$prenom = getPrenom($id);
-			$tel = getTel($id);
-			$naissance = getNaissance($id);
-			$role = getRole($id);
-			$genre = getGenre($id);
+            $utilisateur = recupereInfosUtilisateur($id);
+			$nom = $utilisateur['nom'];
+            $prenom = $utilisateur['prenom'];
+            $tel = $utilisateur['tel'];
+            $naissance = $utilisateur['naissance'];
+            $role = $utilisateur['role'];
+            $genre = $utilisateur['genre'];
 			
 			$_SESSION['id'] = $id;
 			//$_SESSION['mdp'] = $mdp;
