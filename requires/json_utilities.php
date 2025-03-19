@@ -32,6 +32,17 @@
 		}
 	}
 
+	function verifCourriel($courriel){
+		$file_content = file_get_contents("databases/users.json");
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["courriel"] == $courriel){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	function modifierPrenomUtilisateur($id, $nouveauPrenom){
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
