@@ -338,6 +338,11 @@
 		}
 		return false;
 	}
+
+	function avoirListeMotsVoyage($id){
+		$voyage = recupererVoyageAvecId($id);
+		return json_encode($voyage);
+	}
 	
 	
 	//EXP UTILISATION
