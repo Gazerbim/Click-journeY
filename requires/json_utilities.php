@@ -163,10 +163,13 @@
 		return $content;
 	}
 
-	function creerVoyage($id, $nom, $description, $tarif, $debut, $fin, $etapes){
+	function creerVoyage($nom, $description, $tarif, $debut, $fin, $etapes){
+		$id = creeId();
 		$path = "databases/voyages.json";
 		$tab = lireFichierJson($path);
 		$tab[] = array("nom"=>$nom, "description"=>$description, "etapes"=>$etapes, "tarif"=>$tarif, "debut"=>$debut, "fin"=>$fin);
+		mkdir("databases/voyages/".$id);
+		file_put_contents("databases/voyages/".$id."voyage.txt","");
 		file_put_contents($path, json_encode($tab));
 	}
 
@@ -317,6 +320,7 @@
 		}
 		return false;
 	}
+	
 	
 	//EXP UTILISATION
 
