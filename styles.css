@@ -549,3 +549,14 @@ body.connexion a:hover {
     font-weight: bold;
     color: #007BFF;
 }
+
+.voyage button {
+    background-color: #e30613;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
