@@ -1,0 +1,10 @@
+Tarif du voyage : 300€
+
+Ce tarif inclut :
+- L'hébergement dans des logements Crous.
+- Le transport entre les villes (car principalement, mais aussi train).
+- Certaines activités et excursions optionnelles à chaque étape.
+
+Ce tarif ne couvre pas :
+- Les repas, à moins qu'ils ne soient spécifiquement mentionnés.
+- Les dépenses personnelles durant le voyage.
