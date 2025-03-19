@@ -1,0 +1,11 @@
+Q: Où se trouve le logement à Paris ?
+R: Le logement est situé au 15 avenue des Champs Élysées, en plein cœur de la ville. Idéalement situé pour explorer Paris.
+
+Q: Comment quitter Lyon ?
+R: Vous pourrez quitter Lyon en train après votre étape, et il y a plusieurs options de départ pour différentes destinations.
+
+Q: Quel est le mode de transport pour quitter Marseille ?
+R: Après Marseille, le transport pour quitter la ville est en avion, avec plusieurs aéroports disponibles pour des vols directs.
+
+Q: Le tarif du voyage est-il fixe ?
+R: Oui, le tarif est fixé à 125€, ce qui couvre les logements, les transports entre les étapes, ainsi que certaines activités à chaque étape.
