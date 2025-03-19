@@ -1,0 +1,10 @@
+Tarif du voyage : 250€
+
+Ce tarif inclut :
+- L'hébergement dans des Krous de qualité dans chaque ville.
+- Le transport entre les étapes (train et bus selon les villes).
+- Activités et excursions en option dans certaines villes.
+
+Ce tarif ne couvre pas :
+- Les repas, à moins qu'ils ne soient spécifiquement mentionnés.
+- Les dépenses personnelles durant le voyage.
