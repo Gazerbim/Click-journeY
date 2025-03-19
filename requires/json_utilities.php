@@ -37,10 +37,10 @@
 		$content = json_decode($file_content, true);
 		foreach ($content as $key => $value) {
 			if($value["courriel"] == $courriel){
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	function modifierPrenomUtilisateur($id, $nouveauPrenom){
