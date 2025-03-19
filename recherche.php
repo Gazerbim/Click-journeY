@@ -46,7 +46,7 @@
 
     <div class="recherche">
         <h2>Recherche de voyages</h2>
-        <form action="recherche_voyage.php" method="GET">
+        <form action="recherche.php" method="GET">
             <label for="lieu"><strong>Crous à rechercher :</strong></label>
             <input type="text" id="lieu" name="lieu" placeholder="Entrez un krous que vous voulez visiter...">
             <br></br>

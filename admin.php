@@ -13,6 +13,27 @@ session_start();
 require("requires/json_utilities.php");
 $tab = lireFichierJson("./databases/users.json");
 const ligneParPage = 20;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['delete_id'])) {
+        $deleteId = $_POST['delete_id'];
+        supprimerUtilisateur($deleteId);
+        header('Location: admin.php');
+    } elseif (isset($_POST['promote_id'])) {
+        $promoteId = $_POST['promote_id'];
+        foreach ($tab as &$user) {
+            if ($user['id'] == $promoteId) {
+                if ($user['role'] == 'user') {
+                    modifierRoleUtilisateur($user['id'], 'adm');
+                } else {
+                    modifierRoleUtilisateur($user['id'], 'user');
+                }
+                break;
+            }
+        }
+        header('Location: admin.php');
+    }
+}
 ?>
     <div class="image_header">
         <nav>
@@ -85,11 +106,18 @@ const ligneParPage = 20;
                                 echo "<td>" . $line['courriel'] . "</td>";
                                 echo "<td>" . $line['role'] . "</td>";
                                 echo "<td>";
-                                echo "<form action='profil.php' method='get'>";
-                                echo "<input type='hidden' name='id' value='" . $line['id'] . "'>";
+                                echo "<form action='admin.php' method='post' style='display:inline;'>";
+                                echo "<input type='hidden' name='promote_id' value='" . $line['id'] . "'>";
+                                if ($line['role'] == 'user') {
+                                    echo "<button type='submit'>Mettre Admin</button>";
+                                } else {
+                                    echo "<button type='submit'>Rendre User</button>";
+                                }
                                 echo "</form>";
-                                echo "<button type='submit'>Modifier</button>";
-                                echo "<button>Supprimer</button>";
+                                echo "<form action='admin.php' method='post' style='display:inline'>";
+                                echo "<input type='hidden' name='delete_id' value='" . $line['id'] . "'>";
+                                echo "<button type='submit'>Supprimer</button>";
+                                echo "</form>";
                                 //echo "<button>Ajouter Reduction</button>";
                                 echo "</td>";
                                 echo "</tr>";
@@ -104,10 +132,18 @@ const ligneParPage = 20;
                                 echo "<td>" . $line['courriel'] . "</td>";
                                 echo "<td>" . $line['role'] . "</td>";
                                 echo "<td>";
-                                echo "<form action='profil.php' method='get'>";
-                                echo "<input type='hidden' name='id' value='" . $line['id'] . "'>";
-                                echo "<button type='submit'>Modifier</button>";
-                                echo "<button>Supprimer</button>";
+                                echo "<form action='admin.php' method='post' style='display:inline;'>";
+                                echo "<input type='hidden' name='promote_id' value='" . $line['id'] . "'>";
+                                if ($line['role'] == 'user') {
+                                    echo "<button type='submit'>Promote to Admin</button>";
+                                } else {
+                                    echo "<button type='submit'>Demote to User</button>";
+                                }
+                                echo "</form>";
+                                echo "<form action='admin.php' method='post' onsubmit='return confirmDelete();' style='display:inline;'>";
+                                echo "<input type='hidden' name='delete_id' value='" . $line['id'] . "'>";
+                                echo "<button type='submit'>Supprimer</button>";
+                                echo "</form>";
                                 //echo "<button>Ajouter Reduction</button>";
                                 echo "</td>";
                                 echo "</tr>";
