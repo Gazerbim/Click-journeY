@@ -89,7 +89,7 @@ nav {
     z-index: 1000;
     background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
+    //padding: 10px 20px;
 }
 
 .nav-center {
@@ -168,8 +168,10 @@ nav a button:hover {
 .crous button {
     padding: 0; 
     border: none; 
-    background-color: transparent; 
-    cursor: pointer; 
+    background-color: white; 
+    cursor: pointer;
+    display: flex;
+    align-items: center; 
 }
 
 nav .crous button:hover {
@@ -180,7 +182,8 @@ nav .crous button:hover {
 .crous button img {
     width: 50px; 
     height: auto; 
-    transition: transform 0.3s ease; 
+    transition: transform 0.3s ease;
+    display: block; 
 }
 
 .crous button img:hover {
@@ -189,7 +192,11 @@ nav .crous button:hover {
 }
 
 nav .crous {
-    margin-right: auto; 
+    margin-left: 40px;
+    padding: 10px; 
+    display: flex;
+    align-items: center; 
+    height: 50px;
 }
 
 .contact {
@@ -490,6 +497,7 @@ body.connexion a:hover {
     max-width: 25%;
     height: 700px;
     object-fit: cover;
+    margin-bottom: 50px;
 }
 
 .image1 img {
@@ -497,8 +505,9 @@ body.connexion a:hover {
     max-width: 33.333333%;
     height: 700px;
     object-fit: cover;
+    margin-bottom: 50px;
 }
 
 img {
-    margin-bottom: 50px;
+    //margin-bottom: 50px;
 }
