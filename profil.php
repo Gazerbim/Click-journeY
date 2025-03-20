@@ -52,6 +52,14 @@
         <?php
             
             require("requires/json_utilities.php");
+            if (isset($_SESSION['error'])) {
+                echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
+                unset($_SESSION['error']);
+            }
+            if (isset($_SESSION['success'])) {
+                echo "<p style='color: #00a000;'>" . $_SESSION['success'] . "</p>";
+                unset($_SESSION['success']);
+            }
             if($_SESSION['role'] == "adm") {
                 echo "<a href='admin.php'><button>VOIR UTILISATEURS</button></a>";
             }

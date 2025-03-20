@@ -725,21 +725,18 @@ body.connexion a:hover {
     background-color: #45a049;
 }
 
-/* Conteneur principal */
 .mes-voyages-container {
     padding: 20px;
     background: #f8f9fa;
     border-radius: 10px;
 }
 
-/* Titre */
 .mes-voyages-container h2 {
     text-align: center;
     color: #2c3e50;
     margin-bottom: 20px;
 }
 
-/* Liste des voyages */
 .mes-voyages-liste {
     display: flex;
     flex-wrap: wrap;
@@ -747,7 +744,6 @@ body.connexion a:hover {
     justify-content: center;
 }
 
-/* Carte individuelle */
 .mes-voyages-card {
     background: #ffffff;
     border-radius: 10px;
@@ -762,14 +758,12 @@ body.connexion a:hover {
     transform: translateY(-5px);
 }
 
-/* Titre du voyage */
 .mes-voyages-titre {
     color: #34495e;
     font-size: 1.4em;
     margin-bottom: 10px;
 }
 
-/* Description */
 .mes-voyages-description {
     font-size: 0.9em;
     color: #7f8c8d;
