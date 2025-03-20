@@ -14,7 +14,7 @@
     <div class="image_header">
         <nav>
             <a class="crous" href="https://www.crous-paris.fr/">
-                <button><img src='images/Krous.png'></button>
+                <button><img src='images/Krous.png' alt="Krous"></button>
             </a>
             <div class="nav-spacer"></div>
             <div class="nav-center">
@@ -44,26 +44,33 @@
             </div>
         </nav>
 
-    <div class="recherche">
-        <h2>Recherche de voyages</h2>
-        <form action="recherche.php" method="GET">
-            <label for="lieu"><strong>Crous à rechercher :</strong></label>
-            <input type="text" id="lieu" name="lieu" placeholder="Entrez un krous que vous voulez visiter...">
-            <br></br>
-            <label for="date"><strong>Quand voulez-vous partir ?</strong></label>
-            <input type="date" id="date" name="date">
-            <br></br>
-            <label for="options"><strong>Options :</strong></label>
-	    <div class="checkbox-groupe" >
-            <input type="checkbox" id="options" name="options" value="a">Meilleur Note 
-            <input type="checkbox" id="options" name="options" value="b">Pire Note 
-            <input type="checkbox" id="options" name="options" value="c">Avec Hebergement
-            <input type="checkbox" id="options" name="options" value="d">A Thème 
-	    </div>
-            <br></br>
-            <button type="submit">Rechercher</button>
-        </form>
-    </div>
+        <div class="recherche">
+            <h2>Recherche de voyages</h2>
+            <form action="resultat_recherche.php" method="GET">
+                <label for="lieu"><strong>Crous à rechercher :</strong></label>
+                <input type="text" id="lieu" name="lieu" placeholder="Entrez un krous que vous voulez visiter...">
+                <br><br>
+                <label for="date"><strong>Quand voulez-vous partir ?</strong></label>
+                <input type="date" id="date" name="date">
+                <br><br>
+                <label for="options"><strong>Options :</strong></label>
+                <div class="checkbox-groupe">
+                    <input type="checkbox" id="options" name="options[]" value="a">Meilleur Note
+                    <input type="checkbox" id="options" name="options[]" value="b">Pire Note
+                    <input type="checkbox" id="options" name="options[]" value="c">Avec Hebergement
+                    <input type="checkbox" id="options" name="options[]" value="d">A Thème
+                </div>
+                <br><br>
+                <label for="etapes"><strong>Étapes :</strong></label>
+                <div class="checkbox-groupe">
+                    <input type="checkbox" id="etapes2" name="etapes[]" value="2">2
+                    <input type="checkbox" id="etapes3" name="etapes[]" value="3">3
+                    <input type="checkbox" id="etapes4" name="etapes[]" value="4">4
+                    <input type="checkbox" id="etapes5" name="etapes[]" value="5">5
+                </div>
+                <button type="submit">Rechercher</button>
+            </form>
+        </div>
     <div class="contact">
       <br>
       <p><strong>Rush&Krous</strong></p>

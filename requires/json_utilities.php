@@ -362,7 +362,11 @@
 		$voyage = recupererVoyageAvecId($id);
 		return json_encode($voyage);
 	}
-	
+
+	function avoirDateVoyage($id){
+		$voyage = recupererVoyageAvecId($id);
+		return $voyage["debut"];
+	}
 	
 	//EXP UTILISATION
 
