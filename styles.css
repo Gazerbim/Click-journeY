@@ -576,7 +576,6 @@ body.connexion a:hover {
     color: #007BFF;
 }
 
-/* Bouton Détails */
 .voyage button {
     background-color: #e30613;
     color: white;
@@ -593,12 +592,10 @@ body.connexion a:hover {
     transform: scale(1.1);
 }
 
-/* Espacement du haut */
 .espaceur {
     margin-top: 50px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .voyages-container {
         grid-template-columns: repeat(2, 1fr);
@@ -705,5 +702,26 @@ body.connexion a:hover {
     font-size: 1.2em;
 }
 
+.buy-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+}
 
+.buy-button button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.buy-button button:hover {
+    background-color: #45a049;
+}
 

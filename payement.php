@@ -1,11 +1,28 @@
 <?php
 require('requires/getapikey.php');
+require('requires/json_utilities.php');
+
+session_start();
+
+if (isset($_GET['voyage'])) {
+    $voyageId = $_GET['voyage'];
+} else {
+    echo "Voyage non trouvé";
+    exit;
+}
+
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    $id = $_SESSION['id'];
+} else {
+    echo "Vous devez être connecté pour effectuer un paiement";
+    exit;
+}
 
 // Paramètres de la transaction
 $transaction = uniqid(); // Génération d'un identifiant unique pour la transaction
-$montant = 1000.50;
+$montant = recupererPrixVoyage($voyageId);
 $vendeur = "MI-4_A";
-$retour = "http://localhost/retour_paiement.php";
+$retour = "http://localhost/retour_paiement.php?id=".$voyageId;
 
 // Récupération de la clé API
 $api_key = getAPIKey($vendeur);
@@ -25,6 +42,7 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur .
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Paiement CYBank</title>
 </head>
 <body>

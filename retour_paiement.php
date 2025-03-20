@@ -1,5 +1,6 @@
 <?php
 require('requires/getapikey.php');
+require('requires/json_utilities.php');
 
 // Récupération des paramètres envoyés par CYBank
 $transaction = $_GET['transaction'] ?? '';
@@ -29,6 +30,15 @@ if ($control_calculé !== $control_recu) {
     die("Erreur : Contrôle de sécurité invalide !");
 }
 
+if ($statut === "accepted") {
+    // Ajout du voyage à la liste des voyages de l'utilisateur
+    session_start();
+    $id = $_SESSION['id'];
+    $idVoyage = $_GET['id'];
+    $date = date("d-m-Y");
+    ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +55,7 @@ if ($control_calculé !== $control_recu) {
         <p style="color: green;">✅ Paiement accepté !</p>
         <p>Transaction ID : <?php echo htmlspecialchars($transaction); ?></p>
         <p>Montant payé : <?php echo htmlspecialchars($montant); ?> €</p>
+        <p>Le voyage a été ajouté à votre compte.</p>
     <?php else : ?>
         <p style="color: red;">❌ Paiement refusé.</p>
     <?php endif; ?>

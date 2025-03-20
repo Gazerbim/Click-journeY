@@ -8,6 +8,9 @@
     <title>Rush&Krous - Voyage</title>
 </head>
 <body>
+<a href="payement.php?voyage=<?php echo $_GET['id']?>" class="buy-button">
+    <button>Acheter</button>
+</a>
 <?php
     session_start();
 ?>
