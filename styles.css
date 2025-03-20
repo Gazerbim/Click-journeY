@@ -725,3 +725,85 @@ body.connexion a:hover {
     background-color: #45a049;
 }
 
+/* Conteneur principal */
+.mes-voyages-container {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+/* Titre */
+.mes-voyages-container h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Liste des voyages */
+.mes-voyages-liste {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Carte individuelle */
+.mes-voyages-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+.mes-voyages-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Titre du voyage */
+.mes-voyages-titre {
+    color: #34495e;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+/* Description */
+.mes-voyages-description {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.mes-voyages-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.mes-voyages-btn:hover {
+    background: #2980b9;
+}
+
+.mes-voyages-message {
+    text-align: center;
+    font-size: 1.1em;
+    color: #7f8c8d;
+}
+
+.mes-voyages-btn2 {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #dc1b1b;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}

@@ -10,7 +10,98 @@
 <body class="rech" >
 <?php
 session_start();
+require('requires/json_utilities.php');
 
+if(isset($_GET['lieu']) || isset($_GET['date']) || isset($_GET['options'])) {
+// Get search parameters
+$lieu = isset($_GET['lieu']) ? trim($_GET['lieu']) : '';
+$date = isset($_GET['date']) ? $_GET['date'] : '';
+$options = isset($_GET['options']) ? $_GET['options'] : array();
+
+// Load voyages data
+$voyages = lireFichierJson('databases/voyages.json');
+
+if($voyages) {
+// Filter voyages based on search criteria
+$filteredVoyages = array();
+
+foreach($voyages as $voyage) {
+    $match = true;
+
+    // Filter by lieu if provided (check in nom and etapes/ville)
+    if(!empty($lieu)) {
+        $lieuMatch = false;
+
+        // Check in voyage name
+        if(stripos($voyage['nom'], $lieu) !== false) {
+            $lieuMatch = true;
+        }
+
+        // Check in etapes/ville
+        if(!$lieuMatch && isset($voyage['etapes'])) {
+            foreach($voyage['etapes'] as $etape) {
+                if(stripos($etape['ville'], $lieu) !== false) {
+                    $lieuMatch = true;
+                    break;
+                }
+            }
+        }
+
+        if(!$lieuMatch) {
+            $match = false;
+        }
+    }
+
+    // Filter by date if provided (check if it falls between debut and fin)
+    if(!empty($date) && isset($voyage['debut']) && isset($voyage['fin'])) {
+        $voyageDebut = strtotime(str_replace('/', '-', $voyage['debut']));
+        $voyageFin = strtotime(str_replace('/', '-', $voyage['fin']));
+        $searchDate = strtotime($date);
+
+        if($searchDate < $voyageDebut || $searchDate > $voyageFin) {
+            $match = false;
+        }
+    }
+
+    // Filter by options
+    // Option c: With Accommodation - check if logement exists in etapes
+    if(in_array('c', $options) && isset($voyage['etapes'])) {
+        $hasAccommodation = false;
+        foreach($voyage['etapes'] as $etape) {
+            if(!empty($etape['logement'])) {
+                $hasAccommodation = true;
+                break;
+            }
+        }
+        if(!$hasAccommodation) {
+            $match = false;
+        }
+    }
+
+    // Option d: With theme - check if description contains theme-related words
+    if(in_array('d', $options) && (!isset($voyage['description']) || empty($voyage['description']))) {
+        $match = false;
+    }
+
+    if($match) {
+        $filteredVoyages[] = $voyage;
+    }
+}
+
+// Sort by price if selected (since there's no rating field, we'll use price)
+if(in_array('a', $options)) {
+    // Lowest price first (as better value)
+    usort($filteredVoyages, function($a, $b) {
+        if ($a['tarif'] == $b['tarif']) return 0;
+        return ($a['tarif'] < $b['tarif']) ? -1 : 1;
+    });
+} elseif(in_array('b', $options)) {
+    // Highest price first (as worse value)
+    usort($filteredVoyages, function($a, $b) {
+        if ($a['tarif'] == $b['tarif']) return 0;
+        return ($a['tarif'] > $b['tarif']) ? -1 : 1;
+    });
+}
 ?>
 <div class="image_header">
     <nav>
@@ -47,7 +138,7 @@ session_start();
 
     <div class="recherche">
         <h2>Recherche de voyages</h2>
-        <form action="resultat_recherche.php" method="GET">
+        <form action="recherche.php" method="GET">
             <label for="lieu"><strong>Crous à rechercher :</strong></label>
             <input type="text" id="lieu" name="lieu" placeholder="Entrez un krous que vous voulez visiter...">
             <br><br>
@@ -62,84 +153,50 @@ session_start();
                 <input type="checkbox" id="options" name="options[]" value="d">A Thème
             </div>
             <br><br>
-            <label for="etapes"><strong>Étapes :</strong></label>
-            <div class="checkbox-groupe">
-                <input type="checkbox" id="etapes2" name="etapes[]" value="2">2
-                <input type="checkbox" id="etapes3" name="etapes[]" value="3">3
-                <input type="checkbox" id="etapes4" name="etapes[]" value="4">4
-                <input type="checkbox" id="etapes5" name="etapes[]" value="5">5
-            </div>
             <button type="submit">Rechercher</button>
         </form>
     </div>
 
     <div class="liste_voyages">
         <h2>Résultats de la recherche</h2>
-        <div class="voyages-container">
-            <?php
+        <?php
+        // Display results
+        if(count($filteredVoyages) > 0) {
+            echo "<div class='resultats'>";
+            foreach($filteredVoyages as $voyage) {
+                echo "<div class='voyage-card'>";
+                echo "<h3>" . htmlspecialchars($voyage['nom']) . "</h3>";
+                echo "<p>Description: " . htmlspecialchars($voyage['description']) . "</p>";
+                echo "<p>Prix: " . htmlspecialchars($voyage['tarif']) . "€</p>";
+                echo "<p>Période: " . htmlspecialchars($voyage['debut']) . " au " . htmlspecialchars($voyage['fin']) . "</p>";
 
-            if(isset($_GET['lieu'])){
-                $lieu = $_GET['lieu'];
-                $lieu = explode(" ", $lieu);
-            }
-            else{
-                $lieu = [""];
-            }
-            if(isset($_GET['date'])){
-                $date = $_GET['date'];
-            }
-            else{
-                $date = "";
-            }
-            if(isset($_GET['etapes'])){
-                $etapes = $_GET['etapes'];
-            }
-            else{
-                $etapes = [];
-            }
-            require_once 'requires/json_utilities.php';
-            $voyages = recupererVoyages();
-            foreach ($voyages as $value) {
-                $resultat = true;
-                $mots = avoirListeMotsVoyage($value['id']);
-                $dates = avoirDateVoyage($value['id']);
-                foreach($lieu as $mot_clef){
-                    if (!(strpos(strtolower($mots), strtolower($mot_clef))!==false)){
-                        $resultat = false;
-                        break;
-                    }
-                    if (!empty($etapes)){
-                        $etapesMatch = false;
-                        foreach($etapes as $etape){
-                            if($etape == count(recupererEtapesVoyage($value['id']))){
-                                $etapesMatch = true;
-                                break;
-                            }
+                if(isset($voyage['etapes']) && !empty($voyage['etapes'])) {
+                    echo "<p>Étapes :</p><ul>";
+                    foreach($voyage['etapes'] as $etape) {
+                        echo "<li>" . htmlspecialchars($etape['ville']) . " - ";
+                        echo "du " . htmlspecialchars($etape['debut']) . " au " . htmlspecialchars($etape['fin']);
+                        if(!empty($etape['logement'])) {
+                            echo "<br>Logement: " . htmlspecialchars($etape['logement']);
                         }
-                        if(!$etapesMatch){
-                            $resultat = false;
-                        }
+                        echo "</li>";
                     }
+                    echo "</ul>";
                 }
-                if($date != ""){
-                    $dateUtilisateur = new DateTime($date);
-                    $dateVoyage = DateTime::createFromFormat('d/m/Y', $dates);
-                    if($dateUtilisateur->format('Y-m-d') !== $dateVoyage->format('Y-m-d')){
-                        $resultat = false;
-                    }
-                }
-                if($resultat ){
-                    echo "<div class='voyage'>";
-                    echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
-                    echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
-                    echo "<p>" . htmlspecialchars($value['description']) . "</p>";
-                    echo "<p>" . htmlspecialchars($value['tarif']) . "€</p>";
-                    echo "<a href='voyage_details.php?id=" . urlencode($value["id"]) . "'><button>Détails</button></a>";
-                    echo "</div>";
-                }
+
+                echo "<p><a href='details_voyage.php?id=" . htmlspecialchars($voyage['id']) . "' class='btn-details'>Voir les détails</a></p>";
+                echo "</div>";
             }
-            ?>
-        </div>
+            echo "</div>";
+        } else {
+            echo "<p>Aucun voyage ne correspond à votre recherche.</p>";
+        }
+        } else {
+            echo "<p>Erreur lors du chargement des données de voyages.</p>";
+        }
+        } else {
+            echo "<p>Veuillez effectuer une recherche pour voir les résultats.</p>";
+        }
+        ?>
     </div>
     <div class="contact">
         <br>
