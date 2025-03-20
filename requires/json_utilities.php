@@ -3,7 +3,7 @@
 		$file_content = file_get_contents($file);
 		$content = json_decode($file_content, true); 
 		array_push($content, $array);
-		file_put_contents($file,json_encode($content));
+		file_put_contents($file,json_encode($content, JSON_PRETTY_PRINT));
 		return 0;
 	}
 
@@ -22,12 +22,20 @@
 		return 0;
 	}
 
+	function estValideMDP($mdp, $hash){
+		if (password_verify($mdp, $hash)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	function modifierNomUtilisateur($id, $nouveauNom){
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["nom"] = $nouveauNom;
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -48,7 +56,7 @@
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["prenom"] = $nouveauPrenom;
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -58,7 +66,7 @@
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["courriel"] = $nouveauCourriel;
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -68,7 +76,7 @@
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["role"] = $nouveauRole;
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -77,8 +85,8 @@
 		$content = lireFichierJson("databases/users.json");
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
-			$content[$line-1]["mdp"] = $nouveauMdp;
-			file_put_contents("databases/users.json",json_encode($content));
+			$content[$line-1]["mdp"] = password_hash($nouveauMdp, PASSWORD_BCRYPT);
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -88,7 +96,7 @@
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["naissance"] = $nouvelleNaissance;
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -98,7 +106,7 @@
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["genre"] = $nouveauGenre;
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -108,7 +116,7 @@
 		$line = trouverUtilisateurAvecId($content, $id);
 		if($line != 0){
 			$content[$line-1]["tel"] = $nouveauTel;
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -132,7 +140,7 @@
 		rrmdir("databases/utilisateurs/".$id);
 		if($line != 0){
 			unset($content[$line-1]);
-			file_put_contents("databases/users.json",json_encode($content));
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
@@ -160,7 +168,7 @@
 		$file_content = file_get_contents("databases/users.json");
 		$content = json_decode($file_content, true);
 		foreach ($content as $key => $value) {
-			if($value["courriel"] == $courriel && $value["mdp"] == $mdp){
+			if($value["courriel"] == $courriel && estValideMDP($mdp, $value["mdp"])){
 				return true;
 			}
 		}
@@ -184,7 +192,7 @@
 		$tab[] = array("nom"=>$nom, "description"=>$description, "etapes"=>$etapes, "tarif"=>$tarif, "debut"=>$debut, "fin"=>$fin);
 		mkdir("databases/voyages/".$id);
 		file_put_contents("databases/voyages/".$id."voyage.txt","");
-		file_put_contents($path, json_encode($tab));
+		file_put_contents($path, json_encode($tab, JSON_PRETTY_PRINT));
 	}
 
 	function estIdValide($id){
@@ -210,8 +218,8 @@
 		$id = creeId();
 		$path = "databases/users.json";
 		$tab = lireFichierJson($path);
-		$tab[] = array("nom"=>$nom, "prenom"=>$prenom, "id"=>$id, "mdp"=>$mdp, "role"=>$role, "naissance"=>$naissance, "genre"=>$genre, "tel"=>$tel, "courriel"=>$courriel);
-		file_put_contents($path, json_encode($tab));
+		$tab[] = array("nom"=>$nom, "prenom"=>$prenom, "id"=>$id, "mdp"=>password_hash($mdp, PASSWORD_BCRYPT), "role"=>$role, "naissance"=>$naissance, "genre"=>$genre, "tel"=>$tel, "courriel"=>$courriel);
+		file_put_contents($path, json_encode($tab, JSON_PRETTY_PRINT));
 		mkdir("databases/utilisateurs/".$id);
 		file_put_contents("databases/utilisateurs/".$id."/voyages.json", json_encode(array()));
 		return $id;
@@ -266,7 +274,7 @@
 		$file_content = file_get_contents("databases/users.json");
 		$content = json_decode($file_content, true);
 		foreach ($content as $key => $value) {
-			if($value["courriel"] == $courriel && $value["mdp"] == $mdp && $value["prenom"] == $prenom && $value["nom"] == $nom && $value["tel"] == $tel && $value["naissance"] == $naissance && $value["genre"] == $genre && $value["role"] == $role){
+			if($value["courriel"] == $courriel && estValideMDP($mdp, $value['mdp']) && $value["prenom"] == $prenom && $value["nom"] == $nom && $value["tel"] == $tel && $value["naissance"] == $naissance && $value["genre"] == $genre && $value["role"] == $role){
 				return true;
 			}
 		}
@@ -277,7 +285,7 @@
 		$file_content = file_get_contents("databases/users.json");
 		$content = json_decode($file_content, true);
 		foreach ($content as $key => $value) {
-			if($value["courriel"] == $courriel && $value["mdp"] == $mdp){
+			if($value["courriel"] == $courriel && estValideMDP($mdp, $value['mdp'])){
 				return $value["id"];
 			}
 		}

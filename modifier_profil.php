@@ -11,7 +11,7 @@ function modifierProfileUtilisateur($id, $field, $value) {
             break;
         }
     }
-    file_put_contents($path, json_encode($content));
+    file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         case 'modifier_mdp':
             if ($_POST['mdp'] == $_POST['cmdp']) {
                 $value = $_POST['mdp'];
+                $value = password_hash($value, PASSWORD_BCRYPT);
                 modifierProfileUtilisateur($id, 'mdp', $value);
             }
             break;  
