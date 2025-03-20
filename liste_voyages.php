@@ -59,17 +59,22 @@
                 require_once 'requires/json_utilities.php';
                 $voyages = recupererVoyages();
                 foreach ($voyages as $value) {
+                    $resultat = true;
                     $mots = avoirListeMotsVoyage($value['id']);
                     foreach($mots_clef as $mot_clef){
-                        if (strpos(strtolower($mots), strtolower($mot_clef))!==false){
-                            echo "<div class='voyage'>";
-                            echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
-                            echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
-                            echo "<p>" . htmlspecialchars($value['description']) . "</p>";
-                            echo "<p>" . htmlspecialchars($value['tarif']) . "€</p>";
-                            echo "<a href='voyage_details.php?id=" . urlencode($value["id"]) . "'><button>Détails</button></a>";
-                            echo "</div>";
+                        if (!(strpos(strtolower($mots), strtolower($mot_clef))!==false)){
+                            $resultat = false;
+                            break;
                         }
+                    }
+                    if($resultat){
+                        echo "<div class='voyage'>";
+                        echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
+                        echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
+                        echo "<p>" . htmlspecialchars($value['description']) . "</p>";
+                        echo "<p>" . htmlspecialchars($value['tarif']) . "€</p>";
+                        echo "<a href='voyage_details.php?id=" . urlencode($value["id"]) . "'><button>Détails</button></a>";
+                        echo "</div>";
                     }
                 }
             ?>
