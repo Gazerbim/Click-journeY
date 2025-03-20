@@ -60,9 +60,57 @@
             $email = $_SESSION['courriel'];
             $telephone = $_SESSION['tel'];
             $date_naissance = $_SESSION['naissance'];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_SESSION['id'];
+            $action = $_POST['action'];
+            $value = '';
+
+            switch ($action) {
+                case 'modifier_nom':
+                    $value = $_POST['nom'];
+                    modifierProfileUtilisateur($id, 'nom', $value);
+                    $_SESSION['nom'] = $value;
+                    break;
+                case 'modifier_prenom':
+                    $value = $_POST['prenom'];
+                    modifierProfileUtilisateur($id, 'prenom', $value);
+                    $_SESSION['prenom'] = $value;
+                    break;
+                case 'modifier_email':
+                    $value = $_POST['email'];
+                    modifierProfileUtilisateur($id, 'courriel', $value);
+                    $_SESSION['courriel'] = $value;
+                    break;
+                case 'modifier_telephone':
+                    $value = $_POST['telephone'];
+                    modifierProfileUtilisateur($id, 'tel', $value);
+                    $_SESSION['tel'] = $value;
+                    break;
+                case 'modifier_date_naissance':
+                    $value = $_POST['date_naissance'];
+                    modifierProfileUtilisateur($id, 'naissance', $value);
+                    $_SESSION['naissance'] = $value;
+                    break;
+                case 'modifier_genre':
+                    $value = $_POST['genre'];
+                    modifierProfileUtilisateur($id, 'genre', $value);
+                    $_SESSION['genre'] = $value;
+                    break;
+                case 'modifier_mdp':
+                    if ($_POST['mdp'] == $_POST['cmdp']) {
+                        $value = $_POST['mdp'];
+                        $value = password_hash($value, PASSWORD_BCRYPT);
+                        modifierProfileUtilisateur($id, 'mdp', $value);
+                    }
+                    break;
+            }
+            header('Location: profil.php');
+            exit();
+        }
         ?>
 
-        <form action="modifier_profil.php" method="post" class="formulaire-classique">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="nom"><strong>Nom :</strong></label>
             <div class="input-groupe">
             <input type="text" id="nom" name="nom" <?php echo "value='$nom'"; ?>>
@@ -70,7 +118,7 @@
             </div>
         </form>
 
-        <form action="modifier_profil.php" method="post" class="formulaire-classique">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="prenom"><strong>Prénom :</strong></label>
             <div class="input-groupe">
             <input type="text" id="prenom" name="prenom" <?php echo "value='$prenom'"; ?>>
@@ -78,7 +126,7 @@
             </div>
         </form>
 
-        <form action="modifier_profil.php" method="post" class="formulaire-classique">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="email"><strong>Email :</strong></label>
             <div class="input-groupe">
             <input type="email" id="email" name="email"<?php echo "value='$email'"; ?>>
@@ -86,7 +134,7 @@
             </div>
         </form>
 
-        <form action="modifier_profil.php" method="post" class="formulaire-classique">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="telephone"><strong>Téléphone :</strong></label>
             <div class="input-groupe">
             <input type="tel" id="telephone" name="telephone" <?php echo "value='$telephone'"; ?>>
@@ -94,7 +142,7 @@
             </div>
         </form>
 
-        <form action="modifier_profil.php" method="post" class="formulaire-classique">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="date_naissance"><strong>Date de naissance :</strong></label>
             <div class="input-groupe">
             <input type="date" id="date_naissance" name="date_naissance"<?php echo "value='$date_naissance'"; ?>>
@@ -102,7 +150,7 @@
             </div>
         </form>
 
-        <form action="modifier_profil.php" method="post" class="formulaire-classique">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="mdp"><strong>Mot de passe :</strong></label>
             <input type="password" id="mdp" name="mdp">
             
