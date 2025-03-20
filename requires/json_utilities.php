@@ -30,6 +30,16 @@
 		}
 	}
 
+	function modifierNomUtilisateur($id, $nouveauNom){
+		$content = lireFichierJson("databases/users.json");
+		$line = trouverUtilisateurAvecId($content, $id);
+		if($line != 0){
+			$content[$line-1]["nom"] = $nouveauNom;
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
+	}
+
 	function verifCourriel($courriel){
 		$file_content = file_get_contents("databases/users.json");
 		$content = json_decode($file_content, true);
@@ -39,6 +49,26 @@
 			}
 		}
 		return true;
+	}
+
+	function modifierPrenomUtilisateur($id, $nouveauPrenom){
+		$content = lireFichierJson("databases/users.json");
+		$line = trouverUtilisateurAvecId($content, $id);
+		if($line != 0){
+			$content[$line-1]["prenom"] = $nouveauPrenom;
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
+	}
+
+	function modifierCourrielUtilisateur($id, $nouveauCourriel){
+		$content = lireFichierJson("databases/users.json");
+		$line = trouverUtilisateurAvecId($content, $id);
+		if($line != 0){
+			$content[$line-1]["courriel"] = $nouveauCourriel;
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
 	}
 	
 	function modifierRoleUtilisateur($id, $nouveauRole){
@@ -51,16 +81,44 @@
 		}
 	}
 
-	function modifierProfileUtilisateur($id, $field, $value) {
-		$path = "./databases/users.json";
-		$content = lireFichierJson($path);
-		foreach ($content as &$user) {
-			if ($user['id'] == $id) {
-				$user[$field] = $value;
-				break;
-			}
+	function modifierMotDePasseUtilisateur($id, $nouveauMdp){
+		$content = lireFichierJson("databases/users.json");
+		$line = trouverUtilisateurAvecId($content, $id);
+		if($line != 0){
+			$content[$line-1]["mdp"] = password_hash($nouveauMdp, PASSWORD_BCRYPT);
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
 		}
-		file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+	}
+
+	function modifierNaissanceUtilisateur($id, $nouvelleNaissance){
+		$content = lireFichierJson("databases/users.json");
+		$line = trouverUtilisateurAvecId($content, $id);
+		if($line != 0){
+			$content[$line-1]["naissance"] = $nouvelleNaissance;
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
+	}
+
+	function modifierGenreUtilisateur($id, $nouveauGenre){
+		$content = lireFichierJson("databases/users.json");
+		$line = trouverUtilisateurAvecId($content, $id);
+		if($line != 0){
+			$content[$line-1]["genre"] = $nouveauGenre;
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
+	}
+
+	function modifierTelUtilisateur($id, $nouveauTel){
+		$content = lireFichierJson("databases/users.json");
+		$line = trouverUtilisateurAvecId($content, $id);
+		if($line != 0){
+			$content[$line-1]["tel"] = $nouveauTel;
+			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
 	}
 
 	function rrmdir($dir) {
@@ -304,10 +362,26 @@
 		$voyage = recupererVoyageAvecId($id);
 		return json_encode($voyage);
 	}
-
-	function avoirDateVoyage($id){
+	
+	function recupererPrixVoyage($id){
 		$voyage = recupererVoyageAvecId($id);
-		return $voyage["debut"];
+		return $voyage["tarif"];
+	}
+
+	function ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction){
+		$voyage = array("id"=>$idVoyage, "date"=>$date, "transaction"=>$transaction);
+		$voyages = recupererVoyagesUtilisateur($id);
+		$voyages[] = $voyage;
+		$path = "databases/utilisateurs/".$id."/voyages.json";
+		file_put_contents($path, json_encode($voyages, JSON_PRETTY_PRINT));
+	}
+	
+	function annulerVoyageUtilisateur($id, $idVoyage){
+		$voyages = recupererVoyagesUtilisateur($id);
+		$indice = trouverVoyageAvecId($voyages, $idVoyage);
+		unset($voyages[$indice-1]);
+		$path = "databases/utilisateurs/".$id."/voyages.json";
+		file_put_contents($path, json_encode($voyages, JSON_PRETTY_PRINT));
 	}
 	
 	//EXP UTILISATION
