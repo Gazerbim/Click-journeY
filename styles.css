@@ -89,7 +89,7 @@ nav {
     z-index: 1000;
     background-color: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    //padding: 10px 20px;
+    /*padding: 10px 20px;*/
 }
 
 .nav-center {
@@ -508,91 +508,102 @@ body.connexion a:hover {
     margin-bottom: 50px;
 }
 
+
 .liste_voyages {
     text-align: center;
-    padding: 20px;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .liste_voyages h2 {
-    color: #333;
+    color: #222;
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
-.liste_voyages .voyage {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    padding: 40px;
-    width: 80%;
-    max-width: 400px;
-    transition: transform 0.3s ease-in-out;
+.voyages-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    
+    justify-content: center;
 }
 
-.liste_voyages .voyage:hover {
+.voyage {
+    background-color: #e5aea8;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.voyage:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.liste_voyages .voyage p {
+
+.voyage img {
+    border-radius: 10px;
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    max-width: 400px;
+    object-fit: cover;
+}
+
+
+.voyage p {
     margin: 10px 0;
     color: #555;
     font-size: 16px;
 }
 
-.liste_voyages .voyage p:first-child {
+.voyage p:first-child {
     font-size: 20px;
     font-weight: bold;
     color: #222;
 }
 
-.liste_voyages .voyage p:last-child {
+.voyage p:last-child {
     font-size: 18px;
     font-weight: bold;
     color: #007BFF;
 }
 
+/* Bouton Détails */
 .voyage button {
     background-color: #e30613;
     color: white;
     border: none;
-    padding: 5px 10px;
-    font-size: 20px;
+    padding: 10px 15px;
+    font-size: 18px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.liste_voyages {
-    width: 90%;
-    margin: 0 auto;
+.voyage button:hover {
+    background-color: #ba0510;
+    transform: scale(1.1);
 }
 
-.liste_voyages h2 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Espacement du haut */
+.espaceur {
+    margin-top: 50px;
 }
 
-.voyages-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 20px;
-}
-
-.voyage {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    text-align: center;
-}
-
-
+/* Responsive */
 @media (max-width: 768px) {
     .voyages-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
 
 @media (max-width: 480px) {
     .voyages-container {
@@ -600,9 +611,6 @@ body.connexion a:hover {
     }
 }
 
-.espaceur {
-    margin-top: 50px;
-}
 
 .voyage_detail {
     width: 90%;
