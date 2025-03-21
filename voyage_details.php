@@ -8,12 +8,17 @@
     <title>Rush&Krous - Voyage</title>
 </head>
 <body>
-<a href="payement.php?voyage=<?php echo $_GET['id']?>" class="buy-button">
-    <button>Acheter</button>
-</a>
-<?php
-    session_start();
-?>
+    <?php
+        session_start();
+        require('requires/json_utilities.php');
+        if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+            if(!existeDejaVoyageUtilisateur($_SESSION['id'], $_GET['id'])){
+                echo "<a href='payement.php?voyage=".$_GET['id']."' class='buy-button'><button>Acheter</button></a>";
+            } 
+        }
+        
+
+    ?>
     <div class="image_header">
         <nav>
             <a class="crous" href="https://www.crous-paris.fr/">
