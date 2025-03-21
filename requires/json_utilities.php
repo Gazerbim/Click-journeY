@@ -383,6 +383,31 @@
 		$path = "databases/utilisateurs/".$id."/voyages.json";
 		file_put_contents($path, json_encode($voyages, JSON_PRETTY_PRINT));
 	}
+
+	function recupererTitreVoyage($id){
+		$voyage = recupererVoyageAvecId($id);
+		return $voyage["nom"];
+	}
+
+	function existeDejaTransaction($id, $transaction){
+		$voyages = recupererVoyagesUtilisateur($id);
+		foreach ($voyages as $key => $value) {
+			if($value["transaction"] == $transaction){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	function existeDejaVoyageUtilisateur($id, $idVoyage){
+		$voyages = recupererVoyagesUtilisateur($id);
+		foreach ($voyages as $key => $value) {
+			if($value["id"] == $idVoyage){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	//EXP UTILISATION
 

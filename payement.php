@@ -18,6 +18,12 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     exit;
 }
 
+if (existeDejaVoyageUtilisateur($id, $voyageId)) {
+    $_SESSION["error"] = "Vous avez déjà réservé ce voyage";
+    header('Location: profil.php');
+    exit;
+}
+
 // Paramètres de la transaction
 $transaction = uniqid(); // Génération d'un identifiant unique pour la transaction
 $montant = recupererPrixVoyage($voyageId);
@@ -46,7 +52,23 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur .
     <title>Paiement CYBank</title>
 </head>
 <body>
+    <div class="recherche">
     <h2>Valider votre paiement</h2>
+    <?php
+    echo "Prix : ".$montant."€";
+    echo "<br>";
+    echo "Voyage : ".recupererTitreVoyage($voyageId);
+    echo "<br>";
+    echo "Numero de carte à mettre : 5555 1234 5678 9000";
+    echo "<br>";
+    echo "Code de sécurité : 555";
+    echo "<br>";
+    echo "Date d'expiration : 01/26";
+    echo "<br>";
+    echo "Nom du titulaire : ". $_SESSION['prenom'] . " " . $_SESSION['nom'];
+    echo "<br>";
+    ?>
+    <div class="espaceur"></div>
     <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
         <input type="hidden" name="transaction" value="<?php echo $transaction; ?>">
         <input type="hidden" name="montant" value="<?php echo $montant; ?>">
@@ -55,5 +77,6 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur .
         <input type="hidden" name="control" value="<?php echo $control; ?>">
         <button type="submit">Payer avec CYBank</button>
     </form>
+    </div>
 </body>
 </html>

@@ -32,11 +32,14 @@ if ($control_calculé !== $control_recu) {
 
 if ($statut === "accepted") {
     // Ajout du voyage à la liste des voyages de l'utilisateur
+    
     session_start();
     $id = $_SESSION['id'];
     $idVoyage = $_GET['id'];
     $date = date("d-m-Y");
-    ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction);
+    if (!existeDejaTransaction($id, $transaction)) {
+        ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction);
+    }
 }
 
 ?>
@@ -46,20 +49,23 @@ if ($statut === "accepted") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Résultat du paiement</title>
 </head>
 <body>
-    <h2>Résultat du paiement</h2>
+    <div class="recherche">
+        <h2>Résultat du paiement</h2>
 
-    <?php if ($statut === "accepted") : ?>
-        <p style="color: green;">✅ Paiement accepté !</p>
-        <p>Transaction ID : <?php echo htmlspecialchars($transaction); ?></p>
-        <p>Montant payé : <?php echo htmlspecialchars($montant); ?> €</p>
-        <p>Le voyage a été ajouté à votre compte.</p>
-    <?php else : ?>
-        <p style="color: red;">❌ Paiement refusé.</p>
-    <?php endif; ?>
+        <?php if ($statut === "accepted") : ?>
+            <p style="color: green;">✅ Paiement accepté !</p>
+            <p>Transaction ID : <?php echo htmlspecialchars($transaction); ?></p>
+            <p>Montant payé : <?php echo htmlspecialchars($montant); ?> €</p>
+            <p>Le voyage a été ajouté à votre compte.</p>
+        <?php else : ?>
+            <p style="color: red;">❌ Paiement refusé.</p>
+        <?php endif; ?>
 
-    <a href="index.php">Retour à l'Accueil</a>
+        <a href="index.php">Retour à l'Accueil</a>
+    </div>
 </body>
 </html>
