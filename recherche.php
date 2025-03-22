@@ -58,8 +58,6 @@
  </div>
 
     <?php
-        $prix_min = isset($_GET['prix_min']) && is_numeric($_GET['prix_min']) ? (float)$_GET['prix_min'] : null;
-        $prix_max = isset($_GET['prix_max']) && is_numeric($_GET['prix_max']) ? (float)$_GET['prix_max'] : null;
         require('requires/footer.php');
     ?>
 </body>
