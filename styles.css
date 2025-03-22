@@ -801,3 +801,14 @@ body.connexion a:hover {
     border-radius: 5px;
     font-weight: bold;
 }
+
+.prix-range {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.prix-range input[type="number"] {
+    width: 120px;
+    padding: 8px;
+}

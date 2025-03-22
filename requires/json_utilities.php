@@ -211,6 +211,22 @@
 		return $content[$indice-1]["etapes"];
 	}
 
+	function recupererVilles(){
+		$voyages = recupererVoyages();
+		$villes = [];
+		foreach ($voyages as $voyage) {
+			$etapes = recupererEtapesVoyage($voyage['id']);
+			foreach ($etapes as $etape) {
+				if (isset($etape["ville"])) {
+					$villes[] = $etape["ville"];
+				}
+			}
+		}
+		$villes= array_unique($villes);
+		sort($villes);
+		return $villes;
+	}
+
 	function isAdmin($id){
 		$path = "databases/users.json";
 		$file_content = file_get_contents($path);
