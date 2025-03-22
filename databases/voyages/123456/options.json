@@ -1,0 +1,70 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": false,
+      "activites": [
+        {
+          "nom": "Visite de la tour Eiffel",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Découverte du Louvre et de ses trésors artistiques",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Flâner le long de la Seine et sur les Champs-Élysées",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Dégustation de spécialités lyonnaises dans un bouchon traditionnel",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Visite du Vieux Lyon et de ses célèbres traboules",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Randonnée dans les Monts d'Or et vue panoramique sur la ville",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Découverte du Vieux-Port et de la Basilique Notre-Dame-de-la-Garde",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Balade en bateau vers les calanques de Marseille",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Détente sur les plages du Prado",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    }
+  ]
+}

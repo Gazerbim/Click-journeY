@@ -1,0 +1,92 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Assister aux Trans Musicales",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Explorer le centre historique et le Parlement de Bretagne",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Déguster une galette-saucisse au marché des Lices",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Assister au Hellfest à Clisson",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Découvrir les Machines de l’Île et le Grand Éléphant",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Flâner dans le quartier du Bouffay",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Assister au Garorock à Marmande",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Déguster un verre de vin sur les quais de la Garonne",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Visiter la Cité du Vin",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Profiter des Siestes Électroniques",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Se promener sur la Place du Capitole",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Faire une croisière sur le Canal du Midi",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    }
+  ]
+}

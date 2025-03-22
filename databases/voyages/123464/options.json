@@ -1,0 +1,92 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Randonnée au sommet du Puy de Dôme.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Balade dans le centre historique et dégustation de fromages locaux.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Visite du parc Vulcania pour en apprendre plus sur les volcans.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Montée à la Bastille pour une vue panoramique.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Randonnée dans le massif de la Chartreuse.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Balade à vélo le long de l’Isère.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Balade sur les rives de la Vienne.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Visite du Parc de Blossac, l’un des plus beaux parcs de la ville.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Excursion au Futuroscope pour une journée de découvertes.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": false,
+      "activites": [
+        {
+          "nom": "Balade dans le parc du Thabor.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Excursion à Saint-Malo pour une journée au bord de la mer.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Découverte du marché des Lices et de ses produits régionaux.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    }
+  ]
+}

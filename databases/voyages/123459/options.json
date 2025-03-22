@@ -1,0 +1,70 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": true,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Dégustation de vins et fromages bordelais.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Balade sur la Place de la Bourse et le Miroir d’eau.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Exploration du quartier Saint-Pierre et des quais de la Garonne.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": true,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Dégustation du cassoulet toulousain dans un restaurant traditionnel.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Balade le long de la Garonne et visite du Capitole.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Découverte du marché Victor Hugo et ses produits régionaux.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": true,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Dégustation d’une véritable flammekueche alsacienne.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Visite de la Cathédrale Notre-Dame de Strasbourg et balade dans la Petite France.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Découverte des caves à vin et dégustation des meilleurs crus d’Alsace.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    }
+  ]
+}

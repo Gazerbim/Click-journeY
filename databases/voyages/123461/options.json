@@ -1,0 +1,48 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Visite des tours médiévales",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Découverte de l’Aquarium de La Rochelle",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Balade sur l’île de Ré",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Initiation au surf sur la plage de la Côte des Basques",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Randonnée au Rocher de la Vierge",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Visite du Phare de Biarritz",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    }
+  ]
+}

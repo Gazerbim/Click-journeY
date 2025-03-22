@@ -1,0 +1,92 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Visite de la Cathédrale Notre-Dame de Strasbourg et montée à la plateforme panoramique",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Découverte du quartier de la Petite France",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Balade en bateau sur l’Ill",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Dégustation de vins dans un vignoble bordelais",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Visite du Miroir d’Eau",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Balade le long des Quais de la Garonne",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Visite de la Cité de Carcassonne",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Découverte du Château Comtal",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Balade le long du Canal du Midi",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Visite du Musée du Louvre",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Balade sur les Champs-Élysées ",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Montée à la Tour Eiffel",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    }
+  ]
+}

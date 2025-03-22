@@ -1,0 +1,48 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": true,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "",
+          "prix": 5,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": true,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "",
+          "prix": 5,
+          "option": false
+        }
+      ]
+    }
+  ]
+}

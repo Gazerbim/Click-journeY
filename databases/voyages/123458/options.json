@@ -1,0 +1,48 @@
+{
+  "etapes": [
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Balade sur la Promenade des Anglais.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Excursion à Èze ou Monaco.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Détente sur les plages niçoises.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    },
+    {
+      "hebergement": true,
+      "restauration": false,
+      "transports": true,
+      "activites": [
+        {
+          "nom": "Découverte du centre historique et de la place de la Comédie.",
+          "prix": 0,
+          "option": false
+        },
+        {
+          "nom": "Excursion aux plages de Palavas-les-Flots.",
+          "prix": 5,
+          "option": false
+        },
+        {
+          "nom": "Sorties et événements étudiants en été.",
+          "prix": 0,
+          "option": false
+        }
+      ]
+    }
+  ]
+}
