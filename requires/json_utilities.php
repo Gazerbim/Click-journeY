@@ -381,6 +381,13 @@
 		}
 		return false;
 	}
+
+	function recupererMotsClefVoyage($id){
+		$path = "databases/voyages/".$id."/mots_clef.txt";
+		$file_content = file_get_contents($path);
+		$mots = explode(" ", $file_content);
+		return $mots;
+	}
 	
 	//EXP UTILISATION
 

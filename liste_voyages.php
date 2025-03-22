@@ -29,12 +29,9 @@
                 $voyages = recupererVoyages();
                 foreach ($voyages as $value) {
                     $resultat = true;
-                    $mots = avoirListeMotsVoyage($value['id']);
+                    $mots = recupererMotsClefVoyage($value['id']);
                     foreach($mots_clef as $mot_clef){
-                        if (!(strpos(strtolower($mots), strtolower($mot_clef))!==false)){
-                            $resultat = false;
-                            break;
-                        }
+                        $resultat = $resultat && in_array(strtolower($mot_clef), $mots);
                     }
                     if($resultat){
                         echo "<div class='voyage'>";
