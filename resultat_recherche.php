@@ -61,7 +61,6 @@ afficher_header('recherche');
         <h2>Résultats de la recherche</h2>
         <div class="voyages-container">
         <?php
-        // Display results
         if(isset($_GET['lieu'])){
             $lieu = $_GET['lieu'];
             $lieu = explode(" ", $lieu);
