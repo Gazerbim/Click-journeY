@@ -70,7 +70,7 @@ afficher_header('recherche');
             $lieu = [""];
         }
         $date = $_GET['date'] ?? "";
-        $options = $_GET['ville'] ?? [];
+        $villeSelectionnee = $_GET['ville'] ?? "";
         $prix_min = isset($_GET['prix_min']) && is_numeric($_GET['prix_min']) ? (float)$_GET['prix_min'] : null;
         $prix_max = isset($_GET['prix_max']) && is_numeric($_GET['prix_max']) ? (float)$_GET['prix_max'] : null;
         $etapes = $_GET['etapes'] ?? [];
@@ -95,6 +95,19 @@ afficher_header('recherche');
                     if(!$etapesMatch){
                         $resultat = false;
                     }
+                }
+            }
+            if(!empty($villeSelectionnee)) {
+                $etapesVoyage = recupererEtapesVoyage($value['id']);
+                $villeMatch = false;
+                foreach($etapesVoyage as $etape) {
+                    if(strtolower($etape['ville']) == strtolower($villeSelectionnee)) {
+                        $villeMatch = true;
+                        break;
+                    }
+                }
+                if(!$villeMatch) {
+                    $resultat = false;
                 }
             }
             if($date != ""){
