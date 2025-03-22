@@ -40,7 +40,7 @@
     $tarifFile = "databases/voyages/{$voyageId}/tarif.txt";
     $faqFile = "databases/voyages/{$voyageId}/faq.txt";
     $avisFile = "databases/voyages/{$voyageId}/avis.txt";
-
+    $optionsfile = "databases/voyages/{$voyageId}/options.json";
     
     $description = file_exists($descriptionFile) ? file_get_contents($descriptionFile) : "Description non disponible.";
     $date = file_exists($dateFile) ? file_get_contents($dateFile) : "Date non disponible.";
@@ -59,20 +59,33 @@
         <h2> Programme du voyage ! </h2>
         <?php
         if (!empty($etapes)) {
+            $options = json_decode(file_get_contents($optionsfile), true); 
             foreach ($etapes as $index => $etape) {
-                $numEtape = $index + 1;
-                echo "<h3>Étape $numEtape :</h3>";
-
+                $numEtape = $index; 
                 
-                echo "<pre>" . file_get_contents("databases/voyages/{$voyageId}/etapes/jour{$numEtape}.txt") . "</pre>";
-
-                                echo "<img src='databases/voyages/{$voyageId}/img/image_etape{$numEtape}.jpg' alt='image_etape{$numEtape}' width='100%' height='20%'>";
+                echo "<h3>Étape " . ($numEtape + 1) . " :</h3>";
+                echo "<pre>" . file_get_contents("databases/voyages/{$voyageId}/etapes/jour" . ($numEtape + 1) . ".txt") . "</pre>";
+                
+                if (isset($options['etapes'][$numEtape])) {
+                    echo "<h3>Options disponibles :</h3>";
+                    
+                    echo "<pre>Hébergement</pre>";
+                    echo "<pre>Restauration</pre>";
+                    echo "<pre>Transports</pre>";
+                    
+                    if (!empty($options['etapes'][$numEtape]['activites'])) {
+                        echo "<h4>Activités :</h4>";
+                        foreach ($options['etapes'][$numEtape]['activites'] as $activite) {
+                            echo "<pre>" . $activite['nom'] . "</pre>";
+                        }
+                    }
+                }
+                echo "<img src='databases/voyages/{$voyageId}/img/image_etape" . ($numEtape + 1) . ".jpg' alt='image_etape" . ($numEtape + 1) . "' width='100%' height='20%'>";
             }
         } else {
             echo "<p>Aucune étape disponible pour ce voyage.</p>";
         }
         ?>
-
         <div class="section">
             <h2>Tarif</h2>
             <p><?php echo nl2br($tarif); ?></p>
