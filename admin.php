@@ -34,40 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         header('Location: admin.php');
     }
 }
-?>
-    <div class="image_header">
-        <nav>
-            <a class="crous" href="https://www.crous-paris.fr/">
-                <button><img src='images/Krous.png'></button>
-            </a>
-            <div class="nav-spacer"></div>
-            <div class="nav-center">
-                <h1 class="nav-titre">Rush&Krous</h1>
-            </div>
-            <div class="nav-liens">
-                <a href="index.php"><button>Accueil</button></a>
-                <a href="presentation.php"><button>Présentation</button></a>
-                <a href="recherche.php"><button>Recherche</button></a>
-                <?php
-                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
-                        echo "<a href='deconnexion.php'><button>Déconnexion</button></a>";
-                    } else {
-                        echo "<a href='connexion.php'><button>Connexion</button></a>";
-                    }
-                ?>
-                <a href="profil.php"><button>
-                <?php
-                    if (isset($_SESSION['prenom']) && !empty($_SESSION['prenom'])) {
-                        echo $_SESSION['prenom'];
-                    } 
-                    else {
-                        echo "Profil";
-                    }
-                ?>
-		</button></a>
-            </div>
-        </nav>
 
+require('requires/header.php');
+afficher_header('admin');
+?>
     <main>
         <div class="recherche admin">
             <h2>Gestion des utilisateurs</h2>
