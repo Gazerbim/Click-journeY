@@ -388,6 +388,58 @@
 		$mots = explode(" ", $file_content);
 		return $mots;
 	}
+
+	function modifierHebergement($idVoyage, $numEtape, $nouvelleValeur) {
+    		$path = "databases/voyages/$idVoyage/options.json";
+    		$file_content = file_get_contents($path);
+    		$content = json_decode($file_content, true);
+    		if (isset($content["etapes"][$numEtape])) {
+        		$content["etapes"][$numEtape]["hebergement"] = $nouvelleValeur;
+			file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+        		return true;
+    		}
+    		return false; 
+	}
+
+	function modifierRestauration($idVoyage, $numEtape, $nouvelleValeur) {
+    		$path = "databases/voyages/$idVoyage/options.json";
+    		$file_content = file_get_contents($path);
+    		$content = json_decode($file_content, true);
+    		if (isset($content["etapes"][$numEtape])) {
+        		$content["etapes"][$numEtape]["restauration"] = $nouvelleValeur;
+			file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+        		return true;
+    		}
+    		return false; 
+	}
+
+	function modifierTransports($idVoyage, $numEtape, $nouvelleValeur) {
+    		$path = "databases/voyages/$idVoyage/options.json";
+    		$file_content = file_get_contents($path);
+    		$content = json_decode($file_content, true);
+    		if (isset($content["etapes"][$numEtape])) {
+        		$content["etapes"][$numEtape]["transports"] = $nouvelleValeur;
+			file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+        		return true;
+    		}
+    		return false; 
+	}
+
+	function modifierActivite($idVoyage, $numEtape, $nomActivite, $nouvelleValeur) {
+    		$path = "databases/voyages/$idVoyage/options.json";   
+    		$file_content = file_get_contents($path);
+    		$content = json_decode($file_content, true);
+    		if (isset($content["etapes"][$numEtape])) {
+        	    foreach ($content["etapes"][$numEtape]["activites"] as &$activite) {
+            		if ($activite["nom"] === $nomActivite) {
+                		$activite["option"] = $nouvelleValeur;
+                		file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+                		return true;
+            		}
+        	    }
+    		}
+    		return false; 
+    	}
 	
 	//EXP UTILISATION
 
