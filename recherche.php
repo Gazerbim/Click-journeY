@@ -40,7 +40,7 @@
          <label for="prix"><strong>Prix :</strong></label>
          <div class="prix-range">
              <input type="number" id="prix-min" name="prix-min" min="0" placeholder="Prix minimum"
-                    value="<?php echo isset($_GET['prix-min']) ? htmlspecialchars($_GET['prix-min']) : '' ?>">
+                    value="<?php echo isset($_GET['prix_min']) ? htmlspecialchars($_GET['prix_min']) : '' ?>">
              <span>à</span>
              <input type="number" id="prix_max" name="prix_max" min="0" placeholder="Prix maximum"
                     value="<?php echo isset($_GET['prix_max']) ? htmlspecialchars($_GET['prix_max']) : ''; ?>">
