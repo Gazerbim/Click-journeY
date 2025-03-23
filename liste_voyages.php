@@ -18,12 +18,12 @@
         <h2>Liste des voyages</h2>
         <div class="voyages-container">
             <?php
-                if(isset($_GET['mot_clef'])){
+                if(isset($_GET['mot_clef']) && !empty($_GET['mot_clef'])){
                     $mots_clef = $_GET['mot_clef'];
                     $mots_clef = explode(" ", $mots_clef);
                 }
                 else{
-                    $mots_clef = [""];
+                    $mots_clef = [];
                 }
                 require_once 'requires/json_utilities.php';
                 $voyages = recupererVoyages();
@@ -33,7 +33,7 @@
                     foreach($mots_clef as $mot_clef){
                         $resultat = $resultat && in_array(strtolower($mot_clef), $mots);
                     }
-                    if($resultat){
+                    if($resultat || $mots_clef == []){
                         echo "<div class='voyage'>";
                         echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
                         echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
