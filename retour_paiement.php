@@ -40,6 +40,7 @@ if ($statut === "accepted") {
         ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction);
         ajouterOptionUtilisateur($id, $idVoyage, $options);
     }
+    unset($_SESSION['options']); // enlever les options de la session
 }
 ?>
 
