@@ -12,7 +12,7 @@
 session_start();
 require("requires/json_utilities.php");
 $tab = lireFichierJson("./databases/users.json");
-const ligneParPage = 20;
+const ligneParPage = 10;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['delete_id'])) {
@@ -93,7 +93,7 @@ afficher_header('admin');
                                 echo "</tr>";
                             }
                         }else{
-                            for ($i = $page*ligneParPage; $i <= min($page*ligneParPage+10, count($tab)-1); $i++) {
+                            for ($i = $page*ligneParPage; $i < min(($page+1)*ligneParPage, count($tab)); $i++) {
                                 $line = $tab[$i];
                                 echo "<tr>";
                                 echo "<td>" . $line['id'] . "</td>";
@@ -110,7 +110,7 @@ afficher_header('admin');
                                     echo "<button type='submit'>Demote to User</button>";
                                 }
                                 echo "</form>";
-                                echo "<form action='admin.php' method='post' onsubmit='return confirmDelete();' style='display:inline;'>";
+                                echo "<form action='admin.php' method='post' style='display:inline;'>";
                                 echo "<input type='hidden' name='delete_id' value='" . $line['id'] . "'>";
                                 echo "<button type='submit'>Supprimer</button>";
                                 echo "</form>";
