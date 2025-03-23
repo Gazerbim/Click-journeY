@@ -119,10 +119,6 @@ afficher_header('admin');
                                 echo "</tr>";
                             }
                         }
-                        
-                        
-
-                        
                     ?>
                 </tbody>
             </table>
@@ -130,19 +126,25 @@ afficher_header('admin');
             <?php
                 $nbPages = ceil(count($tab)/ligneParPage);
                 if($nbPages != 1){
-                    for ($i = 0; $i < $nbPages; $i++) {
-                        echo "<a href='admin.php?page=$i'>" . ($i+1) . "</a><a> </a>";
-                    }
-                    echo "<br>";
                     $pageM = $page-1;
-                    $pageP = $page+1;
                     if ($pageM < 0) {
                         $pageM = 0;
                     }
+                    echo "<a href='admin.php?page=$pageM'>"."<"."</a>";
+                    for ($i = 0; $i < $nbPages; $i++) {
+                        if ($i == $page) {
+                            echo "<a class='active'>" . ($i+1) . "</a>";
+                            continue;
+                        }
+                        echo "<a href='admin.php?page=$i'>" . ($i+1) . "</a>";
+                    }
+                    echo "<br>";
+                    
+                    $pageP = $page+1;
                     if ($pageP >= $nbPages) {
                         $pageP = $nbPages-1;
                     }
-                    echo "<a href='admin.php?page=$pageM'>"."<"."</a>";
+                    
                     echo "<a href='admin.php?page=$pageP'>".">"."</a>";
                 }
             ?>
