@@ -28,7 +28,7 @@ if (existeDejaVoyageUtilisateur($id, $voyageId)) {
 $transaction = uniqid(); // Génération d'un identifiant unique pour la transaction
 $montant = recupererPrixVoyage($voyageId);
 $vendeur = "MI-4_A";
-$retour = "http://localhost/retour_paiement.php?id=".$voyageId;
+//$retour = "http://localhost/retour_paiement.php?id=".$voyageId;
 
 // Récupération de la clé API
 $api_key = getAPIKey($vendeur);
@@ -38,8 +38,7 @@ if (!preg_match("/^[0-9a-zA-Z]{15}$/", $api_key)) {
     die("Erreur : Clé API invalide !");
 }
 
-// Génération de la valeur de contrôle
-$control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
+
 
 ?>
 
@@ -72,30 +71,51 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur .
     <form action="update_options.php" method="POST" class="recherche">
     <input type="hidden" name="voyageId" value="<?php echo $voyageId; ?>">
     <?php
-	echo "<strong> options possibles : </strong><br>";
-	
-        foreach ($optionsDisponibles as $index => $etape) {
-	    echo "<br>";
-	    echo "--------------------------------------";
-	    echo "<br>";
-            echo "<strong>Étape ".($index + 1)." :</strong><br>";
-	    echo '<div class="checkbox-groupe">';
-            echo "Hébergement <input type='checkbox' name='options[hebergement][$index]' value='true' " . ($etape["hebergement"] ? "checked" : "") . "><br>";
-            echo "Restauration <input type='checkbox' name='options[restauration][$index]' value='true' " . ($etape["restauration"] ? "checked" : "") . "><br>";
-            echo "Transports <input type='checkbox' name='options[transports][$index]' value='true' " . ($etape["transports"] ? "checked" : "") . "><br>";
-            echo '</div>';
-            if (!empty($etape["activites"])) {
-                echo "<b>Activités :</b><br>";
-                foreach ($etape["activites"] as $activite) {
-                    echo htmlspecialchars($activite["nom"]) . 
-                         " <input type='checkbox' name='options[activites][$index][]' value='" . htmlspecialchars($activite["nom"]) . "' " . 
-                         ($activite["option"] ? "checked" : "") . "><br>";
-                }
-            }
-	    
+	echo "<strong> Options possibles : </strong><br>";
+    $optionsDisponibles = recupererOptionsVoyage($voyageId);
+    if (isset($_SESSION["options"])) {
+        print("Options sélectionnées : ");
+        foreach ($_SESSION["options"] as $option) {
+            print($option);
             echo "<br>";
-	    echo "<br>";
         }
+    }
+    
+    foreach ($optionsDisponibles as $index => $valeur) { 
+        
+        echo "<br>";
+        echo "<label for='$index'>$index (+$valeur €)</label>";
+        echo "<input type='checkbox' name='options[]' value='$index'";
+        if (isset($_SESSION['options']) && in_array($index, $_SESSION['options'])) {
+            echo " checked";
+        }
+        
+        echo ">";
+    }
+        
+$optionsParams = [];
+
+$optionsSelectionnees = $_SESSION['options'] ?? [];
+
+foreach ($optionsDisponibles as $index => $valeur) {
+    $etat = in_array($index, $optionsSelectionnees) ? 'true' : 'false';
+    print($etat);
+    $optionsParams[] = "$index=$etat";
+}
+
+// Construire l'URL de retour avec toutes les options
+$retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
+if (!empty($optionsParams)) {
+    $retour .= "&" . implode("&", $optionsParams);
+}
+
+// Génération de la valeur de contrôle
+$control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
+
+// Affichage de l'URL pour debug
+print($retour);
+
+
     ?>
     <button type="submit">Mettre à jour les options</button>
     </form>    

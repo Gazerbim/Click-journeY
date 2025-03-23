@@ -426,20 +426,43 @@
 	}
 
 	function modifierActivite($idVoyage, $numEtape, $nomActivite, $nouvelleValeur) {
-    		$path = "databases/voyages/$idVoyage/options.json";   
-    		$file_content = file_get_contents($path);
-    		$content = json_decode($file_content, true);
-    		if (isset($content["etapes"][$numEtape])) {
-        	    foreach ($content["etapes"][$numEtape]["activites"] as &$activite) {
-            		if ($activite["nom"] === $nomActivite) {
-                		$activite["option"] = $nouvelleValeur;
-                		file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
-                		return true;
-            		}
-        	    }
-    		}
-    		return false; 
-    	}
+		$path = "databases/voyages/$idVoyage/options.json";   
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		if (isset($content["etapes"][$numEtape])) {
+			foreach ($content["etapes"][$numEtape]["activites"] as &$activite) {
+				if ($activite["nom"] === $nomActivite) {
+					$activite["option"] = $nouvelleValeur;
+					file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+					return true;
+				}
+			}
+		}
+		return false; 
+    }
+
+	function recupererOptionsVoyage($id){
+		$path = "databases/voyages/$id/options.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		return $content;
+	}
+
+	function recupererLigneVoyageUtilisateur($id, $idVoyage){
+		$voyages = recupererVoyagesUtilisateur($id);
+		foreach ($voyages as $key => $value) {
+			if($value["id"] == $idVoyage){
+				return $key;
+			}
+		}
+	}
+	function ajouterOptionUtilisateur($id, $idVoyage, $options){
+		$path = "databases/utilisateurs/$id/voyages.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		$content[recupererLigneVoyageUtilisateur($id, $idVoyage)]["options"] = $options;
+		file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+	}
 	
 	//EXP UTILISATION
 

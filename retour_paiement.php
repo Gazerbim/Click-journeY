@@ -8,10 +8,19 @@ $montant = $_GET['montant'] ?? '';
 $vendeur = $_GET['vendeur'] ?? '';
 $statut = $_GET['status'] ?? '';
 $control_recu = $_GET['control'] ?? '';
+$idVoyage = $_GET['id'] ?? '';
+$options = $_GET ?? [];
+unset($options['transaction']);
+unset($options['montant']);
+unset($options['vendeur']);
+unset($options['status']);
+unset($options['control']);
+unset($options['id']);
+
 
 // Vérification que les paramètres sont bien reçus
-if (empty($transaction)|| empty($montant) || empty($vendeur) || empty($statut) || empty($control_recu)) {
-        die("Erreur : Paramètres manquants !");
+if (empty($transaction) || empty($montant) || empty($vendeur) || empty($statut) || empty($control_recu) || empty($idVoyage)) {
+    die("Erreur : Paramètres manquants !");
 }
 
 // Récupération de l'API key
@@ -31,17 +40,15 @@ if ($control_calculé !== $control_recu) {
 }
 
 if ($statut === "accepted") {
-    // Ajout du voyage à la liste des voyages de l'utilisateur
-    
     session_start();
     $id = $_SESSION['id'];
-    $idVoyage = $_GET['id'];
     $date = date("d-m-Y");
+    
     if (!existeDejaTransaction($id, $transaction)) {
         ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction);
+        ajouterOptionUtilisateur($id, $idVoyage, $options);
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -55,16 +62,14 @@ if ($statut === "accepted") {
 <body>
     <div class="recherche">
         <h2>Résultat du paiement</h2>
-
         <?php if ($statut === "accepted") : ?>
             <p style="color: green;">✅ Paiement accepté !</p>
             <p>Transaction ID : <?php echo htmlspecialchars($transaction); ?></p>
             <p>Montant payé : <?php echo htmlspecialchars($montant); ?> €</p>
-            <p>Le voyage a été ajouté à votre compte.</p>
+            <p>Le voyage a été ajouté à votre compte avec les options sélectionnées.</p>
         <?php else : ?>
             <p style="color: red;">❌ Paiement refusé.</p>
         <?php endif; ?>
-
         <a href="index.php">Retour à l'Accueil</a>
     </div>
 </body>
