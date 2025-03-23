@@ -41,7 +41,7 @@
     }
 
     // Pagination
-    $voyagesParPage = 5; 
+    $voyagesParPage = 6; 
     $pageActuelle = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
     $totalVoyages = count($voyagesFiltres);
     $totalPages = max(1, ceil($totalVoyages / $voyagesParPage));
