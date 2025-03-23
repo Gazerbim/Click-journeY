@@ -68,6 +68,38 @@ $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur .
     echo "Nom du titulaire : ". $_SESSION['prenom'] . " " . $_SESSION['nom'];
     echo "<br>";
     ?>
+
+    <form action="update_options.php" method="POST" class="recherche">
+    <input type="hidden" name="voyageId" value="<?php echo $voyageId; ?>">
+    <?php
+	echo "<strong> options possibles : </strong><br>";
+	
+        foreach ($optionsDisponibles as $index => $etape) {
+	    echo "<br>";
+	    echo "--------------------------------------";
+	    echo "<br>";
+            echo "<strong>Étape ".($index + 1)." :</strong><br>";
+	    echo '<div class="checkbox-groupe">';
+            echo "Hébergement <input type='checkbox' name='options[hebergement][$index]' value='true' " . ($etape["hebergement"] ? "checked" : "") . "><br>";
+            echo "Restauration <input type='checkbox' name='options[restauration][$index]' value='true' " . ($etape["restauration"] ? "checked" : "") . "><br>";
+            echo "Transports <input type='checkbox' name='options[transports][$index]' value='true' " . ($etape["transports"] ? "checked" : "") . "><br>";
+            echo '</div>';
+            if (!empty($etape["activites"])) {
+                echo "<b>Activités :</b><br>";
+                foreach ($etape["activites"] as $activite) {
+                    echo htmlspecialchars($activite["nom"]) . 
+                         " <input type='checkbox' name='options[activites][$index][]' value='" . htmlspecialchars($activite["nom"]) . "' " . 
+                         ($activite["option"] ? "checked" : "") . "><br>";
+                }
+            }
+	    
+            echo "<br>";
+	    echo "<br>";
+        }
+    ?>
+    <button type="submit">Mettre à jour les options</button>
+    </form>    
+        
     <div class="espaceur"></div>
     <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
         <input type="hidden" name="transaction" value="<?php echo $transaction; ?>">
