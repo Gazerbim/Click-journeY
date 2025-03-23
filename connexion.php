@@ -10,6 +10,11 @@
 <body class="connexion" >
    <?php
     session_start();
+    if (isset($_SESSION['id'])) {
+        $_SESSION['error'] = "Vous êtes déjà connecté";
+        header('Location: profil.php');
+        exit;
+    }
     require('requires/header.php');
     afficher_header('connexion');
   ?>
