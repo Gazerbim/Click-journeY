@@ -17,24 +17,16 @@ unset($options['status']);
 unset($options['control']);
 unset($options['id']);
 
-
-// Vérification que les paramètres sont bien reçus
 if (empty($transaction) || empty($montant) || empty($vendeur) || empty($statut) || empty($control_recu) || empty($idVoyage)) {
     die("Erreur : Paramètres manquants !");
 }
-
-// Récupération de l'API key
 $api_key = getAPIKey($vendeur);
-
-// Vérification de la clé API
 if (!preg_match("/^[0-9a-zA-Z]{15}$/", $api_key)) {
     die("Erreur : Clé API invalide !");
 }
 
-// Recalcul de la valeur de contrôle
 $control_calculé = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $statut . "#");
 
-// Vérification de l'intégrité des données
 if ($control_calculé !== $control_recu) {
     die("Erreur : Contrôle de sécurité invalide !");
 }
