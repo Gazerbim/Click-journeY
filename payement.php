@@ -24,16 +24,12 @@ if (existeDejaVoyageUtilisateur($id, $voyageId)) {
     exit;
 }
 
-// Paramètres de la transaction
-$transaction = uniqid(); // Génération d'un identifiant unique pour la transaction
+$transaction = uniqid();
 $montant = recupererPrixVoyage($voyageId);
 $vendeur = "MI-4_A";
-//$retour = "http://localhost/retour_paiement.php?id=".$voyageId;
 
-// Récupération de la clé API
 $api_key = getAPIKey($vendeur);
 
-// Vérification de la clé API
 if (!preg_match("/^[0-9a-zA-Z]{15}$/", $api_key)) {
     die("Erreur : Clé API invalide !");
 }
@@ -73,13 +69,6 @@ if (!preg_match("/^[0-9a-zA-Z]{15}$/", $api_key)) {
     <?php
 	echo "<strong> Options possibles : </strong><br>";
     $optionsDisponibles = recupererOptionsVoyage($voyageId);
-    if (isset($_SESSION["options"])) {
-        print("Options sélectionnées : ");
-        foreach ($_SESSION["options"] as $option) {
-            print($option);
-            echo "<br>";
-        }
-    }
     
     foreach ($optionsDisponibles as $index => $valeur) { 
         
@@ -103,17 +92,12 @@ foreach ($optionsDisponibles as $index => $valeur) {
     $optionsParams[] = "$index=$etat";
 }
 
-// Construire l'URL de retour avec toutes les options
+// Construire l'URL
 $retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
 if (!empty($optionsParams)) {
     $retour .= "&" . implode("&", $optionsParams);
 }
-
-// Génération de la valeur de contrôle
 $control = md5($api_key . "#" . $transaction . "#" . $montant . "#" . $vendeur . "#" . $retour . "#");
-
-// Affichage de l'URL pour debug
-print($retour);
 
 
     ?>
