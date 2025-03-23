@@ -812,3 +812,40 @@ body.connexion a:hover {
     width: 120px;
     padding: 8px;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: rgba(227, 6, 19, 0.7);
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination a:hover {
+    background-color: #dab71e;
+    transform: scale(1.1);
+}
+
+.pagination a.active {
+    background-color: #3a4bff;
+    cursor: default;
+}
+
+.pagination a:first-child,
+.pagination a:last-child {
+    font-weight: bold;
+}
+
+.pagination a:first-child:hover,
+.pagination a:last-child:hover {
+    transform: scale(1.15);
+}
