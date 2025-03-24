@@ -53,32 +53,31 @@
         <h3><?php echo nl2br($date); ?></h3>
         <img src="databases/voyages/<?php echo $voyageId; ?>/img/profil.jpg" alt="image1" width="100%" height="20%">
     </div>
-    
     <form action="modification_options.php?id=<?php echo htmlspecialchars($voyageId); ?>" method="POST" class="recherche">
-    <?php foreach ($voyages as $voyage): ?>
-        <?php 
-            $voyageId = $voyage['id'];
-            $options = $voyage['options']; 
-        ?>
-        <input type="hidden" name="voyages[<?php echo htmlspecialchars($voyageId); ?>][id]" value="<?php echo htmlspecialchars($voyageId); ?>">
+    <?php
+	foreach ($voyages as $v1) {
+    	    if ($v1["id"] == $voyageId) {
+                if (isset($v1['options'])) {
+                    echo "<div>";
+            	        foreach ($v1['options'] as $optionName => $optionValue) {
+                	    echo "<label>" . htmlspecialchars(str_replace('_', ' ', $optionName)) . "</label>";
+                	    echo "<input type='checkbox' name='Options[]' value='" . htmlspecialchars($optionName) . "' ";
+                		if ($optionValue === "true" || $optionValue === true) {
+                    		    echo "checked";
+                		}
+                	    echo ">";
+            		}
+            	    echo "</div>";
+        	}
+    	    }
+	}
 
-        <?php foreach ($options as $option => $valeur): ?>
-            <div>
-                <input type="checkbox" id="opt_<?php echo htmlspecialchars($voyageId . '_' . $option); ?>"
-                    name="voyages[<?php echo htmlspecialchars($voyageId); ?>][options][<?php echo htmlspecialchars($option); ?>]" value="true"
-                    <?php if ($valeur === "true" || $valeur === true) echo "checked"; ?>>
-                <label for="opt_<?php echo htmlspecialchars($voyageId . '_' . $option); ?>">
-                    <?php echo htmlspecialchars(str_replace('_', ' ', $option)); ?>
-                </label>
-            </div>
-        <?php endforeach; ?>
 
-        <br>
-    <?php endforeach; ?>
+	?>
+	<button type="submit">Mettre à jour les options</button>
+    </form>
 
-    <button type="submit">Mettre à jour les options</button>
-</form>
-
+    
 
 
     <?php require('requires/footer.php'); ?>
