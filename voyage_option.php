@@ -45,6 +45,13 @@
 
         $description = file_exists($descriptionFile) ? file_get_contents($descriptionFile) : "Description non disponible.";
         $date = file_exists($dateFile) ? file_get_contents($dateFile) : "Date non disponible.";
+
+	$optionsFile = "databases/voyages/{$voyageId}/options.json";
+        if (file_exists($optionsFile)) {
+            $optionsPrices = json_decode(file_get_contents($optionsFile), true);
+        } else {
+            $optionsPrices = [];
+        }
     ?>
 
     <div class="voyage_detail">
@@ -60,12 +67,14 @@
                 if (isset($v1['options'])) {
                     echo "<div>";
             	        foreach ($v1['options'] as $optionName => $optionValue) {
+			    $price = $optionsPrices[$optionName];
                 	    echo "<label>" . htmlspecialchars(str_replace('_', ' ', $optionName)) . "</label>";
                 	    echo "<input type='checkbox' name='Options[]' value='" . htmlspecialchars($optionName) . "' ";
                 		if ($optionValue === "true" || $optionValue === true) {
                     		    echo "checked";
                 		}
                 	    echo ">";
+			    echo " - " . $price . " €";
             		}
             	    echo "</div>";
         	}
