@@ -60,29 +60,37 @@
         <h3><?php echo nl2br($date); ?></h3>
         <img src="databases/voyages/<?php echo $voyageId; ?>/img/profil.jpg" alt="image1" width="100%" height="20%">
     </div>
-    <form action="modification_options.php?id=<?php echo htmlspecialchars($voyageId); ?>" method="POST" class="recherche">
+    <form action="payement_options.php?id=<?php echo htmlspecialchars($voyageId); ?>" method="POST" class="recherche">
+    <h2>Options du voyage</h2>
     <?php
-	foreach ($voyages as $v1) {
-    	    if ($v1["id"] == $voyageId) {
+
+        foreach ($voyages as $v1) {
+            if ($v1["id"] == $voyageId) {
                 if (isset($v1['options'])) {
-                    echo "<div>";
-            	        foreach ($v1['options'] as $optionName => $optionValue) {
-			    $price = $optionsPrices[$optionName];
-                	    echo "<label>" . htmlspecialchars(str_replace('_', ' ', $optionName)) . "</label>";
-                	    echo "<input type='checkbox' name='Options[]' value='" . htmlspecialchars($optionName) . "' ";
-                		if ($optionValue === "true" || $optionValue === true) {
-                    		    echo "checked";
-                		}
-                	    echo ">";
-			    echo " - " . $price . " €";
-            		}
-            	    echo "</div>";
-        	}
-    	    }
-	}
-
-
-	?>
+                    echo "<table class='options-table'>";
+                    foreach ($v1['options'] as $optionName => $optionValue) {
+                        $price = $optionsPrices[$optionName];
+                        echo "<tr class='option-row'>";
+                        echo "<td><label class='option-label'>" . htmlspecialchars(str_replace('_', ' ', $optionName)) . "</label></td>";
+                        echo "<td><input type='checkbox' name='Options[]' value='" . htmlspecialchars($optionName) . "' class='option-checkbox'";
+                        if ($optionValue === "true" || $optionValue === true) {
+                            echo " checked";
+                            echo "></td>";
+                            echo "<td class='option-prix-paye'>" . $price . " €</td>";
+                            echo "</tr>";
+                            continue;
+                        }
+                        echo "></td>";
+                        echo "<td class='option-prix-pas-paye'>" . $price . " €</td>";
+                        echo "</tr>";
+                        
+                    }
+                    echo "</table>";
+                }
+            }
+        }
+    ?>
+    <div class="espaceur"></div>
 	<button type="submit">Mettre à jour les options</button>
     </form>
 

@@ -864,9 +864,33 @@ body.connexion a:hover {
 }
 
 .option-checkbox {
-    transform: scale(2);
+    margin-top: 30px;
+    transform: scale(2.5);
 }
 
 .options-table td {
     padding: 8px 12px;
+}
+
+.option-prix-paye {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #00ff26;
+}
+
+.option-prix-pas-paye {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.recherche .bouton-vert {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
