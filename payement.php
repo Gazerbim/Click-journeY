@@ -60,20 +60,27 @@ foreach ($optionsSelectionnees as $option) {
     <h2>Valider votre paiement</h2>
     
 
-    <form action="update_options.php" method="POST" class="recherche">
+    <form action="update_options.php" method="POST" class="maj_options">
     <input type="hidden" name="voyageId" value="<?php echo $voyageId; ?>">
     <?php
     echo "<strong> Options possibles : </strong><br>";
     
+    echo "<table class='options-table'>";
     foreach ($optionsDisponibles as $index => $valeur) { 
-        echo "<br>";
-        echo "<label for='$index'>$index (+$valeur €)</label>";
-        echo "<input type='checkbox' name='options[]' value='$index'";
+        echo "<tr class='option-row'>";
+        echo "<td><label for='$index' class='option-label'>$index (+$valeur €)</label></td>";
+        echo "<td><input type='checkbox' name='options[]' value='$index' class='option-checkbox'";
         if (isset($_SESSION['options']) && in_array($index, $_SESSION['options'])) {
             echo " checked";
         }
-        echo ">";
+        echo "></td>";
+        echo "</tr>";
     }
+    echo "</table>";
+    
+
+    
+    
         
 $optionsParams = [];
 $optionsRetour = [];
