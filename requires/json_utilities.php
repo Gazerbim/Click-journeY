@@ -341,8 +341,8 @@
 		return $voyage["tarif"];
 	}
 
-	function ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction){
-		$voyage = array("id"=>$idVoyage, "date"=>$date, "transaction"=>$transaction);
+	function ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction, $montant){
+		$voyage = array("id"=>$idVoyage, "date"=>$date, "transaction"=>$transaction, "montant"=>$montant);
 		$voyages = recupererVoyagesUtilisateur($id);
 		$voyages[] = $voyage;
 		$path = "databases/utilisateurs/".$id."/voyages.json";

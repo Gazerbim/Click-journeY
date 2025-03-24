@@ -37,7 +37,7 @@ if ($statut === "accepted") {
     $date = date("d-m-Y");
     
     if (!existeDejaTransaction($id, $transaction)) {
-        ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction);
+        ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction, $montant);
         ajouterOptionUtilisateur($id, $idVoyage, $options);
     }
     unset($_SESSION['options']); // enlever les options de la session
