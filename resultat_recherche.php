@@ -128,7 +128,7 @@ afficher_header('recherche');
                     $resultat = false;
                 }
             }
-            if($resultat ){
+            if($resultat){
                 echo "<div class='voyage'>";
                 echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
                 echo "<p>" . htmlspecialchars($value['nom']) . "</p>";

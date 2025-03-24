@@ -1,0 +1,11 @@
+Q: Quelle est la durée du voyage ?
+R: Le voyage dure 11 jours et 10 nuits.
+
+Q: Quels sont les modes de transport utilisés pendant le voyage ?
+R: Les trajets se feront principalement en bus et en train.
+
+Q: Quels types de logements sont proposés ?
+R: Les logements proposés sont des logements CROUS situés à proximité des centres-villes et des attractions principales.
+
+Q: Les repas sont-ils inclus dans le tarif ?
+R: Non, les repas ne sont pas inclus dans le tarif. Cependant, des suggestions de restaurants et de spécialités locales vous seront fournies pour chaque étape.
