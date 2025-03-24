@@ -463,6 +463,15 @@
 		$content[recupererLigneVoyageUtilisateur($id, $idVoyage)]["options"] = $options;
 		file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
 	}
+
+	function recupererOptionsVoyageUtilisateur($id, $idVoyage){
+		$voyages = recupererVoyagesUtilisateur($id);
+		foreach ($voyages as $key => $value) {
+			if($value["id"] == $idVoyage){
+				return $value["options"];
+			}
+		}
+	}
 	
 	//EXP UTILISATION
 
