@@ -207,8 +207,6 @@ nav .crous {
   
 }
 
-
-
 .contact button {
   width: 50px;
   border: none;
@@ -848,4 +846,25 @@ body.connexion a:hover {
 .pagination a:first-child:hover,
 .pagination a:last-child:hover {
     transform: scale(1.15);
+}
+
+.options-table {
+    width: 90%; 
+    border-collapse: collapse; 
+}
+
+.option-row {
+    border-bottom: 2px solid #ccc;
+}
+
+.option-label {
+    margin: 0;
+}
+
+.option-checkbox {
+    transform: scale(2);
+}
+
+.options-table td {
+    padding: 8px 12px;
 }
