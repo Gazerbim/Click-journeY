@@ -750,6 +750,8 @@ body.connexion a:hover {
     width: 280px;
     text-align: center;
     transition: transform 0.2s ease-in-out;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .mes-voyages-card:hover {
