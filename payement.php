@@ -76,19 +76,18 @@ foreach ($optionsSelectionnees as $option) {
     }
         
 $optionsParams = [];
+$optionsRetour = [];
 foreach ($optionsDisponibles as $index => $valeur) {
     $etat = in_array($index, $optionsSelectionnees) ? 'true' : 'false';
     $optionsParams[] = "$index=$etat";
+    $optionsRetour[$index] = $etat;
 }
 
-
-// Construire l'URL
+$_SESSION['retour'] = $optionsRetour;
 $retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
-if (!empty($optionsParams)) {
-    $retour .= "&" . implode("&", $optionsParams);
-}
 
-$control = md5($api_key . "#" . $transaction . "#" . $montantTotal . "#" . $vendeur . "#" . $retour . "#");
+
+
     ?>
     <div class="espaceur"></div>
     <?php
@@ -98,6 +97,7 @@ $control = md5($api_key . "#" . $transaction . "#" . $montantTotal . "#" . $vend
     foreach ($optionsSelectionnees as $option) {
         echo $option . " (+". $optionsDisponibles[$option] ." €), ";
     }
+    $control = md5($api_key . "#" . $transaction . "#" . $montantTotal . "#" . $vendeur . "#" . $retour . "#");
     echo "<br>";
     echo "Montant total : ".$montantTotal."€";  // Affichage du montant total avec les options
     echo "<br>";

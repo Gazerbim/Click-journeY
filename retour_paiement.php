@@ -1,7 +1,7 @@
 <?php
 require('requires/getapikey.php');
 require('requires/json_utilities.php');
-
+session_start();
 // Récupération des paramètres envoyés par CYBank
 $transaction = $_GET['transaction'] ?? '';
 $montant = $_GET['montant'] ?? '';
@@ -9,13 +9,8 @@ $vendeur = $_GET['vendeur'] ?? '';
 $statut = $_GET['status'] ?? '';
 $control_recu = $_GET['control'] ?? '';
 $idVoyage = $_GET['id'] ?? '';
-$options = $_GET ?? [];
-unset($options['transaction']);
-unset($options['montant']);
-unset($options['vendeur']);
-unset($options['status']);
-unset($options['control']);
-unset($options['id']);
+$options = $_SESSION['retour'] ?? [];
+
 
 if (empty($transaction) || empty($montant) || empty($vendeur) || empty($statut) || empty($control_recu) || empty($idVoyage)) {
     die("Erreur : Paramètres manquants !");
@@ -32,7 +27,6 @@ if ($control_calculé !== $control_recu) {
 }
 
 if ($statut === "accepted") {
-    session_start();
     $id = $_SESSION['id'];
     $date = date("d-m-Y");
     
@@ -40,6 +34,7 @@ if ($statut === "accepted") {
         ajouterVoyageUtilisateur($id, $idVoyage, $date, $transaction, $montant);
         ajouterOptionUtilisateur($id, $idVoyage, $options);
     }
+    unset($_SESSION['retour']); // enlever les options activées de la session
     unset($_SESSION['options']); // enlever les options de la session
 }
 ?>
