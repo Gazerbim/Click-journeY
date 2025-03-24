@@ -1,48 +1,11 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Montée à la Bastille en téléphérique",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Balade au parc Paul Mistral",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "Randonnée dans le massif de la Chartreuse",
-          "prix": 0,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Visite du château des Ducs de Savoie",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Excursion au lac du Bourget",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "Randonnée dans le massif des Bauges",
-          "prix": 0,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement en résidence KROUS": 0,
+  "Restauration en KROUS": 0,
+  "Transports": 0,
+  "Randonnée en montagne autour de Grenoble": 0,
+  "Dégustation d'une fondue savoyarde à Chambéry": 12,
+  "Visite de la Bastille de Grenoble et vue panoramique": 5,
+  "Découverte des fromages savoyards et charcuteries locales": 8,
+  "VTT en montagne": 15,
+  "Via ferrata ou escalade pour débutants": 20
 }

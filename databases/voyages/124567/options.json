@@ -1,114 +1,14 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement en résidence KROUS": 0,
+  "Restauration en KROUS": 0,
+  "Transports": 0,
+  "Dégustation de fruits de mer à Saint-Malo": 15,
+  "Visite des alignements de Carnac et découverte de la préhistoire": 0,
+  "Dégustation de crêpes bretonnes à Carnac": 8,
+  "Pêche à la Crevette à Carnac" : 3,
+  "Visite de Belle-Île-en-Mer": 15,
+  "Dégustation de kouign-amann à Quimper": 6,
+  "Promenade autour du port de Brest et visite du Musée de la Marine": 0,
+  "Dégustation de langoustines et de produits locaux à Brest": 18,
+  "Excursion à l'île d'Ouessant depuis Brest": 20
 }

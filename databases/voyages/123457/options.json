@@ -1,89 +1,16 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Visite de la Tour Eiffel et du Louvre.",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Balade sur les Champs-Élysées et dans les quartiers emblématiques.",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Visite du Vieux Lyon et des traboules.",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Dégustation de spécialités lyonnaises dans un bouchon.",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Balade au Vieux-Port et visite de la Basilique Notre-Dame-de-la-Garde.",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Détente sur les plages de Marseille ou excursion vers les calanques.",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Dégustation de vins dans les vignobles bordelais.",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Balade dans le centre historique de Bordeaux.",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Visite de la Basilique Saint-Sernin et du Capitole.",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Découverte de la Garonne et ses bords pittoresques.",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement": 0,
+  "Restauration": 0,
+  "Transports": 0,
+  "Visite de la Tour Eiffel": 15,
+  "Visite de Notre-Dame": 5,
+  "Diner dans un restaurant gastronomique": 25,
+  "Croisière sur la Seine": 18,
+  "Dégustation de spécialités lyonnaises": 12,
+  "Excursion aux Calanques": 20,
+  "Dégustation de bouillabaisse": 15,
+  "Visite de la Cité du Vin à Bordeaux": 20,
+  "Dégustation de vins bordelais": 18,
+  "Visite de la Cité de l'Espace": 23,
+  "Découverte de la gastronomie toulousaine (Cassoulet)": 10
 }

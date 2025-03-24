@@ -1,92 +1,12 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Visite de la Cathédrale Notre-Dame de Strasbourg et montée à la plateforme panoramique",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Découverte du quartier de la Petite France",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "Balade en bateau sur l’Ill",
-          "prix": 0,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Dégustation de vins dans un vignoble bordelais",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Visite du Miroir d’Eau",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "Balade le long des Quais de la Garonne",
-          "prix": 0,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Visite de la Cité de Carcassonne",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Découverte du Château Comtal",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "Balade le long du Canal du Midi",
-          "prix": 0,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": false,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "Visite du Musée du Louvre",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "Balade sur les Champs-Élysées ",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "Montée à la Tour Eiffel",
-          "prix": 0,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement en résidence KROUS": 0,
+  "Restauration en KROUS": 0,
+  "Transports": 0,
+  "Visite de la cathédrale de Strasbourg et balade dans la Petite France": 0,
+  "Dégustation d’une flammekueche à Strasbourg": 9,
+  "Découverte du miroir d’eau et des quais de Bordeaux": 0,
+  "Visite de la Cité du Vin à Bordeaux": 22,
+  "Visite du château comtal de Carcassonne": 9,
+  "Visite de Notre-Dame et balade sur l’Île de la Cité": 5,
+  "Dégustation d’une pâtisserie parisienne dans une boulangerie traditionnelle": 6
 }

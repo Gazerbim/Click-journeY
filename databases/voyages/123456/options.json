@@ -1,8 +1,9 @@
-
 {
-  "hebergement": 0,
-  "restauration": 0,
-  "transports": 0,
-  "Balade en Bateau Mouche":10,
-  "Balade à Marseille":0
+  "Hebergement en Krous": 0,
+  "Restauration au Krous": 0,
+  "Transports": 0,
+  "Dégustation de pâtes sans sauce au Krous de Paris": 3,
+  "Exploration du plateau mystère du Krous de Lyon": 4,
+  "Survie après un steak semelle au Krous de Marseille": 2,
+  "Menu étudiant premium : plateau micro-ondes et yaourt tiède": 5
 }
