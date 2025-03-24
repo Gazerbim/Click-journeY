@@ -467,7 +467,7 @@
 	function recupererOptionsVoyageUtilisateur($id, $idVoyage){
 		$voyages = recupererVoyagesUtilisateur($id);
 		foreach ($voyages as $key => $value) {
-			if($value["id"] == $idVoyage){
+			if($value["idVoyage"] == $idVoyage){
 				return $value["options"];
 			}
 		}
