@@ -1,48 +1,12 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement": 0,
+  "Restauration": 0,
+  "Transports": 0,
+  "Visite du Palais des Beaux-Arts": 15,
+  "Visite de la Citadelle de Lille": 5,
+  "Participation à un concert au Zénith": 15,
+  "Diner dans un restaurant gastronomique": 25,
+  "Dégustation de bières locales": 18,
+  "Visite de la Place de la Comédie": 20,
+  "Entrée en boite de nuit": 15
 }

@@ -1,48 +1,11 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement": 0,
+  "Restauration": 0,
+  "Transports": 0,
+  "Balade en bateau sur le lac": 15,
+  "Centre historique d'Annecy": 5,
+  "Diner dans un restaurant gastronomique": 25,
+  "Dégustation de spécialités locales": 18,
+  "Visite du marché de Brive-la-Gaillarde": 20,
+  "Découverte du patrimoine de Brive-la-Gaillarde": 15
 }

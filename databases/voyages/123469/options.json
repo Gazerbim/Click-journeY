@@ -1,48 +1,11 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement": 0,
+  "Restauration": 0,
+  "Transports": 0,
+  "Visite de la Cathédrale Noter-Dame-et-Saint-Privat": 15,
+  "Visite de la Maison de la Béate": 5,
+  "Diner dans un restaurant gastronomique": 25,
+  "Dégustation de spécialités locales": 18,
+  "Visite du Château de Foix": 20,
+  "Centre historique de Foix": 15
 }

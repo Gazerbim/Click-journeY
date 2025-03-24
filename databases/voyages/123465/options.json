@@ -1,48 +1,10 @@
 {
-  "etapes": [
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    },
-    {
-      "hebergement": true,
-      "restauration": true,
-      "transports": true,
-      "activites": [
-        {
-          "nom": "",
-          "prix": 0,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        },
-        {
-          "nom": "",
-          "prix": 5,
-          "option": false
-        }
-      ]
-    }
-  ]
+  "Hebergement": 0,
+  "Restauration": 0,
+  "Transports": 0,
+  "Visite de la Cathédrale Saint-Étienne": 15,
+  "Visite libre du Vieux Metz": 12,
+  "Visite du Musée national Adrien Dubouché": 5,
+  "Diner dans un restaurant gastronomique": 25,
+  "Découverte des ateliers de porcelaine": 18
 }
