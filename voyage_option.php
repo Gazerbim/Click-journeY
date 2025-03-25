@@ -10,6 +10,8 @@
 <body>
     <?php
         session_start();
+        include("requires/header.php");
+        afficher_header("profil");
         require('requires/json_utilities.php');
         if (!isset($_SESSION['id']) && empty($_SESSION['id'])) {
             header('Location: connexion.php');
@@ -59,6 +61,9 @@
         <h3><?php echo nl2br($description); ?></h3>
         <h3><?php echo nl2br($date); ?></h3>
         <img src="databases/voyages/<?php echo $voyageId; ?>/img/profil.jpg" alt="image1" width="100%" height="20%">
+        <div class="recherche">
+        <a href="voyage_details.php?id=<?php echo $voyageId ?>"><button>Aller au voyage</button></a>
+        </div>
     </div>
     <form action="payement_options.php?id=<?php echo htmlspecialchars($voyageId); ?>" method="POST" class="recherche">
     <h2>Options du voyage</h2>

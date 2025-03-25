@@ -11,10 +11,10 @@
     <?php
         session_start();
         require('requires/json_utilities.php');
-        if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-            if(!existeDejaVoyageUtilisateur($_SESSION['id'], $_GET['id'])){
-                echo "<a href='payement.php?voyage=".$_GET['id']."' class='buy-button'><button>Acheter</button></a>";
-            } 
+        if(!existeDejaVoyageUtilisateur($_SESSION['id'], $_GET['id'])){
+            echo "<a href='payement.php?voyage=".$_GET['id']."' class='buy-button'><button>Acheter</button></a>";
+        }else{
+            echo "<a href='voyage_option.php?id=".$_GET['id']."' class='buy-button'><button>Voyage déjà acheté : Personaliser le voyage</button></a>";
         }
         require('requires/header.php');
         afficher_header('');

@@ -92,12 +92,11 @@
 		rrmdir("databases/utilisateurs/".$id);
 		if($line != 0){
 			unset($content[$line-1]);
-			file_put_contents("databases/users.json",json_encode($content, JSON_PRETTY_PRINT));
+			$content = array_values($content);
+			file_put_contents("databases/users.json",json_encode($content,JSON_PRETTY_PRINT));
 			return 0;
 		}
 	}
-
-	supprimerUtilisateur(49385);
 
 	function recupereInfosUtilisateur($id){
 		$content = lireFichierJson("databases/users.json");
@@ -353,6 +352,7 @@
 		$voyages = recupererVoyagesUtilisateur($id);
 		$indice = trouverVoyageAvecId($voyages, $idVoyage);
 		unset($voyages[$indice-1]);
+		$content = array_values($voyages);
 		$path = "databases/utilisateurs/".$id."/voyages.json";
 		file_put_contents($path, json_encode($voyages, JSON_PRETTY_PRINT));
 	}
