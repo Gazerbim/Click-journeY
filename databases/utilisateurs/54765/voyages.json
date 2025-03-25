@@ -1,0 +1,31 @@
+[
+    {
+        "id": "123458",
+        "date": "25-03-2025",
+        "transaction": "67e276fa7054d",
+        "montant": "205",
+        "options": {
+            "Hebergement": "true",
+            "Restauration": "true",
+            "Transports": "true",
+            "Excursion aux Gorges du Verdon": "false",
+            "D\u00e9gustation de fruits de mer": "true",
+            "Sortie en bateau le long de la c\u00f4te": "false"
+        }
+    },
+    {
+        "id": "123462",
+        "date": "25-03-2025",
+        "transaction": "67e2c5028af7f",
+        "montant": "368",
+        "options": {
+            "Hebergement en r\u00e9sidence KROUS": "true",
+            "Restauration en KROUS": "true",
+            "Transports": "true",
+            "D\u00e9gustation d\u2019une flammekueche \u00e0 Strasbourg": "true",
+            "Visite de la Cit\u00e9 du Vin \u00e0 Bordeaux": "false",
+            "Visite du ch\u00e2teau comtal de Carcassonne": "false",
+            "D\u00e9gustation d\u2019une p\u00e2tisserie parisienne dans une boulangerie traditionnelle": "true"
+        }
+    }
+]

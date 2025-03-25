@@ -1,0 +1,134 @@
+{
+    "1": {
+        "nom": "Manchec",
+        "prenom": "Sergue\u00ef",
+        "id": 54765,
+        "mdp": "$2y$10$QfZjMKqZQ0WkqjR3N\/zF2OqQeb2TOikklcmSQLifP5MlEB2HJsDdS",
+        "role": "adm",
+        "naissance": "12\/06\/2006",
+        "genre": "M",
+        "tel": "0767239623",
+        "courriel": "serguei.manchec@gmail.com"
+    },
+    "2": {
+        "nom": "Amimi",
+        "prenom": "Ahmed",
+        "id": 54566,
+        "mdp": "$2y$10$Gd40ZniNb55FTrpYrLCsgu8\/CNAo17YAOcPlKjRVNccPVBhzmgmEe",
+        "role": "user",
+        "naissance": "01\/10\/2003",
+        "genre": "M",
+        "tel": "0656782159",
+        "courriel": "aahmed@gmail.com"
+    },
+    "4": {
+        "nom": "Qureshi",
+        "prenom": "Hussain",
+        "id": 86245,
+        "mdp": "$2y$10$bebEMOu0zRurtIbG7HxRi.dVgYau8HBH7.jQEDBSzSpIJwHdqZsIa",
+        "role": "adm",
+        "naissance": "2005-07-11",
+        "genre": "M",
+        "tel": "0765389029",
+        "courriel": "hqureshi@gmail.com"
+    },
+    "5": {
+        "nom": "lemenand",
+        "prenom": "Tom",
+        "id": 27330,
+        "mdp": "$2y$10$kXpfVMXZ.O.SYyib.ftSce.QA2H1HSNkgF97JI08Q\/Inna.x\/NKLa",
+        "role": "adm",
+        "naissance": "2005-06-04",
+        "genre": "homme",
+        "tel": "0652607735",
+        "courriel": "tom.lemenand@gmail.com"
+    },
+    "6": {
+        "nom": "trump",
+        "prenom": "donald",
+        "id": 53321,
+        "mdp": "$2y$10$sxPVJcm5kiTUIADdsEoU\/uXYw\/DbDO1UudON7RV.kXnkZbnyWivgu",
+        "role": "user",
+        "naissance": "1959-12-08",
+        "genre": "homme",
+        "tel": "0684586248",
+        "courriel": "donald.trump@gmail.com"
+    },
+    "7": {
+        "nom": "admin",
+        "prenom": "admin",
+        "id": 62887,
+        "mdp": "$2y$10$slRIMgdGUavEth6Qmw73XuuNFSVB9LaWnJJ3YaUD2di3eyoHpna3a",
+        "role": "adm",
+        "naissance": "2025-03-25",
+        "genre": "autre",
+        "tel": "0654759523",
+        "courriel": "admin@gmail.com"
+    },
+    "8": {
+        "nom": "utilisateur",
+        "prenom": "utilisateur",
+        "id": 48983,
+        "mdp": "$2y$10$SdDg4iNRvt253kJk\/ezh7e\/zwlWrSpzf.Qg5QgTkiasli\/9Ao8p1W",
+        "role": "user",
+        "naissance": "2025-03-25",
+        "genre": "autre",
+        "tel": "0684521589",
+        "courriel": "utilisateur@gmail.com"
+    },
+    "9": {
+        "nom": "macron",
+        "prenom": "emmanuel",
+        "id": 50377,
+        "mdp": "$2y$10$4V5tO.DOiLj8UAWIfNByvOpBAWluXzbA9KBnwcl94qxres.6ZMnpe",
+        "role": "user",
+        "naissance": "1980-04-25",
+        "genre": "homme",
+        "tel": "0654785621",
+        "courriel": "emmanuel.macron@gmail.com"
+    },
+    "10": {
+        "nom": "poutine",
+        "prenom": "vladimir",
+        "id": 45441,
+        "mdp": "$2y$10$pN.7ndGMELREhT055sgpSufONVqgivn8mBrK2WPV4VOIDuq8S7kay",
+        "role": "user",
+        "naissance": "1960-09-18",
+        "genre": "homme",
+        "tel": "0654789512",
+        "courriel": "vlad.poutine@gmail.com"
+    },
+    "11": {
+        "nom": "zelensky",
+        "prenom": "Volodymyr",
+        "id": 34107,
+        "mdp": "$2y$10$IU6lBu9KiIJ0POviBjtItuAOmQjqj1tD7uxf5\/LDsjQuHpNEk2nR.",
+        "role": "user",
+        "naissance": "1980-04-07",
+        "genre": "homme",
+        "tel": "0654789523",
+        "courriel": "volodymyr.zelensky@gmail.com"
+    },
+    "12": {
+        "nom": "civil",
+        "prenom": "fran\u00e7ois",
+        "id": 67366,
+        "mdp": "$2y$10$YQdGZJpqnoMUFRC8376gq.iUaxaFLKchYFLA\/ymaeg07887Pu7pO6",
+        "role": "user",
+        "naissance": "1985-12-04",
+        "genre": "homme",
+        "tel": "0654785236",
+        "courriel": "fifi.civil@gmail.com"
+    },
+    "13": {
+        "nom": "s'il vous plait",
+        "prenom": "20\/20",
+        "id": 52853,
+        "mdp": "$2y$10$lU8.2j0bA09rLxGMxuEWQuQLbvqUnh3evdSu.zl0zgJYGU2wi8FEi",
+        "role": "user",
+        "naissance": "2025-03-25",
+        "genre": "femme",
+        "tel": "0654785236",
+        "courriel": "metteznous20.svp@gmail.com"
+    }
+}
