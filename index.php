@@ -27,6 +27,30 @@
         <p>Rejoignez-nous pour une aventure inoubliable et découvrez la France comme vous ne l'avez jamais vue !</p>
     </div>
     <?php
+        require('requires/json_utilities.php');
+        function afficherVoyage($value){
+            echo "<div class='voyage'>";
+            echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
+            echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
+            echo "<p>" . htmlspecialchars($value['description']) . "</p>";
+            echo "<p>" . htmlspecialchars($value['tarif']) . "€</p>";
+            echo "<a href='voyage_details.php?id=" . urlencode($value["id"]) . "'><button>Détails</button></a>";
+            echo "</div>";
+        }
+        $voyages = recupererVoyages();
+        $taille = count($voyages);
+        $voyages_a_afficher = [];
+        for ($i=0;$i<4;$i++){
+            $voyages_a_afficher[] = $voyages[rand(0,$taille-count($voyages_a_afficher)-1)];
+        }
+        echo "<div class='recherche'>";
+        echo "<h2>Quelques voyages pour vous</h2>";
+        echo "<div class='voyages-container'>";
+        foreach($voyages_a_afficher as $voyage){
+            afficherVoyage($voyage);
+        }
+        echo "</div>";
+        echo "</div>";
         include('requires/footer.php');
     ?>
 </body>
