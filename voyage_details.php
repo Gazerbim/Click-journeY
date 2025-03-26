@@ -17,7 +17,7 @@
             echo "<a href='voyage_option.php?id=".$_GET['id']."' class='buy-button'><button>Voyage déjà acheté : Personaliser le voyage</button></a>";
         }
         require('requires/header.php');
-        afficher_header('');
+        afficher_header('recherche');
     ?>
 
 <?php 
