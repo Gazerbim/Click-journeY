@@ -65,7 +65,7 @@
         <a href="voyage_details.php?id=<?php echo $voyageId ?>"><button>Aller au voyage</button></a>
         </div>
     </div>
-    <form action="payement_options.php?id=<?php echo htmlspecialchars($voyageId); ?>" method="POST" class="recherche">
+    <form action="paiement_options.php?id=<?php echo htmlspecialchars($voyageId); ?>" method="POST" class="recherche">
     <h2>Options du voyage</h2>
     <?php
 

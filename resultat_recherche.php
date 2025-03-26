@@ -20,21 +20,14 @@ afficher_header('recherche');
             <label for="lieu"><strong>Crous à rechercher :</strong></label>
             <input type="text" id="lieu" name="lieu" placeholder="Entrez un krous que vous voulez visiter...">
             <br><br>
-            <label for="date"><strong>Quand voulez-vous partir ?</strong></label>
-            <input type="date" id="date" name="date">
-            <br><br>
-            <label for="options"><strong>Ville :</strong></label>
-            <div class="selected">
-                <select name="ville" id="ville">
-                    <option value="">Toutes les villes</option>
-                    <?php
-                    $villes = recupererVilles();
-                    foreach ($villes as $ville) {
-                        $choix = (isset($_GET['ville']) && $_GET['ville'] == $ville) ? 'choix' : '';
-                        echo "<option value='" . strtolower($ville) . "' $choix>" . $ville . "</option>";
-                    }
-                    ?>
-                </select>
+            <label for="date_debut"><strong>Période de voyage souhaitée :</strong></label>
+            <div class="date-range" style="display: flex; align-items: center; gap: 20px; margin-top: 20px">
+                <label for="date_debut">Du</label>
+                <input type="date" id="date_debut" name="date_debut"
+                       value="<?php echo isset($_GET['date_debut']) ? htmlspecialchars($_GET['date_debut']) : ''; ?>">
+                <label for="date_fin">Au</label>
+                <input type="date" id="date_fin" name="date_fin"
+                       value="<?php echo isset($_GET['date_fin']) ? htmlspecialchars($_GET['date_fin']) : ''; ?>">
             </div>
             <br><br>
             <label for="prix"><strong>Prix :</strong></label>
@@ -68,7 +61,8 @@ afficher_header('recherche');
         else{
             $lieu = [""];
         }
-        $date = $_GET['date'] ?? "";
+        $date_debut = $_GET['date_debut'] ?? "";
+        $date_fin = $_GET['date_fin'] ?? "";
         $villeSelectionnee = $_GET['ville'] ?? "";
         $prix_min = isset($_GET['prix_min']) && is_numeric($_GET['prix_min']) ? (float)$_GET['prix_min'] : null;
         $prix_max = isset($_GET['prix_max']) && is_numeric($_GET['prix_max']) ? (float)$_GET['prix_max'] : null;
@@ -109,11 +103,19 @@ afficher_header('recherche');
                     $resultat = false;
                 }
             }
-            if($date != ""){
-                $dateUtilisateur = new DateTime($date);
+            if($date_debut != "" || $date_fin != ""){
                 $dateVoyage = DateTime::createFromFormat('d/m/Y', $dates);
-                if($dateUtilisateur->format('Y-m-d') !== $dateVoyage->format('Y-m-d')){
-                    $resultat = false;
+                if($date_debut != ""){
+                    $dateDebut = new DateTime($date_debut);
+                    if($dateVoyage < $dateDebut){
+                        $resultat = false;
+                    }
+                }
+                if($date_fin != ""){
+                    $dateFin = new DateTime($date_fin);
+                    if($dateVoyage > $dateFin){
+                        $resultat = false;
+                    }
                 }
             }
             if($resultat && $prix_min !== null) {

@@ -20,27 +20,19 @@
          <label for="lieu"><strong>Crous à rechercher :</strong></label>
          <input type="text" id="lieu" name="lieu" placeholder="Entrez un krous que vous voulez visiter...">
          <br><br>
-         <label for="date"><strong>Quand voulez-vous partir ?</strong></label>
-         <input type="date" id="date" name="date">
-         <br><br>
-         <label for="options"><strong>Ville :</strong></label>
-         <div class="selected">
-             <select name="ville" id="ville">
-                 <option value="">Toutes les villes</option>
-                 <?php
-                 $villes = recupererVilles();
-                 foreach ($villes as $ville) {
-                     $choix = (isset($_GET['ville']) && $_GET['ville'] == $ville) ? 'choix' : '';
-                     echo "<option value='" . strtolower($ville) . "' $choix>" . $ville . "</option>";
-                 }
-                 ?>
-             </select>
+         <label for="date_debut"><strong>Période de voyage souhaitée :</strong></label>
+         <div class="date-range" style="display: flex; align-items: center; gap: 20px; margin-top: 20px">
+             <label for="date_debut">Du</label>
+             <input type="date" id="date_debut" name="date_debut"
+                    value="<?php echo isset($_GET['date_debut']) ? htmlspecialchars($_GET['date_debut']) : ''; ?>">
+             <label for="date_fin">Au</label>
+             <input type="date" id="date_fin" name="date_fin"
+                    value="<?php echo isset($_GET['date_fin']) ? htmlspecialchars($_GET['date_fin']) : ''; ?>">
          </div>
-         <br><br>
          <label for="prix"><strong>Prix :</strong></label>
          <div class="prix-range">
-             <input type="number" id="prix-min" name="prix-min" min="0" placeholder="Prix minimum"
-                    value="<?php echo isset($_GET['prix_min']) ? htmlspecialchars($_GET['prix_min']) : '' ?>">
+             <input type="number" id="prix_min" name="prix_min" min="0" placeholder="Prix minimum"
+                    value="<?php echo isset($_GET['prix_min']) ? htmlspecialchars($_GET['prix_min']) : ''; ?>">
              <span>à</span>
              <input type="number" id="prix_max" name="prix_max" min="0" placeholder="Prix maximum"
                     value="<?php echo isset($_GET['prix_max']) ? htmlspecialchars($_GET['prix_max']) : ''; ?>">
