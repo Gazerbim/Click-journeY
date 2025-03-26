@@ -54,6 +54,19 @@ afficher_header('recherche');
         <h2>Résultats de la recherche</h2>
         <div class="voyages-container">
         <?php
+        
+        function afficherVoyage($value){
+            echo "<div class='voyage'>";
+            echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
+            echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
+            echo "<p>" . htmlspecialchars($value['description']) . "</p>";
+            echo "<p>" . htmlspecialchars($value['tarif']) . "€</p>";
+            echo "<a href='voyage_details.php?id=" . urlencode($value["id"]) . "'><button>Détails</button></a>";
+            echo "</div>";
+        }
+
+
+
         if(isset($_GET['lieu'])){
             $lieu = $_GET['lieu'];
             $lieu = explode(" ", $lieu);
@@ -68,6 +81,7 @@ afficher_header('recherche');
         $prix_max = isset($_GET['prix_max']) && is_numeric($_GET['prix_max']) ? (float)$_GET['prix_max'] : null;
         $etapes = $_GET['etapes'] ?? [];
         $voyages = recupererVoyages();
+        $voyagesSelectionnes = [];
         foreach ($voyages as $value) {
             $resultat = true;
             $mots = avoirListeMotsVoyage($value['id']);
@@ -131,15 +145,40 @@ afficher_header('recherche');
                 }
             }
             if($resultat){
-                echo "<div class='voyage'>";
-                echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
-                echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
-                echo "<p>" . htmlspecialchars($value['description']) . "</p>";
-                echo "<p>" . htmlspecialchars($value['tarif']) . "€</p>";
-                echo "<a href='voyage_details.php?id=" . urlencode($value["id"]) . "'><button>Détails</button></a>";
-                echo "</div>";
+                $voyagesSelectionnes[] = $value;
             }
         }
+        // Pagination
+        $voyagesParPage = 6; 
+        $pageActuelle = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+        $totalVoyages = count($voyagesSelectionnes);
+        $totalPages = max(1, ceil($totalVoyages / $voyagesParPage));
+        $indexDepart = ($pageActuelle - 1) * $voyagesParPage;
+        $voyagesAffiches = array_slice($voyagesSelectionnes, $indexDepart, $voyagesParPage);
+
+        echo "<div class='espaceur'>";
+        echo "<div class='liste_voyages'>";
+        echo "<h2>Liste des voyages</h2>";
+        echo "<div class='voyages-container'>";
+
+        foreach ($voyagesAffiches as $value) {
+            afficherVoyage($value);
+        }
+        echo "</div>";
+
+        // Affichage des boutons
+        echo "<div class='pagination'>";
+        if ($pageActuelle > 1) {
+            echo "<a href='?page=" . ($pageActuelle - 1) . "'>Précédent</a> ";
+        }
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo "<a href='?page=$i'" . ($i == $pageActuelle ? " class='active'" : "") . ">$i</a> ";
+        }
+        if ($pageActuelle < $totalPages) {
+            echo "<a href='?page=" . ($pageActuelle + 1) . "'>Suivant</a>";
+        }
+        echo "</div>";
+        echo "</div>";
         ?>
         </div>
     </div>

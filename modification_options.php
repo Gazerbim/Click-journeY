@@ -41,9 +41,14 @@ if (!file_exists($filePath)) {
 
 $voyages = json_decode(file_get_contents($filePath), true);
 
-
-
-if($statut === "accepted"){
+if(isset($_SESSION["transaction"])){
+    $existeTransaction = ($_SESSION["transaction"] == $transaction);
+}
+else{
+    $existeTransaction = false;
+}
+if($statut === "accepted" && !$existeTransaction){
+    $_SESSION["transaction"] = $transaction;
     foreach ($voyages as &$voyage) {
         if ($voyage['id'] === $voyageId) {
             foreach ($voyage['options'] as $option => &$valeur) {

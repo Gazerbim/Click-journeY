@@ -41,7 +41,12 @@
         $taille = count($voyages);
         $voyages_a_afficher = [];
         for ($i=0;$i<4;$i++){
-            $voyages_a_afficher[] = $voyages[rand(0,$taille-count($voyages_a_afficher)-1)];
+            $rand = rand(0,$taille-count($voyages_a_afficher)-1);
+            if(!in_array($voyages[$rand], $voyages_a_afficher)){
+                $voyages_a_afficher[] = $voyages[$rand];
+                continue;
+            }
+            $i--;
         }
         echo "<div class='recherche'>";
         echo "<h2>Quelques voyages pour vous</h2>";
