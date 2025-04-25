@@ -105,9 +105,9 @@ afficher_header('admin');
                                 echo "<form action='admin.php' method='post' style='display:inline;'>";
                                 echo "<input type='hidden' name='promote_id' value='" . $line['id'] . "'>";
                                 if ($line['role'] == 'user') {
-                                    echo "<button type='submit'>Promote to Admin</button>";
+                                    echo "<button type='submit'>Promouvoir en Admin</button>";
                                 } else {
-                                    echo "<button type='submit'>Demote to User</button>";
+                                    echo "<button type='submit'>Rétrograder en User</button>";
                                 }
                                 echo "</form>";
                                 echo "<form action='admin.php' method='post' style='display:inline;'>";
@@ -152,5 +152,35 @@ afficher_header('admin');
         </div>
         
     </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const actions = document.querySelectorAll('form[action="admin.php"]');
+
+            actions.forEach(form => {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+
+                    const bouton = this.querySelector('button');
+
+                    const suppr = this.querySelector('input[name="delete_id"]');
+                    const promote = this.querySelector('input[name="promote_id"]');
+
+                    bouton.disabled = true;
+                    bouton.style.opacity = 0.7;
+                    bouton.style.cursor = 'wait';
+
+                    if (suppr) {
+                        bouton.textContent = 'Suppression en cours...';
+                    } else if (promote) {
+                        bouton.textContent = 'Modification en cours...';
+                    }
+
+                    setTimeout(() => {
+                        this.submit();
+                    }, 2000);
+                });
+            });
+        })
+    </script>
 </body>
 </html>
