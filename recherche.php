@@ -14,6 +14,7 @@
     afficher_header('recherche');
     require('requires/json_utilities.php');
   ?>
+
  <div class="recherche">
      <h2>Recherche de voyages</h2>
      <form action="resultat_recherche.php" method="GET">
