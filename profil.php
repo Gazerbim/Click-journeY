@@ -147,6 +147,30 @@
     </div>
     
     <div class="mes-voyages-container">
+        <h2>Mon Panier</h2>
+        <?php
+            $panier = recupererPanierUtilisateur($_SESSION['id']);
+            if (!empty($panier)) {
+                echo "<div class='mes-voyages-liste'>";
+                foreach ($panier as $voyage_panier) {
+                    $voyageid = $voyage_panier["idVoyage"];
+                    $voyage = recupererVoyageAvecId($voyageid);
+                    echo "<div class='mes-voyages-card'>";
+                    echo "<h3 class='mes-voyages-titre'>" . htmlspecialchars($voyage['nom']) . "</h3>";
+                    echo "<img src='databases/voyages/" . $voyage['id'] . "/img/profil.jpg' alt='Voyage " . $voyage['id'] . "' width='100%' height='25%'>";
+                    echo "<p class='mes-voyages-description'>" . htmlspecialchars($voyage['description']) . "</p>";
+                    echo "<p><strong>Période :</strong> " . htmlspecialchars($voyage['debut']) . " - " . htmlspecialchars($voyage['fin']) . "</p>";
+                    echo "<p><strong>Tarif :</strong> " . htmlspecialchars($voyage['tarif']) . "€</p>";
+                    echo "<a href='paiement.php?panier=1&voyage=" . htmlspecialchars($voyage['id']) . "' class='mes-voyages-btn'>Détails</a>";
+                    echo "<br>";
+                    echo "<a href='supprimer_panier.php?id=" . htmlspecialchars($voyage['id']) . "' class='mes-voyages-btn2'>Supprimer du panier</a>";
+                    echo "</div>";
+                }
+                echo "</div>";
+            } else {
+                echo "<p class='mes-voyages-message'>Aucun voyage dans le panier.</p>";
+            }
+        ?>
         <h2>Mes Voyages Réservés</h2>
         <?php
             $id = $_SESSION['id'];

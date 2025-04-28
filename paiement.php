@@ -11,6 +11,12 @@ if (isset($_GET['voyage'])) {
     exit;
 }
 
+
+
+if(isset($_GET['panier'])){
+    $_SESSION['options'] = recupererVoyagePanierUtilisateur($_SESSION['id'], $voyageId)['options'];
+}
+
 if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
     $id = $_SESSION['id'];
 } else {
@@ -39,10 +45,21 @@ $optionsDisponibles = recupererOptionsVoyage($voyageId);
 $montantTotal = $montant; // Commencer avec le prix de base
 
 $optionsSelectionnees = $_SESSION['options'] ?? [];
+if(!existePanierVoyageUtilisateur($_SESSION['id'], $voyageId) && !existeDejaVoyageUtilisateur($id, $voyageId)){
+    $optionsSelectionnees = [];
+    $_SESSION['options'] = $optionsSelectionnees;
+}
+
 foreach ($optionsSelectionnees as $option) {
     if (isset($optionsDisponibles[$option])) {
         $montantTotal += $optionsDisponibles[$option];  // Ajouter le coût de l'option sélectionnée
     }
+}
+
+if (!existePanierVoyageUtilisateur($_SESSION['id'], $voyageId)) { // le voyage n'est pas dans le panier => on l'ajoute
+    ajouterVoyagePanier($id, $voyageId, []); // Ajout du voyage au panier de l'utilisateur
+}else{
+    modifierVoyagePanier($id, $voyageId, $optionsSelectionnees); // Modification du voyage dans le panier de l'utilisateur
 }
 
 ?>
