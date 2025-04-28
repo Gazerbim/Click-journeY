@@ -13,7 +13,7 @@ if (isset($_GET['voyage'])) {
 
 
 
-if(isset($_GET['panier'])){
+if(existePanierVoyageUtilisateur($_SESSION['id'], $voyageId)){
     $_SESSION['options'] = recupererVoyagePanierUtilisateur($_SESSION['id'], $voyageId)['options'];
 }
 
