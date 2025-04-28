@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $_SESSION['options'] = $_POST['options'];
     print(json_encode($options));
     
-    header("Location: paiement.php?voyage=$voyageId");
+    header("Location: paiement.php?voyage=$voyageId&maj=1");
     exit;
 } else {
     die("Accès non autorisé.");
