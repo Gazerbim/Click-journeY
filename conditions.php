@@ -7,7 +7,7 @@
     <title>Conditions d'utilisation</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="conditions">
+<body class="conditions light-mode">
   <?php
     session_start();
     require('requires/header.php');
@@ -47,5 +47,6 @@
     <?php
       require('requires/footer.php');
     ?>
+    <script src="script.js"></script>
 </body>
 </html>
