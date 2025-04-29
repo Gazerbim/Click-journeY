@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Voyage</title>
 </head>
-<body>
+<body class="light-mode">
     <?php
         session_start();
         require('requires/json_utilities.php');
@@ -102,5 +102,6 @@
     <?php
         require('requires/footer.php');
     ?>
+    <script src="script.js"></script>
 </body>
 </html>
