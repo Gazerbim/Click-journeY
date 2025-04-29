@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Voyage</title>
 </head>
-<body>
+<body class="light-mode">
 <?php
 session_start();
 require('requires/getapikey.php');
@@ -99,4 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </form>
 <div class="espaceur"></div>
 <a href="voyage_option.php?id=<?php echo $voyageId; ?>"><button>Retour aux options</button></a>
+<script src="script.js"></script>
 </body>
+</html>
+    
