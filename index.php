@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css">
     <title>Rush&Krous</title>
 </head>
-<body class="accueil">
+<body class="accueil light-mode">
   <?php
     session_start();
     require('requires/header.php');
@@ -58,5 +58,6 @@
         echo "</div>";
         include('requires/footer.php');
     ?>
+    <script src="script.js"></script>
 </body>
 </html>
