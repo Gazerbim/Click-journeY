@@ -12,7 +12,7 @@
     require('requires/header.php');
     afficher_header('connexion');
   ?>
-    <div class="recherche">
+    <div class="recherche light-mode">
         <h2>Inscription</h2>
 	
 	<?php
@@ -77,7 +77,7 @@
             <input type="text" id="prenom" name="prenom" placeholder="Votre prénom..." required="true">
             <br></br>
             <label for="lieu"><strong>Date de naissance :</strong></label>
-            <input type="date" id="date_naissance" name="date_naissance" required="true">
+            <input type="date" id="date_naissance" max="2025-01-01" name="date_naissance" required="true" title="Veuillez entrer une date antérieure à 2025">
             <br></br>
             <label for="options"><strong>Genre :</strong></label>
             <div class="radio-groupe">
@@ -87,7 +87,7 @@
 	    </div>
             <br></br>
             <label for="telephone"><strong>Téléphone :</strong></label>
-            <input type="tel" id="telephone" name="telephone" placeholder="Entrez votre numéro..." required="true">
+            <input type="tel" pattern="^0[1-9][0-9]{8}$" id="telephone" name="telephone" placeholder="Entrez votre numéro..." required="true" title="entrer un numéro de téléphone valide au format 06XXXXXXXX">
             <br></br>
             <label for="email"><strong>Adresse courriel :</strong></label>
             <input type="email" id="email" name="email" placeholder="Entrez une adresse courriel valide..." required="true">
@@ -103,5 +103,6 @@
     <?php
         require('requires/footer.php');
     ?>
+    <script src="script.js"></script>
 </body>
 </html>
