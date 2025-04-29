@@ -13,7 +13,7 @@
     include('requires/header.php');
     afficher_header('presentation');
   ?>
-    <div class="presentation">
+    <div class="presentation light-mode">
         <h1>Bienvenue chez Rush&Krous : L'agence de voyage des étudiants !</h1>
 
         <h3>Chez le Crous, nous avons toujours eu à cœur d'accompagner les étudiants dans leur quotidien. 
@@ -74,5 +74,6 @@
     <?php
     include('requires/footer.php');
     ?>
+    <script src="script.js"></script>
 </body>
 </html>
