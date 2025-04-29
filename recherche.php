@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Recherche</title>
 </head>
-<body class="rech">
+<body class="rech light-mode">
  <?php
     session_start();
     include('requires/header.php');
@@ -53,5 +53,6 @@
     <?php
         require('requires/footer.php');
     ?>
+    <script src="script.js"></script>
 </body>
 </html>
