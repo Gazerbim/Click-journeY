@@ -49,6 +49,7 @@ function afficher_header($page_active) {
                         </button>
                     </a>
                 </div>
+                <button class="yang" id="theme-toggle"><img src="images/clair.png" alt="Changer de thème"></button>
             </nav>
         </div>
     <?php
