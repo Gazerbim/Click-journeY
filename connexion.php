@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Connexion</title>
 </head>
-<body class="connexion" >
+<body class="connexion light-mode" >
    <?php
     session_start();
     if (isset($_SESSION['id'])) {
@@ -97,6 +97,7 @@
     <?php
         require('requires/footer.php');
     ?>
+    <script src="script.js"></script>
 </body>
 </html>
 
