@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Gestion Admin</title>
 </head>
-<body class="rech">
+<body class="rech light-mode">
 <?php
 session_start();
 require("requires/json_utilities.php");
@@ -152,35 +152,6 @@ afficher_header('admin');
         </div>
         
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const actions = document.querySelectorAll('form[action="admin.php"]');
-
-            actions.forEach(form => {
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    const bouton = this.querySelector('button');
-
-                    const suppr = this.querySelector('input[name="delete_id"]');
-                    const promote = this.querySelector('input[name="promote_id"]');
-
-                    bouton.disabled = true;
-                    bouton.style.opacity = 0.7;
-                    bouton.style.cursor = 'wait';
-
-                    if (suppr) {
-                        bouton.textContent = 'Suppression en cours...';
-                    } else if (promote) {
-                        bouton.textContent = 'Modification en cours...';
-                    }
-
-                    setTimeout(() => {
-                        this.submit();
-                    }, 2000);
-                });
-            });
-        })
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
