@@ -1,47 +1,9 @@
 
-function setCookie(name, value, days) {
-  let expires = "";
-  if (days) {
-    const date = new Date();
-    date.setTime(date.getTime() + (days*24*60*60*1000));
-    expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/";
-}
-
-
-function getCookie(name) {
-  const nameEQ = name + "=";
-  const ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
-    let c = ca[i];
-    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-  }
-  return null;
-}
-
-
-const savedTheme = getCookie("theme");
-if (savedTheme === "dark-mode") {
-  document.body.classList.add("dark-mode");
-} else {
-  document.body.classList.add("light-mode"); // thème par défaut
-}
-
-
 const toggle = document.getElementById("theme-toggle");
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  document.body.classList.toggle("light-mode");
-
-  if (document.body.classList.contains("dark-mode")) {
-    setCookie("theme", "dark-mode", 30);
-  } else {
-    setCookie("theme", "light-mode", 30);
-  }
-});
-
+  toggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    document.body.classList.toggle("light-mode");
+  });
 
 document.addEventListener('DOMContentLoaded', () => {
     const champsMotDePasse = document.querySelectorAll('input[type="password"]');
