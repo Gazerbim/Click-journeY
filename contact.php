@@ -7,7 +7,7 @@
     <title>Contact</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body class="contact-page">
+<body class="contact-page light-mode">
 <?php
     session_start();
     require('requires/header.php');
@@ -32,6 +32,6 @@
     <?php
         require('requires/footer.php');
     ?>
-    
+    <script src="script.js"></script>
 </body>
 </html>
