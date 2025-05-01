@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Présentation</title>
 </head>
-<body>
+<body class="light-mode">
  <?php
     session_start();
     include('requires/header.php');
     afficher_header('presentation');
   ?>
-    <div class="presentation light-mode">
+    <div class="presentation">
         <h1>Bienvenue chez Rush&Krous : L'agence de voyage des étudiants !</h1>
 
         <h3>Chez le Crous, nous avons toujours eu à cœur d'accompagner les étudiants dans leur quotidien. 
