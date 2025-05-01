@@ -34,6 +34,7 @@ body.dark-mode{
     --cont3-color: white;
     --cont4-color: white;
     --table2-color: #2e2e2e;
+    --input-color: #626262;
 } 
 
 body.accueil {
@@ -365,7 +366,8 @@ span {
 }
 
 .recherche input {
-    
+    background-color: var(--input-color);
+    color: var(--p-color);
     width: 80%;
     padding: 10px;
     font-size: 16px;
