@@ -472,6 +472,84 @@
 			}
 		}
 	}
+
+	function recupererPanierUtilisateur($id){
+		$path = "databases/utilisateurs/$id/panier.json";
+		if (!file_exists($path)) {
+			file_put_contents($path, json_encode(array(), JSON_PRETTY_PRINT));
+		}
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		return $content;
+	}
+
+	function recupererVoyagePanierUtilisateur($id, $idVoyage){
+		$path = "databases/utilisateurs/$id/panier.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["idVoyage"] == $idVoyage){
+				return $value;
+			}
+		}
+		return false;
+	}
+
+	function ajouterVoyagePanier($id, $idVoyage, $options){
+		$path = "databases/utilisateurs/$id/panier.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		$voyage = array("idVoyage"=>$idVoyage, "options"=>$options);
+		if($content == null){
+			$content = array();
+			array_push($content, $voyage);
+			file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
+		else{
+			array_push($content, $voyage);
+			file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+			return 0;
+		}
+		
+	}
+
+	function modifierVoyagePanier($id, $idVoyage, $options){
+		$path = "databases/utilisateurs/$id/panier.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["idVoyage"] == $idVoyage){
+				$content[$key]["options"] = $options;
+				file_put_contents($path, json_encode($content, JSON_PRETTY_PRINT));
+				return 0;
+			}
+		}
+	}
+	function supprimerVoyagePanier($id, $idVoyage){
+		$path = "databases/utilisateurs/$id/panier.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["idVoyage"] == $idVoyage){
+				unset($content[$key]);
+				file_put_contents($path, json_encode(array_values($content), JSON_PRETTY_PRINT));
+				return 0;
+			}
+		}
+	}
+
+	function existePanierVoyageUtilisateur($id, $idVoyage){
+		$path = "databases/utilisateurs/$id/panier.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		foreach ($content as $key => $value) {
+			if($value["idVoyage"] == $idVoyage){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	//EXP UTILISATION
 
