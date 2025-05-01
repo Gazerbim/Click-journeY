@@ -1,9 +1,35 @@
 
+function setCookie(name, value, days) {
+  const expires = new Date(Date.now() + days*24*60*60*1000).toUTCString();
+  document.cookie = `${name}=${value}; expires=${expires}; path=/`;
+}
+
+function getCookie(name) {
+  const cookies = document.cookie.split("; ");
+  for (let cookie of cookies) {
+    const [key, val] = cookie.split("=");
+    if (key === name) return val;
+  }
+  return null;
+}
+
+const savedTheme = getCookie("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+} else {
+  document.body.classList.add("light-mode");
+}
+
 const toggle = document.getElementById("theme-toggle");
-  toggle.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-    document.body.classList.toggle("light-mode");
-  });
+toggle.addEventListener("click", () => {
+  if (document.body.classList.contains("dark-mode")) {
+    document.body.classList.replace("dark-mode", "light-mode");
+    setCookie("theme", "light", 30); 
+  } else {
+    document.body.classList.replace("light-mode", "dark-mode");
+    setCookie("theme", "dark", 30);
+  }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     const champsMotDePasse = document.querySelectorAll('input[type="password"]');
