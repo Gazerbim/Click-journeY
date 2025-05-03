@@ -86,7 +86,7 @@ if (!existePanierVoyageUtilisateur($_SESSION['id'], $voyageId)) { // le voyage n
     foreach ($optionsDisponibles as $index => $valeur) { 
         echo "<tr class='option-row'>";
         echo "<td><label for='$index' class='option-label'>$index (+$valeur €)</label></td>";
-        echo "<td><input type='checkbox' name='options[]' value='$index' class='option-checkbox'";
+        echo "<td><input type='checkbox' name='options[]' value='$index' class='option-checkbox' data-price='$valeur'";
         if (isset($_SESSION['options']) && in_array($index, $_SESSION['options'])) {
             echo " checked";
         }
@@ -115,6 +115,7 @@ $retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
     ?>
     <div class="espaceur"></div>
     <?php
+    echo "<p><strong>Prix estimé :</strong> <span id='prix-estime'>" . $montantTotal . " €</span></p>";
     echo "Prix de base : ".$montant."€";
     echo "<br>";
     echo "Options sélectionnées : ";
@@ -150,5 +151,6 @@ $retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
         <button type="submit">Payer avec CYBank</button>
     </form>
     </div>
+    <script src="options.js"></script>
 </body>
 </html>
