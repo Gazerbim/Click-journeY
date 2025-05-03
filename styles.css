@@ -14,7 +14,9 @@ body.light-mode{
     --cont2-color: #ffffff;
     --cont3-color: #2c3e50;
     --cont4-color: #34495e;
-    --table2-color: white  ;
+    --table2-color: white;
+    --voyage-bg-color: #e5aea8;
+    --voyage-text-color: #555;
 }
 
 body.dark-mode{
@@ -35,6 +37,9 @@ body.dark-mode{
     --cont4-color: white;
     --table2-color: #2e2e2e;
     --input-color: #626262;
+    --voyage-bg-color: #444; 
+    --voyage-text-color: #ddd;
+
 } 
 
 body.accueil {
@@ -589,7 +594,7 @@ body.connexion a:hover {
 }
 
 .voyage {
-    background-color: #e5aea8;
+    background-color: var(--voyage-bg-color);
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -615,7 +620,7 @@ body.connexion a:hover {
 
 .voyage p {
     margin: 10px 0;
-    color: #555; /*------------------------*/
+    color: var(--voyage-text-color);
     font-size: 16px;
 }
 

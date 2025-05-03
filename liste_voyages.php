@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <script src="script.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rush&Krous - Recherche</title>
+</head>
+<body class="light-mode">
 <?php
     session_start();
     require('requires/header.php');
@@ -81,6 +92,9 @@
         <button type="submit">Rechercher</button>
     </form>
 </div>
+
 <?php
     require('requires/footer.php');
 ?>
+</body>
+</html>
