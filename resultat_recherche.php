@@ -52,11 +52,30 @@ afficher_header('recherche');
 
     <div class="liste_voyages">
         <h2>Résultats de la recherche</h2>
+
+        <div class="tri-options">
+            <label for="tri"><strong>Trier par :</strong></label>
+            <select id="tri">
+                <option value="default">Par défaut</option>
+                <option value="prix-c">Prix croissant</option>
+                <option value="prix-dc">Prix décroissant</option>
+                <option value="nom-c">Nom (A-Z)</option>
+                <option value="nom-dc">Nom (Z-A)</option>
+                <option value="date-c">Date (plus proche)</option>
+                <option value="date-dc">Date (plus lointaine)</option>
+                <option value="etapes-c">Nombre d'étapes (croissant)</option>
+                <option value="etapes-dc">Nombre d'étapes (décroissant)</option>
+            </select>
+        </div>
+
         <div class="voyages-container">
         <?php
-        
+
         function afficherVoyage($value){
-            echo "<div class='voyage'>";
+            $etapes = count(recupererEtapesVoyage($value['id']));
+            $date = avoirDateVoyage($value['id']);
+
+            echo "<div class='voyage' data-etapes='$etapes' data-date='$date'>";
             echo "<img src='databases/voyages/" . $value['id'] . "/img/profil.jpg' alt='Voyage " . $value['id'] . "' width='100%' height='60%'>";
             echo "<p>" . htmlspecialchars($value['nom']) . "</p>";
             echo "<p>" . htmlspecialchars($value['description']) . "</p>";
@@ -148,43 +167,153 @@ afficher_header('recherche');
                 $voyagesSelectionnes[] = $value;
             }
         }
-        // Pagination
-        $voyagesParPage = 6; 
-        $pageActuelle = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-        $totalVoyages = count($voyagesSelectionnes);
-        $totalPages = max(1, ceil($totalVoyages / $voyagesParPage));
-        $indexDepart = ($pageActuelle - 1) * $voyagesParPage;
-        $voyagesAffiches = array_slice($voyagesSelectionnes, $indexDepart, $voyagesParPage);
 
-        echo "<div class='espaceur'>";
-        echo "<div class='liste_voyages'>";
-        echo "<h2>Liste des voyages</h2>";
-        echo "<div class='voyages-container'>";
-
-        foreach ($voyagesAffiches as $value) {
+        foreach ($voyagesSelectionnes as $value) {
             afficherVoyage($value);
         }
-        echo "</div>";
-
-        // Affichage des boutons
-        echo "<div class='pagination'>";
-        if ($pageActuelle > 1) {
-            echo "<a href='?page=" . ($pageActuelle - 1) . "'>Précédent</a> ";
-        }
-        for ($i = 1; $i <= $totalPages; $i++) {
-            echo "<a href='?page=$i'" . ($i == $pageActuelle ? " class='active'" : "") . ">$i</a> ";
-        }
-        if ($pageActuelle < $totalPages) {
-            echo "<a href='?page=" . ($pageActuelle + 1) . "'>Suivant</a>";
-        }
-        echo "</div>";
-        echo "</div>";
         ?>
         </div>
     </div>
-    <?php
-        require('requires/footer.php');
-    ?>
-    <script src="script.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+
+        const themeToggleBtn = document.querySelector('.yang');
+
+        if (themeToggleBtn) {
+            // Ensure we're not breaking any existing handler by using a new listener
+            themeToggleBtn.addEventListener('click', function(e) {
+                // Prevent any default behaviors
+                e.preventDefault();
+                e.stopPropagation();
+
+                // Simple toggle between light and dark
+                const body = document.body;
+                if (body.classList.contains('light-mode')) {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    // Save preference if needed
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    // Save preference if needed
+                    localStorage.setItem('theme', 'light');
+                }
+
+                // Return false to prevent any other handlers
+                return false;
+            }, true); // Use capture phase to ensure this runs first
+        }
+
+        // Apply theme from localStorage on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.remove('light-mode', 'dark-mode');
+            document.body.classList.add(savedTheme + '-mode');
+        }
+
+        const voyagesParCharge = 6;
+        const voyagesContainer = document.querySelector('.voyages-container');
+        const triSelect = document.getElementById('tri');
+        let affiche = 0;
+
+        // Sort functionality
+        triSelect.addEventListener('change', function() {
+            const sortBy = this.value;
+            const voyages = Array.from(document.querySelectorAll('.voyage'));
+
+            voyages.sort((a, b) => {
+                switch(sortBy) {
+                    case 'prix-c': return extractPrice(a) - extractPrice(b);
+                    case 'prix-dc': return extractPrice(b) - extractPrice(a);
+                    case 'nom-c': return extractText(a).localeCompare(extractText(b));
+                    case 'nom-dc': return extractText(b).localeCompare(extractText(a));
+                    case 'date-c': return new Date(a.dataset.date) - new Date(b.dataset.date);
+                    case 'date-dc': return new Date(b.dataset.date) - new Date(a.dataset.date);
+                    case 'etapes-c': return parseInt(a.dataset.etapes) - parseInt(b.dataset.etapes);
+                    case 'etapes-dc': return parseInt(b.dataset.etapes) - parseInt(a.dataset.etapes);
+                    default: return 0;
+                }
+            });
+
+            voyagesContainer.innerHTML = '';
+            voyages.forEach(voyage => voyagesContainer.appendChild(voyage));
+            affiche = resetLoadMoreState();
+        });
+
+        function extractPrice(voyageElement) {
+            const priceText = voyageElement.querySelector('p:nth-of-type(3)').textContent;
+            return parseFloat(priceText.replace('€', '').trim());
+        }
+
+        function extractText(voyageElement) {
+            return voyageElement.querySelector('p:nth-of-type(1)').textContent.trim();
+        }
+
+        function resetLoadMoreState() {
+            const voyagesActuels = document.querySelectorAll('.voyage');
+            let visibleCount = 0;
+
+            voyagesActuels.forEach((voyage, index) => {
+                if (index < voyagesParCharge) {
+                    voyage.classList.remove('hidden-voyage');
+                    visibleCount++;
+                } else {
+                    voyage.classList.add('hidden-voyage');
+                }
+            });
+
+            const chargeBtn = document.getElementById('load-more-btn');
+            if (chargeBtn) {
+                chargeBtn.classList.toggle('hidden-btn', visibleCount >= voyagesActuels.length);
+            }
+            return visibleCount;
+        }
+
+        // Create "load more" button with no inline styles
+        const chargeBtn = document.createElement('button');
+        chargeBtn.id = 'load-more-btn';
+        chargeBtn.className = 'bouton-vert';
+        chargeBtn.textContent = 'Afficher plus';
+
+        const chargeContainer = document.createElement('div');
+        chargeContainer.className = 'load-more-container';
+        chargeContainer.appendChild(chargeBtn);
+
+        voyagesContainer.parentNode.insertBefore(chargeContainer, voyagesContainer.nextSibling);
+
+        // Initialize - hide all voyages except first batch
+        const voyageInitial = document.querySelectorAll('.voyage');
+        voyageInitial.forEach((voyage, index) => {
+            if (index >= voyagesParCharge) {
+                voyage.classList.add('hidden-voyage');
+            } else {
+                affiche++;
+            }
+        });
+
+        majChargeBouton();
+
+        // Add click handler to load more button
+        chargeBtn.addEventListener('click', function() {
+            const voyagesActuels = document.querySelectorAll('.voyage');
+
+            for (let i = affiche; i < affiche + voyagesParCharge && i < voyagesActuels.length; i++) {
+                voyagesActuels[i].classList.remove('hidden-voyage');
+            }
+
+            affiche = Math.min(affiche + voyagesParCharge, voyagesActuels.length);
+            majChargeBouton();
+        });
+
+        function majChargeBouton() {
+            const voyagesActuels = document.querySelectorAll('.voyage');
+            chargeBtn.classList.toggle('hidden-btn', affiche >= voyagesActuels.length);
+        }
+    });
+</script>
+<?php
+require('requires/footer.php');
+?>
 </body>
 </html>
