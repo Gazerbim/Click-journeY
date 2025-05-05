@@ -242,99 +242,98 @@
         require('requires/footer.php');
     ?>
     <script>
-        // Add this function before the DOMContentLoaded event listener
-        function setupProfileEditing() {
+        function modificationProfil() {
             // Store original values for potential cancellation
-            const originalValues = {};
+            const vOrigine = {};
             // Track which fields have been modified
-            const modifiedFields = {};
+            const champsModif = {};
             // Get all input fields
-            const inputFields = document.querySelectorAll('.formulaire-classique input');
+            const inputChamps = document.querySelectorAll('.formulaire-classique input');
 
             // Initially disable all input fields
-            inputFields.forEach(input => {
+            inputChamps.forEach(input => {
                 input.disabled = true;
                 // Store original values
-                originalValues[input.id] = input.value;
+                vOrigine[input.id] = input.value;
             });
 
             // Hide the submit button initially
-            const submitButton = document.getElementById('submit-all-changes');
-            if (submitButton) submitButton.style.display = 'none';
+            const submitBouton = document.getElementById('submit-all-changes');
+            if (submitBouton) submitBouton.style.display = 'none';
 
             // Set up edit buttons
-            const editButtons = document.querySelectorAll('.edit-btn');
-            editButtons.forEach(button => {
+            const modifBoutons = document.querySelectorAll('.edit-btn');
+            modifBoutons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const fieldId = this.dataset.field;
-                    const inputField = document.getElementById(fieldId);
+                    const champId = this.dataset.field;
+                    const inputChamps = document.getElementById(champId);
 
                     // Make field editable
-                    inputField.disabled = false;
-                    inputField.focus();
+                    inputChamps.disabled = false;
+                    inputChamps.focus();
 
                     // Show action buttons, hide edit button
                     this.style.display = 'none';
-                    document.querySelector(`.save-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
-                    document.querySelector(`.cancel-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
+                    document.querySelector(`.save-btn[data-field="${champId}"]`).style.display = 'inline-block';
+                    document.querySelector(`.cancel-btn[data-field="${champId}"]`).style.display = 'inline-block';
                 });
             });
 
             // Set up save buttons
-            const saveButtons = document.querySelectorAll('.save-btn');
-            saveButtons.forEach(button => {
+            const saveBoutons = document.querySelectorAll('.save-btn');
+            saveBoutons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const fieldId = this.dataset.field;
-                    const inputField = document.getElementById(fieldId);
+                    const champId = this.dataset.field;
+                    const inputChamps = document.getElementById(champId);
 
                     // If value changed, mark as modified
-                    if (inputField.value !== originalValues[fieldId]) {
-                        modifiedFields[fieldId] = inputField.value;
+                    if (inputChamps.value !== vOrigine[champId]) {
+                        champsModif[champId] = inputChamps.value;
 
                         // Show the submit button
-                        if (submitButton) submitButton.style.display = 'block';
+                        if (submitBouton) submitBouton.style.display = 'block';
                     }
 
                     // Disable field
-                    inputField.disabled = true;
+                    inputChamps.disabled = true;
 
                     // Hide action buttons, show edit button
                     this.style.display = 'none';
-                    document.querySelector(`.cancel-btn[data-field="${fieldId}"]`).style.display = 'none';
-                    document.querySelector(`.edit-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
+                    document.querySelector(`.cancel-btn[data-field="${champId}"]`).style.display = 'none';
+                    document.querySelector(`.edit-btn[data-field="${champId}"]`).style.display = 'inline-block';
                 });
             });
 
             // Set up cancel buttons
-            const cancelButtons = document.querySelectorAll('.cancel-btn');
-            cancelButtons.forEach(button => {
+            const cancelBoutons = document.querySelectorAll('.cancel-btn');
+            cancelBoutons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const fieldId = this.dataset.field;
-                    const inputField = document.getElementById(fieldId);
+                    const champId = this.dataset.field;
+                    const inputChamps = document.getElementById(champId);
 
                     // Restore original value
-                    inputField.value = originalValues[fieldId];
+                    inputChamps.value = vOrigine[champId];
 
                     // Disable field
-                    inputField.disabled = true;
+                    inputChamps.disabled = true;
 
                     // Hide action buttons, show edit button
                     this.style.display = 'none';
-                    document.querySelector(`.save-btn[data-field="${fieldId}"]`).style.display = 'none';
-                    document.querySelector(`.edit-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
+                    document.querySelector(`.save-btn[data-field="${champId}"]`).style.display = 'none';
+                    document.querySelector(`.edit-btn[data-field="${champId}"]`).style.display = 'inline-block';
                 });
             });
 
             // Set up form submission with modified values
             const profileForm = document.getElementById('profile-form');
-            if (profileForm && submitButton) {
-                submitButton.addEventListener('click', function() {
+            if (profileForm && submitBouton) {
+                submitBouton.addEventListener('click', function() {
                     // Create hidden inputs for each modified field
-                    for (const fieldId in modifiedFields) {
+                    for (const champId in champsModif) {
                         const hiddenInput = document.createElement('input');
                         hiddenInput.type = 'hidden';
-                        hiddenInput.name = fieldId;
-                        hiddenInput.value = modifiedFields[fieldId];
+                        hiddenInput.name = champId;
+                        hiddenInput.value = champsModif[champId];
                         profileForm.appendChild(hiddenInput);
                     }
 
@@ -351,9 +350,9 @@
             }
 
             // Special handling for password field
-            const mdpEditBtn = document.querySelector('.edit-btn[data-field="mdp"]');
-            if (mdpEditBtn) {
-                mdpEditBtn.addEventListener('click', function() {
+            const mdpModifBtn = document.querySelector('.edit-btn[data-field="mdp"]');
+            if (mdpModifBtn) {
+                mdpModifBtn.addEventListener('click', function() {
                     document.getElementById('confirm-password-field').style.display = 'block';
                 });
             }
@@ -369,18 +368,18 @@
             const mdpSaveBtn = document.querySelector('.save-btn[data-field="mdp"]');
             if (mdpSaveBtn) {
                 mdpSaveBtn.addEventListener('click', function() {
-                    const pwd = document.getElementById('mdp').value;
+                    const mdp = document.getElementById('mdp').value;
                     const confirmPwd = document.getElementById('cmdp').value;
 
-                    if (pwd !== confirmPwd) {
+                    if (mdp !== confirmPwd) {
                         alert('Les mots de passe ne correspondent pas.');
                         return;
                     }
 
-                    if (pwd) {
-                        modifiedFields['mdp'] = pwd;
-                        modifiedFields['cmdp'] = confirmPwd;
-                        if (submitButton) submitButton.style.display = 'block';
+                    if (mdp) {
+                        champsModif['mdp'] = mdp;
+                        champsModif['cmdp'] = confirmPwd;
+                        if (submitBouton) submitBouton.style.display = 'block';
                     }
 
                     document.getElementById('confirm-password-field').style.display = 'none';
@@ -425,7 +424,7 @@
             }
 
             // Profile editing functionality
-            setupProfileEditing();
+            modificationProfil();
         });
     </script>
 </body>
