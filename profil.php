@@ -41,102 +41,125 @@
             $telephone = $_SESSION['tel'];
             $date_naissance = $_SESSION['naissance'];
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['action'] == 'update_profile') {
             $id = $_SESSION['id'];
-            $action = $_POST['action'];
-            $value = '';
-            switch ($action) {
-                case 'modifier_nom':
-                    $value = $_POST['nom'];
-                    modifierProfileUtilisateur($id, 'nom', $value);
-                    $_SESSION['nom'] = $value;
-                    break;
-                case 'modifier_prenom':
-                    $value = $_POST['prenom'];
-                    modifierProfileUtilisateur($id, 'prenom', $value);
-                    $_SESSION['prenom'] = $value;
-                    break;
-                case 'modifier_email':
-                    $value = $_POST['email'];
-                    modifierProfileUtilisateur($id, 'courriel', $value);
-                    $_SESSION['courriel'] = $value;
-                    break;
-                case 'modifier_telephone':
-                    $value = $_POST['telephone'];
-                    modifierProfileUtilisateur($id, 'tel', $value);
-                    $_SESSION['tel'] = $value;
-                    break;
-                case 'modifier_date_naissance':
-                    $value = $_POST['date_naissance'];
-                    modifierProfileUtilisateur($id, 'naissance', $value);
-                    $_SESSION['naissance'] = $value;
-                    break;
-                case 'modifier_genre':
-                    $value = $_POST['genre'];
-                    modifierProfileUtilisateur($id, 'genre', $value);
-                    $_SESSION['genre'] = $value;
-                    break;
-                case 'modifier_mdp':
-                    if ($_POST['mdp'] == $_POST['cmdp']) {
-                        $value = $_POST['mdp'];
-                        $value = password_hash($value, PASSWORD_BCRYPT);
-                        modifierProfileUtilisateur($id, 'mdp', $value);
-                    }
-                    break;
+            $modified = false;
+
+            // Check and update each field if present in the POST data
+            if (isset($_POST['nom']) && !empty($_POST['nom'])) {
+                modifierProfileUtilisateur($id, 'nom', $_POST['nom']);
+                $_SESSION['nom'] = $_POST['nom'];
+                $modified = true;
             }
+
+            if (isset($_POST['prenom']) && !empty($_POST['prenom'])) {
+                modifierProfileUtilisateur($id, 'prenom', $_POST['prenom']);
+                $_SESSION['prenom'] = $_POST['prenom'];
+                $modified = true;
+            }
+
+            if (isset($_POST['email']) && !empty($_POST['email'])) {
+                modifierProfileUtilisateur($id, 'courriel', $_POST['email']);
+                $_SESSION['courriel'] = $_POST['email'];
+                $modified = true;
+            }
+
+            if (isset($_POST['telephone']) && !empty($_POST['telephone'])) {
+                modifierProfileUtilisateur($id, 'tel', $_POST['telephone']);
+                $_SESSION['tel'] = $_POST['telephone'];
+                $modified = true;
+            }
+
+            if (isset($_POST['date_naissance']) && !empty($_POST['date_naissance'])) {
+                modifierProfileUtilisateur($id, 'naissance', $_POST['date_naissance']);
+                $_SESSION['naissance'] = $_POST['date_naissance'];
+                $modified = true;
+            }
+
+            if (isset($_POST['mdp']) && !empty($_POST['mdp']) && isset($_POST['cmdp']) && $_POST['mdp'] == $_POST['cmdp']) {
+                $mdp_hash = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
+                modifierProfileUtilisateur($id, 'mdp', $mdp_hash);
+                $modified = true;
+            }
+
+            if ($modified) {
+                $_SESSION['success'] = "Votre profil a été mis à jour avec succès.";
+            }
+
             header('Location: profil.php');
             exit();
         }
         ?>
 
-        <form action="profil.php" method="post" class="formulaire-classique">
-            <label for="nom"><strong>Nom :</strong></label>
-            <div class="input-groupe">
-            <input type="text" id="nom" name="nom" <?php echo "value='$nom'"; ?>>
-            <button type="submit" name="action" value="modifier_nom">Modifier</button>
+        <form id="profile-form" action="profil.php" method="post" class="formulaire-classique">
+            <div class="form-field">
+                <label for="nom"><strong>Nom :</strong></label>
+                <div class="input-groupe">
+                    <input type="text" id="nom" name="nom" <?php echo "value='$nom'"; ?>>
+                    <button type="button" class="edit-btn" data-field="nom">Modifier</button>
+                    <button type="button" class="save-btn" data-field="nom" style="display: none;">Valider</button>
+                    <button type="button" class="cancel-btn" data-field="nom" style="display: none;">Annuler</button>
+                </div>
             </div>
-        </form>
 
-        <form action="profil.php" method="post" class="formulaire-classique">
-            <label for="prenom"><strong>Prénom :</strong></label>
-            <div class="input-groupe">
-            <input type="text" id="prenom" name="prenom" <?php echo "value='$prenom'"; ?>>
-            <button type="submit" name="action" value="modifier_prenom">Modifier</button>
+            <div class="form-field">
+                <label for="prenom"><strong>Prénom :</strong></label>
+                <div class="input-groupe">
+                    <input type="text" id="prenom" name="prenom" <?php echo "value='$prenom'"; ?>>
+                    <button type="button" class="edit-btn" data-field="prenom">Modifier</button>
+                    <button type="button" class="save-btn" data-field="prenom" style="display: none;">Valider</button>
+                    <button type="button" class="cancel-btn" data-field="prenom" style="display: none;">Annuler</button>
+                </div>
             </div>
-        </form>
 
-        <form action="profil.php" method="post" class="formulaire-classique">
-            <label for="email"><strong>Email :</strong></label>
-            <div class="input-groupe">
-            <input type="email" id="email" name="email"<?php echo "value='$email'"; ?>>
-            <button type="submit" name="action" value="modifier_email">Modifier</button>
+            <div class="form-field">
+                <label for="email"><strong>Email :</strong></label>
+                <div class="input-groupe">
+                    <input type="email" id="email" name="email" <?php echo "value='$email'"; ?>>
+                    <button type="button" class="edit-btn" data-field="email">Modifier</button>
+                    <button type="button" class="save-btn" data-field="email" style="display: none;">Valider</button>
+                    <button type="button" class="cancel-btn" data-field="email" style="display: none;">Annuler</button>
+                </div>
             </div>
-        </form>
 
-        <form action="profil.php" method="post" class="formulaire-classique">
-            <label for="telephone"><strong>Téléphone :</strong></label>
-            <div class="input-groupe">
-            <input type="tel" id="telephone" name="telephone" <?php echo "value='$telephone'"; ?>>
-            <button type="submit" name="action" value="modifier_telephone">Modifier</button>
+            <div class="form-field">
+                <label for="telephone"><strong>Téléphone :</strong></label>
+                <div class="input-groupe">
+                    <input type="tel" id="telephone" name="telephone" <?php echo "value='$telephone'"; ?>>
+                    <button type="button" class="edit-btn" data-field="telephone">Modifier</button>
+                    <button type="button" class="save-btn" data-field="telephone" style="display: none;">Valider</button>
+                    <button type="button" class="cancel-btn" data-field="telephone" style="display: none;">Annuler</button>
+                </div>
             </div>
-        </form>
 
-        <form action="profil.php" method="post" class="formulaire-classique">
-            <label for="date_naissance"><strong>Date de naissance :</strong></label>
-            <div class="input-groupe">
-            <input type="date" id="date_naissance" name="date_naissance"<?php echo "value='$date_naissance'"; ?>>
-            <button type="submit" name="action" value="modifier_date_naissance">Modifier</button>
+            <div class="form-field">
+                <label for="date_naissance"><strong>Date de naissance :</strong></label>
+                <div class="input-groupe">
+                    <input type="date" id="date_naissance" name="date_naissance" <?php echo "value='$date_naissance'"; ?>>
+                    <button type="button" class="edit-btn" data-field="date_naissance">Modifier</button>
+                    <button type="button" class="save-btn" data-field="date_naissance" style="display: none;">Valider</button>
+                    <button type="button" class="cancel-btn" data-field="date_naissance" style="display: none;">Annuler</button>
+                </div>
             </div>
-        </form>
 
-        <form action="profil.php" method="post" class="formulaire-classique">
-            <label for="mdp"><strong>Mot de passe :</strong></label>
-            <input type="password" id="mdp" name="mdp">
-            
-            <label for="cmdp"><strong>Confirmer le mot de passe :</strong></label>
-            <input type="password" id="cmdp" name="cmdp">
-            
-            <button type="submit" name="action" value="modifier_mdp">Modifier</button>
+            <div class="form-field">
+                <label for="mdp"><strong>Mot de passe :</strong></label>
+                <div class="input-groupe">
+                    <input type="password" id="mdp" name="mdp">
+                    <button type="button" class="edit-btn" data-field="mdp">Modifier</button>
+                    <button type="button" class="save-btn" data-field="mdp" style="display: none;">Valider</button>
+                    <button type="button" class="cancel-btn" data-field="mdp" style="display: none;">Annuler</button>
+                </div>
+            </div>
+
+            <div class="form-field" id="confirm-password-field" style="display: none;">
+                <label for="cmdp"><strong>Confirmer le mot de passe :</strong></label>
+                <div class="input-groupe">
+                    <input type="password" id="cmdp" name="cmdp">
+                </div>
+            </div>
+
+            <button type="button" id="submit-all-changes" style="display: none;">Enregistrer les modifications</button>
         </form>
     </div>
 
@@ -218,6 +241,192 @@
     <?php
         require('requires/footer.php');
     ?>
-    <script src="script.js"></script>
+    <script>
+        // Add this function before the DOMContentLoaded event listener
+        function setupProfileEditing() {
+            // Store original values for potential cancellation
+            const originalValues = {};
+            // Track which fields have been modified
+            const modifiedFields = {};
+            // Get all input fields
+            const inputFields = document.querySelectorAll('.formulaire-classique input');
+
+            // Initially disable all input fields
+            inputFields.forEach(input => {
+                input.disabled = true;
+                // Store original values
+                originalValues[input.id] = input.value;
+            });
+
+            // Hide the submit button initially
+            const submitButton = document.getElementById('submit-all-changes');
+            if (submitButton) submitButton.style.display = 'none';
+
+            // Set up edit buttons
+            const editButtons = document.querySelectorAll('.edit-btn');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const fieldId = this.dataset.field;
+                    const inputField = document.getElementById(fieldId);
+
+                    // Make field editable
+                    inputField.disabled = false;
+                    inputField.focus();
+
+                    // Show action buttons, hide edit button
+                    this.style.display = 'none';
+                    document.querySelector(`.save-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
+                    document.querySelector(`.cancel-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
+                });
+            });
+
+            // Set up save buttons
+            const saveButtons = document.querySelectorAll('.save-btn');
+            saveButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const fieldId = this.dataset.field;
+                    const inputField = document.getElementById(fieldId);
+
+                    // If value changed, mark as modified
+                    if (inputField.value !== originalValues[fieldId]) {
+                        modifiedFields[fieldId] = inputField.value;
+
+                        // Show the submit button
+                        if (submitButton) submitButton.style.display = 'block';
+                    }
+
+                    // Disable field
+                    inputField.disabled = true;
+
+                    // Hide action buttons, show edit button
+                    this.style.display = 'none';
+                    document.querySelector(`.cancel-btn[data-field="${fieldId}"]`).style.display = 'none';
+                    document.querySelector(`.edit-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
+                });
+            });
+
+            // Set up cancel buttons
+            const cancelButtons = document.querySelectorAll('.cancel-btn');
+            cancelButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const fieldId = this.dataset.field;
+                    const inputField = document.getElementById(fieldId);
+
+                    // Restore original value
+                    inputField.value = originalValues[fieldId];
+
+                    // Disable field
+                    inputField.disabled = true;
+
+                    // Hide action buttons, show edit button
+                    this.style.display = 'none';
+                    document.querySelector(`.save-btn[data-field="${fieldId}"]`).style.display = 'none';
+                    document.querySelector(`.edit-btn[data-field="${fieldId}"]`).style.display = 'inline-block';
+                });
+            });
+
+            // Set up form submission with modified values
+            const profileForm = document.getElementById('profile-form');
+            if (profileForm && submitButton) {
+                submitButton.addEventListener('click', function() {
+                    // Create hidden inputs for each modified field
+                    for (const fieldId in modifiedFields) {
+                        const hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = fieldId;
+                        hiddenInput.value = modifiedFields[fieldId];
+                        profileForm.appendChild(hiddenInput);
+                    }
+
+                    // Add an action identifier
+                    const actionInput = document.createElement('input');
+                    actionInput.type = 'hidden';
+                    actionInput.name = 'action';
+                    actionInput.value = 'update_profile';
+                    profileForm.appendChild(actionInput);
+
+                    // Submit the form
+                    profileForm.submit();
+                });
+            }
+
+            // Special handling for password field
+            const mdpEditBtn = document.querySelector('.edit-btn[data-field="mdp"]');
+            if (mdpEditBtn) {
+                mdpEditBtn.addEventListener('click', function() {
+                    document.getElementById('confirm-password-field').style.display = 'block';
+                });
+            }
+
+            const mdpCancelBtn = document.querySelector('.cancel-btn[data-field="mdp"]');
+            if (mdpCancelBtn) {
+                mdpCancelBtn.addEventListener('click', function() {
+                    document.getElementById('confirm-password-field').style.display = 'none';
+                    document.getElementById('cmdp').value = '';
+                });
+            }
+
+            const mdpSaveBtn = document.querySelector('.save-btn[data-field="mdp"]');
+            if (mdpSaveBtn) {
+                mdpSaveBtn.addEventListener('click', function() {
+                    const pwd = document.getElementById('mdp').value;
+                    const confirmPwd = document.getElementById('cmdp').value;
+
+                    if (pwd !== confirmPwd) {
+                        alert('Les mots de passe ne correspondent pas.');
+                        return;
+                    }
+
+                    if (pwd) {
+                        modifiedFields['mdp'] = pwd;
+                        modifiedFields['cmdp'] = confirmPwd;
+                        if (submitButton) submitButton.style.display = 'block';
+                    }
+
+                    document.getElementById('confirm-password-field').style.display = 'none';
+                });
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            // Theme toggle functionality (copied from resultat_recherche.php)
+            const themeToggleBtn = document.querySelector('.yang');
+
+            if (themeToggleBtn) {
+                // Ensure we're not breaking any existing handler by using a new listener
+                themeToggleBtn.addEventListener('click', function(e) {
+                    // Prevent any default behaviors
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // Simple toggle between light and dark
+                    const body = document.body;
+                    if (body.classList.contains('light-mode')) {
+                        body.classList.remove('light-mode');
+                        body.classList.add('dark-mode');
+                        // Save preference if needed
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        body.classList.remove('dark-mode');
+                        body.classList.add('light-mode');
+                        // Save preference if needed
+                        localStorage.setItem('theme', 'light');
+                    }
+
+                    // Return false to prevent any other handlers
+                    return false;
+                }, true); // Use capture phase to ensure this runs first
+            }
+
+            // Apply theme from localStorage on page load
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                document.body.classList.remove('light-mode', 'dark-mode');
+                document.body.classList.add(savedTheme + '-mode');
+            }
+
+            // Profile editing functionality
+            setupProfileEditing();
+        });
+    </script>
 </body>
 </html>
