@@ -4,189 +4,147 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="profil-edition.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Profil utilisateur</title>
 </head>
 <body class="profil light-mode" >
 <?php
-session_start();
-include('requires/header.php');
-afficher_header('profil');
-if (!isset($_SESSION['prenom']) || empty($_SESSION['prenom'])) {
-    $_SESSION['error'] = "Vous devez être connecté pour accéder à cette page.";
-    header('Location: connexion.php');
-    exit();
-}
-?>
-<div class="recherche">
-    <h2>Mon Profil</h2>
-
-    <?php
-    require("requires/json_utilities.php");
-    if (isset($_SESSION['error'])) {
-        echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
-        unset($_SESSION['error']);
+    session_start();
+    include('requires/header.php');
+    afficher_header('profil');
+    if (!isset($_SESSION['prenom']) || empty($_SESSION['prenom'])) {
+        $_SESSION['error'] = "Vous devez être connecté pour accéder à cette page.";
+        header('Location: connexion.php');
+        exit();
     }
-    if (isset($_SESSION['success'])) {
-        echo "<p style='color: #00a000;'>" . $_SESSION['success'] . "</p>";
-        unset($_SESSION['success']);
-    }
-    if($_SESSION['role'] == "adm") {
-        echo "<a href='admin.php'><button>VOIR UTILISATEURS</button></a>";
-    }
-    $nom = $_SESSION['nom'];
-    $prenom = $_SESSION['prenom'];
-    $email = $_SESSION['courriel'];
-    $telephone = $_SESSION['tel'];
-    $date_naissance = $_SESSION['naissance'];
+  ?>
+    <div class="recherche">
+        <h2>Mon Profil</h2>
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $id = $_SESSION['id'];
-        $action = $_POST['action'];
-
-        if ($action == 'modifier_tous') {
-            // Traiter tous les champs potentiellement modifiés
-            $champs = [
-                'nom' => ['session' => 'nom', 'db' => 'nom'],
-                'prenom' => ['session' => 'prenom', 'db' => 'prenom'],
-                'email' => ['session' => 'courriel', 'db' => 'courriel'],
-                'telephone' => ['session' => 'tel', 'db' => 'tel'],
-                'date_naissance' => ['session' => 'naissance', 'db' => 'naissance'],
-            ];
-
-            foreach ($champs as $post_key => $info) {
-                if (isset($_POST[$post_key]) && $_POST[$post_key] !== $_SESSION[$info['session']]) {
-                    $value = $_POST[$post_key];
-                    modifierProfileUtilisateur($id, $info['db'], $value);
-                    $_SESSION[$info['session']] = $value;
-                }
+        <?php
+            
+            require("requires/json_utilities.php");
+            if (isset($_SESSION['error'])) {
+                echo "<p style='color: #e30613;'>" . $_SESSION['error'] . "</p>";
+                unset($_SESSION['error']);
             }
-
-            // Traiter le mot de passe séparément
-            if (!empty($_POST['mdp']) && $_POST['mdp'] === $_POST['cmdp']) {
-                $value = password_hash($_POST['mdp'], PASSWORD_BCRYPT);
-                modifierProfileUtilisateur($id, 'mdp', $value);
+            if (isset($_SESSION['success'])) {
+                echo "<p style='color: #00a000;'>" . $_SESSION['success'] . "</p>";
+                unset($_SESSION['success']);
             }
-        } else {
-            // Garder l'ancien code pour compatibilité
+            if($_SESSION['role'] == "adm") {
+                echo "<a href='admin.php'><button>VOIR UTILISATEURS</button></a>";
+            }
+            $nom = $_SESSION['nom'];
+            $prenom = $_SESSION['prenom'];
+            $email = $_SESSION['courriel'];
+            $telephone = $_SESSION['tel'];
+            $date_naissance = $_SESSION['naissance'];
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_SESSION['id'];
+            $action = $_POST['action'];
             $value = '';
             switch ($action) {
                 case 'modifier_nom':
-                    // ... code existant ...
+                    $value = $_POST['nom'];
+                    modifierProfileUtilisateur($id, 'nom', $value);
+                    $_SESSION['nom'] = $value;
                     break;
-                // ... autres cases ...
+                case 'modifier_prenom':
+                    $value = $_POST['prenom'];
+                    modifierProfileUtilisateur($id, 'prenom', $value);
+                    $_SESSION['prenom'] = $value;
+                    break;
+                case 'modifier_email':
+                    $value = $_POST['email'];
+                    modifierProfileUtilisateur($id, 'courriel', $value);
+                    $_SESSION['courriel'] = $value;
+                    break;
+                case 'modifier_telephone':
+                    $value = $_POST['telephone'];
+                    modifierProfileUtilisateur($id, 'tel', $value);
+                    $_SESSION['tel'] = $value;
+                    break;
+                case 'modifier_date_naissance':
+                    $value = $_POST['date_naissance'];
+                    modifierProfileUtilisateur($id, 'naissance', $value);
+                    $_SESSION['naissance'] = $value;
+                    break;
+                case 'modifier_genre':
+                    $value = $_POST['genre'];
+                    modifierProfileUtilisateur($id, 'genre', $value);
+                    $_SESSION['genre'] = $value;
+                    break;
+                case 'modifier_mdp':
+                    if ($_POST['mdp'] == $_POST['cmdp']) {
+                        $value = $_POST['mdp'];
+                        $value = password_hash($value, PASSWORD_BCRYPT);
+                        modifierProfileUtilisateur($id, 'mdp', $value);
+                    }
+                    break;
             }
+            header('Location: profil.php');
+            exit();
         }
+        ?>
 
-        header('Location: profil.php');
-        exit();
-    }
-    ?>
-
-    <!-- Formulaire principal qui sera soumis -->
-    <form id="formulaire_principal_profil" action="profil.php" method="post" class="formulaire-classique">
-        <input type="hidden" name="action" id="action_formulaire" value="">
-
-        <!-- Champs cachés pour stocker les modifications -->
-        <input type="hidden" id="cache-nom" name="nom" value="<?php echo $nom; ?>">
-        <input type="hidden" id="cache-prenom" name="prenom" value="<?php echo $prenom; ?>">
-        <input type="hidden" id="cache-email" name="email" value="<?php echo $email; ?>">
-        <input type="hidden" id="cache-telephone" name="telephone" value="<?php echo $telephone; ?>">
-        <input type="hidden" id="cache-date_naissance" name="date_naissance" value="<?php echo $date_naissance; ?>">
-        <input type="hidden" id="cache-mdp" name="mdp" value="">
-        <input type="hidden" id="cache-cmdp" name="cmdp" value="">
-
-        <div class="champ_profil">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="nom"><strong>Nom :</strong></label>
-            <div class="groupe_saisie">
-                <input type="text" id="nom" value="<?php echo $nom; ?>" class="lecture_seule">
-                <button type="button" class="bouton_modifier">Modifier</button>
-                <div class="controles_edition">
-                    <button type="button" class="bouton_valider">Valider</button>
-                    <button type="button" class="bouton_annuler">Annuler</button>
-                </div>
+            <div class="input-groupe">
+            <input type="text" id="nom" name="nom" <?php echo "value='$nom'"; ?>>
+            <button type="submit" name="action" value="modifier_nom">Modifier</button>
             </div>
-        </div>
+        </form>
 
-        <div class="champ_profil">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="prenom"><strong>Prénom :</strong></label>
-            <div class="groupe_saisie">
-                <input type="text" id="prenom" value="<?php echo $prenom; ?>" class="lecture_seule">
-                <button type="button" class="bouton_modifier">Modifier</button>
-                <div class="controles_edition">
-                    <button type="button" class="bouton_valider">Valider</button>
-                    <button type="button" class="bouton_annuler">Annuler</button>
-                </div>
+            <div class="input-groupe">
+            <input type="text" id="prenom" name="prenom" <?php echo "value='$prenom'"; ?>>
+            <button type="submit" name="action" value="modifier_prenom">Modifier</button>
             </div>
-        </div>
+        </form>
 
-        <div class="champ_profil">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="email"><strong>Email :</strong></label>
-            <div class="groupe_saisie">
-                <input type="email" id="email" value="<?php echo $email; ?>" class="lecture_seule">
-                <button type="button" class="bouton_modifier">Modifier</button>
-                <div class="controles_edition">
-                    <button type="button" class="bouton_valider">Valider</button>
-                    <button type="button" class="bouton_annuler">Annuler</button>
-                </div>
+            <div class="input-groupe">
+            <input type="email" id="email" name="email"<?php echo "value='$email'"; ?>>
+            <button type="submit" name="action" value="modifier_email">Modifier</button>
             </div>
-        </div>
+        </form>
 
-        <div class="champ_profil">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="telephone"><strong>Téléphone :</strong></label>
-            <div class="groupe_saisie">
-                <input type="tel" id="telephone" value="<?php echo $telephone; ?>" class="lecture_seule">
-                <button type="button" class="bouton_modifier">Modifier</button>
-                <div class="controles_edition">
-                    <button type="button" class="bouton_valider">Valider</button>
-                    <button type="button" class="bouton_annuler">Annuler</button>
-                </div>
+            <div class="input-groupe">
+            <input type="tel" id="telephone" name="telephone" <?php echo "value='$telephone'"; ?>>
+            <button type="submit" name="action" value="modifier_telephone">Modifier</button>
             </div>
-        </div>
+        </form>
 
-        <div class="champ_profil">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="date_naissance"><strong>Date de naissance :</strong></label>
-            <div class="groupe_saisie">
-                <input type="date" id="date_naissance" value="<?php echo $date_naissance; ?>" class="lecture_seule">
-                <button type="button" class="bouton_modifier">Modifier</button>
-                <div class="controles_edition">
-                    <button type="button" class="bouton_valider">Valider</button>
-                    <button type="button" class="bouton_annuler">Annuler</button>
-                </div>
+            <div class="input-groupe">
+            <input type="date" id="date_naissance" name="date_naissance"<?php echo "value='$date_naissance'"; ?>>
+            <button type="submit" name="action" value="modifier_date_naissance">Modifier</button>
             </div>
-        </div>
+        </form>
 
-        <div class="champ_profil">
+        <form action="profil.php" method="post" class="formulaire-classique">
             <label for="mdp"><strong>Mot de passe :</strong></label>
-            <div class="groupe_saisie">
-                <input type="password" id="mdp" value="" class="lecture_seule">
-                <button type="button" class="bouton_modifier">Modifier</button>
-                <div class="controles_edition">
-                    <button type="button" class="bouton_valider">Valider</button>
-                    <button type="button" class="bouton_annuler">Annuler</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="champ_profil champ_confirmation_mdp">
+            <input type="password" id="mdp" name="mdp">
+            
             <label for="cmdp"><strong>Confirmer le mot de passe :</strong></label>
-            <div class="groupe_saisie">
-                <input type="password" id="cmdp" value="" class="lecture_seule">
-            </div>
-        </div>
+            <input type="password" id="cmdp" name="cmdp">
+            
+            <button type="submit" name="action" value="modifier_mdp">Modifier</button>
+        </form>
+    </div>
 
-        <div class="boutons_formulaire_principal">
-            <button type="submit" id="soumettre_modifications" onclick="return soumettreFormulaire()">Enregistrer les modifications</button>
-        </div>
-    </form>
-</div>
-
-<div>
-    <form action="deconnexion.php" method="post" class="deconnexion">
-        <a href="connexion.php"><button>Déconnexion</button></a>
-    </form>
-</div>
+    <div>
+        <form action="deconnexion.php" method="post" class="deconnexion">
+            <a href="connexion.php"><button>Déconnexion</button></a>
+        </form>
+    </div>
     
     <div class="mes-voyages-container">
         <h2>Mon Panier</h2>
@@ -260,121 +218,6 @@ if (!isset($_SESSION['prenom']) || empty($_SESSION['prenom'])) {
     <?php
         require('requires/footer.php');
     ?>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Stockage des valeurs originales et suivi des modifications
-            const valeursOriginales = {};
-            const champsFormulaire = document.querySelectorAll('.champ_profil');
-            let modificationsEffectuees = false;
-
-            // Initialisation des champs en lecture seule
-            champsFormulaire.forEach(champ => {
-                const saisie = champ.querySelector('input');
-                const champId = saisie.id;
-                valeursOriginales[champId] = saisie.value;
-                saisie.setAttribute('readonly', true);
-                saisie.classList.add('lecture_seule');
-            });
-
-            // Cacher initialement le bouton de soumission
-            const boutonSoumettre = document.getElementById('soumettre_modifications');
-            if(boutonSoumettre) boutonSoumettre.style.display = 'none';
-
-            // Gestionnaire de clic sur le bouton modifier
-            document.querySelectorAll('.bouton_modifier').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const conteneurChamp = this.closest('.champ_profil');
-                    const saisie = conteneurChamp.querySelector('input');
-                    const controlesEdition = conteneurChamp.querySelector('.controles_edition');
-
-                    // Afficher le champ de confirmation si on modifie le mot de passe
-                    if(saisie.id === 'mdp' && saisie.value === '') {
-                        document.querySelector('.champ_confirmation_mdp').style.display = 'block';
-                    }
-
-                    // Activer l'édition
-                    saisie.removeAttribute('readonly');
-                    saisie.classList.remove('lecture_seule');
-                    saisie.focus();
-
-                    // Afficher les boutons valider/annuler, cacher le bouton modifier
-                    this.style.display = 'none';
-                    controlesEdition.style.display = 'inline-block';
-                });
-            });
-
-            // Gestionnaire de clic sur le bouton valider
-            document.querySelectorAll('.bouton_valider').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const conteneurChamp = this.closest('.champ_profil');
-                    const saisie = conteneurChamp.querySelector('input');
-                    const boutonModifier = conteneurChamp.querySelector('.bouton_modifier');
-                    const controlesEdition = conteneurChamp.querySelector('.controles_edition');
-
-                    // Remettre le champ en lecture seule
-                    saisie.setAttribute('readonly', true);
-                    saisie.classList.add('lecture_seule');
-
-                    // Vérifier si la valeur a changé
-                    if(saisie.value !== valeursOriginales[saisie.id]) {
-                        modificationsEffectuees = true;
-                        conteneurChamp.classList.add('modifie');
-                        // Mettre à jour le champ caché dans le formulaire principal
-                        const champCache = document.getElementById(`cache-${saisie.id}`);
-                        if(champCache) champCache.value = saisie.value;
-
-                        // Afficher le bouton soumettre
-                        if(boutonSoumettre) boutonSoumettre.style.display = 'block';
-                    }
-
-                    // Afficher le bouton modifier, cacher valider/annuler
-                    boutonModifier.style.display = 'inline-block';
-                    controlesEdition.style.display = 'none';
-                });
-            });
-
-            // Gestionnaire de clic sur le bouton annuler
-            document.querySelectorAll('.bouton_annuler').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const conteneurChamp = this.closest('.champ_profil');
-                    const saisie = conteneurChamp.querySelector('input');
-                    const boutonModifier = conteneurChamp.querySelector('.bouton_modifier');
-                    const controlesEdition = conteneurChamp.querySelector('.controles_edition');
-
-                    // Cacher le champ de confirmation si on annule la modification du mot de passe
-                    if(saisie.id === 'mdp') {
-                        document.querySelector('.champ_confirmation_mdp').style.display = 'none';
-                    }
-
-                    // Restaurer la valeur originale
-                    saisie.value = valeursOriginales[saisie.id];
-
-                    // Remettre le champ en lecture seule
-                    saisie.setAttribute('readonly', true);
-                    saisie.classList.add('lecture_seule');
-
-                    // Afficher le bouton modifier, cacher valider/annuler
-                    boutonModifier.style.display = 'inline-block';
-                    controlesEdition.style.display = 'none';
-                });
-            });
-        });
-
-        function soumettreFormulaire() {
-            // Gestion de la validation du mot de passe
-            if(document.getElementById('cache-mdp').value) {
-                if(document.getElementById('cache-mdp').value !== document.getElementById('cache-cmdp').value) {
-                    alert('Les mots de passe ne correspondent pas!');
-                    return false;
-                }
-                document.getElementById('action_formulaire').value = 'modifier_tous';
-            } else {
-                // Marquer l'action comme modification multiple
-                document.getElementById('action_formulaire').value = 'modifier_tous';
-            }
-
-            return true;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
