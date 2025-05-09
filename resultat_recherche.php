@@ -177,47 +177,150 @@ afficher_header('recherche');
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        const themeToggleBtn = document.querySelector('.yang');
-
-        if (themeToggleBtn) {
-            // Ensure we're not breaking any existing handler by using a new listener
-            themeToggleBtn.addEventListener('click', function(e) {
-                // Prevent any default behaviors
-                e.preventDefault();
-                e.stopPropagation();
-
-                // Simple toggle between light and dark
-                const body = document.body;
-                if (body.classList.contains('light-mode')) {
-                    body.classList.remove('light-mode');
-                    body.classList.add('dark-mode');
-                    // Save preference if needed
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    body.classList.remove('dark-mode');
-                    body.classList.add('light-mode');
-                    // Save preference if needed
-                    localStorage.setItem('theme', 'light');
-                }
-
-                // Return false to prevent any other handlers
-                return false;
-            }, true); // Use capture phase to ensure this runs first
-        }
-
-        // Apply theme from localStorage on page load
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            document.body.classList.remove('light-mode', 'dark-mode');
-            document.body.classList.add(savedTheme + '-mode');
-        }
-
-        const voyagesParCharge = 6;
+        const itemsPerPage = 6; // Same as voyagesParCharge
         const voyagesContainer = document.querySelector('.voyages-container');
         const triSelect = document.getElementById('tri');
-        let affiche = 0;
+        let currentPage = 1;
 
-        // Sort functionality
+        // Function to create pagination controls
+        // Function to create pagination controls
+        function createPagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+            // Remove existing pagination if any
+            const existingPagination = document.querySelector('.pagination');
+            if (existingPagination) {
+                existingPagination.remove();
+            }
+
+            // If only one page or no items, don't show pagination
+            if (totalPages <= 1) {
+                return;
+            }
+
+            // Create pagination container
+            const paginationContainer = document.createElement('div');
+            paginationContainer.className = 'pagination';
+
+            // Previous button
+            const prevBtn = document.createElement('a');
+            prevBtn.href = 'javascript:void(0)';
+            prevBtn.textContent = 'Précédent';
+            if (currentPage === 1) {
+                prevBtn.style.opacity = '0.5';
+                prevBtn.style.pointerEvents = 'none';
+            }
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    changePage(currentPage - 1);
+                }
+            });
+            paginationContainer.appendChild(prevBtn);
+
+            // Page buttons
+            const displayedPages = getDisplayedPages(currentPage, totalPages);
+            displayedPages.forEach(page => {
+                if (page === '...') {
+                    // Ellipsis
+                    const ellipsis = document.createElement('span');
+                    ellipsis.style.padding = '10px 15px';
+                    ellipsis.style.color = 'var(--p2-color)';
+                    ellipsis.textContent = '...';
+                    paginationContainer.appendChild(ellipsis);
+                } else {
+                    // Page number
+                    const pageBtn = document.createElement('a');
+                    pageBtn.href = 'javascript:void(0)';
+                    if (page === currentPage) {
+                        pageBtn.classList.add('active');
+                    }
+                    pageBtn.textContent = page;
+                    pageBtn.addEventListener('click', () => changePage(page));
+                    paginationContainer.appendChild(pageBtn);
+                }
+            });
+
+            // Next button
+            const nextBtn = document.createElement('a');
+            nextBtn.href = 'javascript:void(0)';
+            nextBtn.textContent = 'Suivant';
+            if (currentPage === totalPages) {
+                nextBtn.style.opacity = '0.5';
+                nextBtn.style.pointerEvents = 'none';
+            }
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    changePage(currentPage + 1);
+                }
+            });
+            paginationContainer.appendChild(nextBtn);
+
+            // Add pagination to the DOM
+            voyagesContainer.parentNode.insertBefore(paginationContainer, voyagesContainer.nextSibling);
+        }
+
+        // Helper function to determine which page numbers to display
+        function getDisplayedPages(current, total) {
+            if (total <= 7) {
+                // Show all pages if there are 7 or fewer
+                return Array.from({length: total}, (_, i) => i + 1);
+            } else {
+                // More complex logic for many pages
+                const pages = [];
+
+                // Always show first page
+                pages.push(1);
+
+                // Show dots if not starting at page 2
+                if (current > 3) {
+                    pages.push('...');
+                }
+
+                // Calculate range around current page
+                const rangeStart = Math.max(2, current - 1);
+                const rangeEnd = Math.min(total - 1, current + 1);
+
+                // Add range of pages
+                for (let i = rangeStart; i <= rangeEnd; i++) {
+                    pages.push(i);
+                }
+
+                // Show dots if not ending at second-to-last page
+                if (current < total - 2) {
+                    pages.push('...');
+                }
+
+                // Always show last page
+                pages.push(total);
+
+                return pages;
+            }
+        }
+
+        // Function to change the current page
+        function changePage(newPage) {
+            currentPage = newPage;
+            const voyages = document.querySelectorAll('.voyage');
+
+            voyages.forEach((voyage, index) => {
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+
+                if (index >= startIndex && index < endIndex) {
+                    voyage.classList.remove('hidden-voyage');
+                } else {
+                    voyage.classList.add('hidden-voyage');
+                }
+            });
+
+            // Update pagination
+            createPagination(voyages.length);
+
+            // Scroll to top of results
+            voyagesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Sort functionality - keep existing code but modify the end
         triSelect.addEventListener('change', function() {
             const sortBy = this.value;
             const voyages = Array.from(document.querySelectorAll('.voyage'));
@@ -228,8 +331,41 @@ afficher_header('recherche');
                     case 'prix-dc': return extractPrice(b) - extractPrice(a);
                     case 'nom-c': return extractText(a).localeCompare(extractText(b));
                     case 'nom-dc': return extractText(b).localeCompare(extractText(a));
-                    case 'date-c': return new Date(a.dataset.date) - new Date(b.dataset.date);
-                    case 'date-dc': return new Date(b.dataset.date) - new Date(a.dataset.date);
+                    case 'date-c':
+                        // Get dates from dataset
+                        const dateStrA1 = a.dataset.date;
+                        const dateStrB1 = b.dataset.date;
+
+                        // Convert DD/MM/YYYY to YYYY/MM/DD for proper sorting
+                        const partsA1 = dateStrA1.split('/');
+                        const partsB1 = dateStrB1.split('/');
+
+                        // Create sortable date strings (YYYY/MM/DD format)
+                        const sortableDateA1 = `${partsA1[2]}/${partsA1[1]}/${partsA1[0]}`;
+                        const sortableDateB1 = `${partsB1[2]}/${partsB1[1]}/${partsB1[0]}`;
+
+                        console.log(`Comparing: ${dateStrA1} vs ${dateStrB1} → ${sortableDateA1} vs ${sortableDateB1}`);
+
+                        // Simple string comparison works for YYYY/MM/DD format
+                        return sortableDateA1.localeCompare(sortableDateB1);
+
+                    case 'date-dc':
+                        // Get dates from dataset
+                        const dateStrA2 = a.dataset.date;
+                        const dateStrB2 = b.dataset.date;
+
+                        // Convert DD/MM/YYYY to YYYY/MM/DD for proper sorting
+                        const partsA2 = dateStrA2.split('/');
+                        const partsB2 = dateStrB2.split('/');
+
+                        // Create sortable date strings (YYYY/MM/DD format)
+                        const sortableDateA2 = `${partsA2[2]}/${partsA2[1]}/${partsA2[0]}`;
+                        const sortableDateB2 = `${partsB2[2]}/${partsB2[1]}/${partsB2[0]}`;
+
+                        console.log(`Comparing (DC): ${dateStrA2} vs ${dateStrB2} → ${sortableDateA2} vs ${sortableDateB2}`);
+
+                        // Reverse the comparison for descending order
+                        return sortableDateB2.localeCompare(sortableDateA2);
                     case 'etapes-c': return parseInt(a.dataset.etapes) - parseInt(b.dataset.etapes);
                     case 'etapes-dc': return parseInt(b.dataset.etapes) - parseInt(a.dataset.etapes);
                     default: return 0;
@@ -238,7 +374,10 @@ afficher_header('recherche');
 
             voyagesContainer.innerHTML = '';
             voyages.forEach(voyage => voyagesContainer.appendChild(voyage));
-            affiche = resetLoadMoreState();
+
+            // Reset to page 1 after sorting
+            currentPage = 1;
+            changePage(1);
         });
 
         function extractPrice(voyageElement) {
@@ -250,68 +389,26 @@ afficher_header('recherche');
             return voyageElement.querySelector('p:nth-of-type(1)').textContent.trim();
         }
 
-        function resetLoadMoreState() {
-            const voyagesActuels = document.querySelectorAll('.voyage');
-            let visibleCount = 0;
-
-            voyagesActuels.forEach((voyage, index) => {
-                if (index < voyagesParCharge) {
-                    voyage.classList.remove('hidden-voyage');
-                    visibleCount++;
-                } else {
-                    voyage.classList.add('hidden-voyage');
-                }
-            });
-
-            const chargeBtn = document.getElementById('load-more-btn');
-            if (chargeBtn) {
-                chargeBtn.classList.toggle('hidden-btn', visibleCount >= voyagesActuels.length);
-            }
-            return visibleCount;
-        }
-
-        // Create "load more" button with no inline styles
-        const chargeBtn = document.createElement('button');
-        chargeBtn.id = 'load-more-btn';
-        chargeBtn.className = 'bouton-vert';
-        chargeBtn.textContent = 'Afficher plus';
-
-        const chargeContainer = document.createElement('div');
-        chargeContainer.className = 'load-more-container';
-        chargeContainer.appendChild(chargeBtn);
-
-        voyagesContainer.parentNode.insertBefore(chargeContainer, voyagesContainer.nextSibling);
-
-        // Initialize - hide all voyages except first batch
-        const voyageInitial = document.querySelectorAll('.voyage');
-        voyageInitial.forEach((voyage, index) => {
-            if (index >= voyagesParCharge) {
+        // Initial setup - hide all voyages except first page
+        const allVoyages = document.querySelectorAll('.voyage');
+        allVoyages.forEach((voyage, index) => {
+            if (index >= itemsPerPage) {
                 voyage.classList.add('hidden-voyage');
-            } else {
-                affiche++;
             }
         });
 
-        majChargeBouton();
+        // Create initial pagination
+        createPagination(allVoyages.length);
 
-        // Add click handler to load more button
-        chargeBtn.addEventListener('click', function() {
-            const voyagesActuels = document.querySelectorAll('.voyage');
-
-            for (let i = affiche; i < affiche + voyagesParCharge && i < voyagesActuels.length; i++) {
-                voyagesActuels[i].classList.remove('hidden-voyage');
-            }
-
-            affiche = Math.min(affiche + voyagesParCharge, voyagesActuels.length);
-            majChargeBouton();
-        });
-
-        function majChargeBouton() {
-            const voyagesActuels = document.querySelectorAll('.voyage');
-            chargeBtn.classList.toggle('hidden-btn', affiche >= voyagesActuels.length);
+        // Remove the old "load more" button if it exists
+        const oldLoadMoreBtn = document.getElementById('load-more-btn');
+        const oldLoadMoreContainer = document.querySelector('.load-more-container');
+        if (oldLoadMoreContainer) {
+            oldLoadMoreContainer.remove();
         }
     });
 </script>
+<script src="script.js"></script>
 <?php
 require('requires/footer.php');
 ?>
