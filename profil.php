@@ -243,92 +243,96 @@
     ?>
     <script>
         function modificationProfil() {
-            // Store original values for potential cancellation
+            // Existing code remains the same
             const vOrigine = {};
-            // Track which fields have been modified
             const champsModif = {};
-            // Get all input fields
             const inputChamps = document.querySelectorAll('.formulaire-classique input');
 
-            // Initially disable all input fields
             inputChamps.forEach(input => {
                 input.disabled = true;
-                // Store original values
                 vOrigine[input.id] = input.value;
+
+                // Add input event listener to highlight changes
+                input.addEventListener('input', function() {
+                    if (this.value !== vOrigine[this.id]) {
+                        this.classList.add('field-modified');
+                    } else {
+                        this.classList.remove('field-modified');
+                    }
+                });
             });
 
-            // Hide the submit button initially
             const submitBouton = document.getElementById('submit-all-changes');
             if (submitBouton) submitBouton.style.display = 'none';
 
-            // Set up edit buttons
+            // Edit buttons code remains the same
             const modifBoutons = document.querySelectorAll('.edit-btn');
             modifBoutons.forEach(button => {
                 button.addEventListener('click', function() {
                     const champId = this.dataset.field;
-                    const inputChamps = document.getElementById(champId);
+                    const inputChamp = document.getElementById(champId);
 
-                    // Make field editable
-                    inputChamps.disabled = false;
-                    inputChamps.focus();
+                    // Make the field editable
+                    inputChamp.disabled = false;
+                    inputChamp.focus();
 
-                    // Show action buttons, hide edit button
+                    // Hide edit button, show save and cancel buttons
                     this.style.display = 'none';
                     document.querySelector(`.save-btn[data-field="${champId}"]`).style.display = 'inline-block';
                     document.querySelector(`.cancel-btn[data-field="${champId}"]`).style.display = 'inline-block';
                 });
             });
 
-            // Set up save buttons
+            // Save buttons - add removal of highlight class
             const saveBoutons = document.querySelectorAll('.save-btn');
             saveBoutons.forEach(button => {
                 button.addEventListener('click', function() {
                     const champId = this.dataset.field;
                     const inputChamps = document.getElementById(champId);
 
-                    // If value changed, mark as modified
                     if (inputChamps.value !== vOrigine[champId]) {
                         champsModif[champId] = inputChamps.value;
-
-                        // Show the submit button
+                        // Keep the highlighting after saving to show it's pending final save
                         if (submitBouton) submitBouton.style.display = 'block';
+                    } else {
+                        // If value is unchanged, remove highlighting
+                        inputChamps.classList.remove('field-modified');
                     }
 
-                    // Disable field
                     inputChamps.disabled = true;
-
-                    // Hide action buttons, show edit button
                     this.style.display = 'none';
                     document.querySelector(`.cancel-btn[data-field="${champId}"]`).style.display = 'none';
                     document.querySelector(`.edit-btn[data-field="${champId}"]`).style.display = 'inline-block';
                 });
             });
 
-            // Set up cancel buttons
+            // Cancel buttons - remove highlight class
             const cancelBoutons = document.querySelectorAll('.cancel-btn');
             cancelBoutons.forEach(button => {
                 button.addEventListener('click', function() {
                     const champId = this.dataset.field;
                     const inputChamps = document.getElementById(champId);
 
-                    // Restore original value
                     inputChamps.value = vOrigine[champId];
-
-                    // Disable field
+                    inputChamps.classList.remove('field-modified'); // Remove highlight on cancel
                     inputChamps.disabled = true;
 
-                    // Hide action buttons, show edit button
                     this.style.display = 'none';
                     document.querySelector(`.save-btn[data-field="${champId}"]`).style.display = 'none';
                     document.querySelector(`.edit-btn[data-field="${champId}"]`).style.display = 'inline-block';
                 });
             });
 
-            // Set up form submission with modified values
+            // Submit button - clear all highlights after form submission
             const profileForm = document.getElementById('profile-form');
             if (profileForm && submitBouton) {
                 submitBouton.addEventListener('click', function() {
-                    // Create hidden inputs for each modified field
+                    // Remove all highlighting classes after submission
+                    document.querySelectorAll('.field-modified').forEach(el => {
+                        el.classList.remove('field-modified');
+                    });
+
+                    // Existing code for form submission
                     for (const champId in champsModif) {
                         const hiddenInput = document.createElement('input');
                         hiddenInput.type = 'hidden';
@@ -337,14 +341,12 @@
                         profileForm.appendChild(hiddenInput);
                     }
 
-                    // Add an action identifier
                     const actionInput = document.createElement('input');
                     actionInput.type = 'hidden';
                     actionInput.name = 'action';
                     actionInput.value = 'update_profile';
                     profileForm.appendChild(actionInput);
 
-                    // Submit the form
                     profileForm.submit();
                 });
             }
@@ -369,16 +371,16 @@
             if (mdpSaveBtn) {
                 mdpSaveBtn.addEventListener('click', function() {
                     const mdp = document.getElementById('mdp').value;
-                    const confirmPwd = document.getElementById('cmdp').value;
+                    const cMdp = document.getElementById('cmdp').value;
 
-                    if (mdp !== confirmPwd) {
+                    if (mdp !== cMdp) {
                         alert('Les mots de passe ne correspondent pas.');
                         return;
                     }
 
                     if (mdp) {
                         champsModif['mdp'] = mdp;
-                        champsModif['cmdp'] = confirmPwd;
+                        champsModif['cmdp'] = cMdp;
                         if (submitBouton) submitBouton.style.display = 'block';
                     }
 
@@ -387,45 +389,10 @@
             }
         }
         document.addEventListener("DOMContentLoaded", function() {
-            // Theme toggle functionality (copied from resultat_recherche.php)
-            const themeToggleBtn = document.querySelector('.yang');
-
-            if (themeToggleBtn) {
-                // Ensure we're not breaking any existing handler by using a new listener
-                themeToggleBtn.addEventListener('click', function(e) {
-                    // Prevent any default behaviors
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    // Simple toggle between light and dark
-                    const body = document.body;
-                    if (body.classList.contains('light-mode')) {
-                        body.classList.remove('light-mode');
-                        body.classList.add('dark-mode');
-                        // Save preference if needed
-                        localStorage.setItem('theme', 'dark');
-                    } else {
-                        body.classList.remove('dark-mode');
-                        body.classList.add('light-mode');
-                        // Save preference if needed
-                        localStorage.setItem('theme', 'light');
-                    }
-
-                    // Return false to prevent any other handlers
-                    return false;
-                }, true); // Use capture phase to ensure this runs first
-            }
-
-            // Apply theme from localStorage on page load
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                document.body.classList.remove('light-mode', 'dark-mode');
-                document.body.classList.add(savedTheme + '-mode');
-            }
-
-            // Profile editing functionality
+            // Initialize profile modification functionality
             modificationProfil();
         });
     </script>
+<script src="script.js"></script>
 </body>
 </html>
