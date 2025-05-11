@@ -1058,8 +1058,6 @@ button.yang:hover {
     transition: all 0.3s ease;
 }
 
-/* Form field container with better width control */
-/* Form field container with true centering */
 .form-field {
     display: flex;
     flex-direction: column;
@@ -1070,7 +1068,6 @@ button.yang:hover {
     margin-right: auto;
 }
 
-/* Label styling - aligned with input width */
 .form-field label {
     text-align: left;
     margin-bottom: 8px;
@@ -1079,7 +1076,6 @@ button.yang:hover {
     width: 100%;
 }
 
-/* Input group - proper width and alignment */
 .form-field .input-groupe {
     display: flex;
     justify-content: flex-start;
@@ -1087,7 +1083,6 @@ button.yang:hover {
     width: 100%;
 }
 
-/* Input styling - controlled width */
 .form-field .input-groupe input,
 .form-field .input-groupe input[type="date"] {
     flex: 0 1 70%;
@@ -1100,14 +1095,13 @@ button.yang:hover {
     margin-right: 10px;
 }
 
-/* Button group with proper spacing */
 .form-field .input-groupe .button-group {
     display: flex;
     gap: 5px;
 }
 
 .form-field .input-groupe .champ-mdp {
-    flex: 0 1 70%; /* Match with regular inputs */
-    max-width: 400px; /* Match with regular inputs */
+    flex: 0 1 70%;
+    max-width: 400px;
     margin-right: 10px;
 }
