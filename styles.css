@@ -959,33 +959,39 @@ body.connexion a:hover {
 
 .champ-mdp {
     position: relative;
-    display: inline-block;
-    width: 80%;
+    box-sizing: border-box;
+    display: block;
+    width: 84.2%;
 }
 
 .champ-mdp input[type="password"],
 .champ-mdp input[type="text"] {
     width: 100%;
-    padding-right: 40px; /* Espace pour le bouton œil */
+    padding: 10px;
+    padding-right: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--input-color);
+    color: var(--p-color);
     box-sizing: border-box;
+    height: 39px;
 }
-
-
 
 
 button.bouton-oeil {
-    all: unset !important; /* RESET complet de tout */
     position: absolute !important;
-    top: 40% !important;
+    top: 42% !important;
     right: 10px !important;
-    transform: translateY(-45%) !important;
+    transform: translateY(-50%) !important;
     background: transparent !important;
     border: none !important;
     cursor: pointer !important;
-    font-size: 20px !important;
-    
+    font-size: 18px !important;
+    line-height: 1 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    z-index: 5 !important;
 }
-
 .yang img {
   width: 35px !important;
   height: 35px !important;
@@ -1047,7 +1053,61 @@ button.yang:hover {
 }
 
 .field-modified {
-    background-color: rgba(255, 255, 0, 0.2) !important; /* Light yellow background */
-    border: 1px solid #ffd700 !important; /* Gold border */
+    background-color: rgba(255, 255, 0, 0.2) !important;
+    border: 1px solid #ffd700 !important;
     transition: all 0.3s ease;
+}
+
+/* Form field container with better width control */
+/* Form field container with true centering */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 90%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Label styling - aligned with input width */
+.form-field label {
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: var(--label-color);
+    width: 100%;
+}
+
+/* Input group - proper width and alignment */
+.form-field .input-groupe {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+/* Input styling - controlled width */
+.form-field .input-groupe input,
+.form-field .input-groupe input[type="date"] {
+    flex: 0 1 70%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--input-color);
+    color: var(--p-color);
+    margin-right: 10px;
+}
+
+/* Button group with proper spacing */
+.form-field .input-groupe .button-group {
+    display: flex;
+    gap: 5px;
+}
+
+.form-field .input-groupe .champ-mdp {
+    flex: 0 1 70%; /* Match with regular inputs */
+    max-width: 400px; /* Match with regular inputs */
+    margin-right: 10px;
 }
