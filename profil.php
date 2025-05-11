@@ -243,7 +243,6 @@
     ?>
     <script>
         function modificationProfil() {
-            // Existing code remains the same
             const vOrigine = {};
             const champsModif = {};
             const inputChamps = document.querySelectorAll('.formulaire-classique input');
@@ -252,7 +251,6 @@
                 input.disabled = true;
                 vOrigine[input.id] = input.value;
 
-                // Add input event listener to highlight changes
                 input.addEventListener('input', function() {
                     if (this.value !== vOrigine[this.id]) {
                         this.classList.add('field-modified');
@@ -265,25 +263,21 @@
             const submitBouton = document.getElementById('submit-all-changes');
             if (submitBouton) submitBouton.style.display = 'none';
 
-            // Edit buttons code remains the same
             const modifBoutons = document.querySelectorAll('.edit-btn');
             modifBoutons.forEach(button => {
                 button.addEventListener('click', function() {
                     const champId = this.dataset.field;
                     const inputChamp = document.getElementById(champId);
 
-                    // Make the field editable
                     inputChamp.disabled = false;
                     inputChamp.focus();
 
-                    // Hide edit button, show save and cancel buttons
                     this.style.display = 'none';
                     document.querySelector(`.save-btn[data-field="${champId}"]`).style.display = 'inline-block';
                     document.querySelector(`.cancel-btn[data-field="${champId}"]`).style.display = 'inline-block';
                 });
             });
 
-            // Save buttons - add removal of highlight class
             const saveBoutons = document.querySelectorAll('.save-btn');
             saveBoutons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -292,10 +286,8 @@
 
                     if (inputChamps.value !== vOrigine[champId]) {
                         champsModif[champId] = inputChamps.value;
-                        // Keep the highlighting after saving to show it's pending final save
                         if (submitBouton) submitBouton.style.display = 'block';
                     } else {
-                        // If value is unchanged, remove highlighting
                         inputChamps.classList.remove('field-modified');
                     }
 
@@ -306,7 +298,6 @@
                 });
             });
 
-            // Cancel buttons - remove highlight class
             const cancelBoutons = document.querySelectorAll('.cancel-btn');
             cancelBoutons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -314,7 +305,7 @@
                     const inputChamps = document.getElementById(champId);
 
                     inputChamps.value = vOrigine[champId];
-                    inputChamps.classList.remove('field-modified'); // Remove highlight on cancel
+                    inputChamps.classList.remove('field-modified');
                     inputChamps.disabled = true;
 
                     this.style.display = 'none';
@@ -323,16 +314,13 @@
                 });
             });
 
-            // Submit button - clear all highlights after form submission
             const profileForm = document.getElementById('profile-form');
             if (profileForm && submitBouton) {
                 submitBouton.addEventListener('click', function() {
-                    // Remove all highlighting classes after submission
                     document.querySelectorAll('.field-modified').forEach(el => {
                         el.classList.remove('field-modified');
                     });
 
-                    // Existing code for form submission
                     for (const champId in champsModif) {
                         const hiddenInput = document.createElement('input');
                         hiddenInput.type = 'hidden';
@@ -351,7 +339,6 @@
                 });
             }
 
-            // Special handling for password field
             const mdpModifBtn = document.querySelector('.edit-btn[data-field="mdp"]');
             if (mdpModifBtn) {
                 mdpModifBtn.addEventListener('click', function() {
@@ -389,7 +376,6 @@
             }
         }
         document.addEventListener("DOMContentLoaded", function() {
-            // Initialize profile modification functionality
             modificationProfil();
         });
     </script>

@@ -177,194 +177,162 @@ afficher_header('recherche');
 <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-        const itemsPerPage = 6; // Same as voyagesParCharge
+        const itemsParPage = 6;
         const voyagesContainer = document.querySelector('.voyages-container');
         const triSelect = document.getElementById('tri');
-        let currentPage = 1;
+        let pageActu = 1;
 
-        // Function to create pagination controls
-        // Function to create pagination controls
-        function createPagination(totalItems) {
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
+        function creationPagination(totalItems) {
+            const totalPages = Math.ceil(totalItems / itemsParPage);
 
-            // Remove existing pagination if any
-            const existingPagination = document.querySelector('.pagination');
-            if (existingPagination) {
-                existingPagination.remove();
+            const existPagination = document.querySelector('.pagination');
+            if (existPagination) {
+                existPagination.remove();
             }
 
-            // If only one page or no items, don't show pagination
             if (totalPages <= 1) {
                 return;
             }
 
-            // Create pagination container
             const paginationContainer = document.createElement('div');
             paginationContainer.className = 'pagination';
 
-            // Previous button
             const prevBtn = document.createElement('a');
             prevBtn.href = 'javascript:void(0)';
             prevBtn.textContent = 'Précédent';
-            if (currentPage === 1) {
+            if (pageActu === 1) {
                 prevBtn.style.opacity = '0.5';
                 prevBtn.style.pointerEvents = 'none';
             }
             prevBtn.addEventListener('click', () => {
-                if (currentPage > 1) {
-                    changePage(currentPage - 1);
+                if (pageActu > 1) {
+                    changerPage(pageActu - 1);
                 }
             });
             paginationContainer.appendChild(prevBtn);
 
-            // Page buttons
-            const displayedPages = getDisplayedPages(currentPage, totalPages);
+            const displayedPages = getPageAffiche(pageActu, totalPages);
             displayedPages.forEach(page => {
                 if (page === '...') {
-                    // Ellipsis
-                    const ellipsis = document.createElement('span');
-                    ellipsis.style.padding = '10px 15px';
-                    ellipsis.style.color = 'var(--p2-color)';
-                    ellipsis.textContent = '...';
-                    paginationContainer.appendChild(ellipsis);
+                    const ellipse = document.createElement('span');
+                    ellipse.style.padding = '10px 15px';
+                    ellipse.style.color = 'var(--p2-color)';
+                    ellipse.textContent = '...';
+                    paginationContainer.appendChild(ellipse);
                 } else {
-                    // Page number
                     const pageBtn = document.createElement('a');
                     pageBtn.href = 'javascript:void(0)';
-                    if (page === currentPage) {
+                    if (page === pageActu) {
                         pageBtn.classList.add('active');
                     }
                     pageBtn.textContent = page;
-                    pageBtn.addEventListener('click', () => changePage(page));
+                    pageBtn.addEventListener('click', () => changerPage(page));
                     paginationContainer.appendChild(pageBtn);
                 }
             });
 
-            // Next button
             const nextBtn = document.createElement('a');
             nextBtn.href = 'javascript:void(0)';
             nextBtn.textContent = 'Suivant';
-            if (currentPage === totalPages) {
+            if (pageActu === totalPages) {
                 nextBtn.style.opacity = '0.5';
                 nextBtn.style.pointerEvents = 'none';
             }
             nextBtn.addEventListener('click', () => {
-                if (currentPage < totalPages) {
-                    changePage(currentPage + 1);
+                if (pageActu < totalPages) {
+                    changerPage(pageActu + 1);
                 }
             });
             paginationContainer.appendChild(nextBtn);
 
-            // Add pagination to the DOM
             voyagesContainer.parentNode.insertBefore(paginationContainer, voyagesContainer.nextSibling);
         }
 
-        // Helper function to determine which page numbers to display
-        function getDisplayedPages(current, total) {
+        function getPageAffiche(actu, total) {
             if (total <= 7) {
-                // Show all pages if there are 7 or fewer
                 return Array.from({length: total}, (_, i) => i + 1);
             } else {
-                // More complex logic for many pages
                 const pages = [];
 
-                // Always show first page
                 pages.push(1);
 
-                // Show dots if not starting at page 2
-                if (current > 3) {
+                if (actu > 3) {
                     pages.push('...');
                 }
 
-                // Calculate range around current page
-                const rangeStart = Math.max(2, current - 1);
-                const rangeEnd = Math.min(total - 1, current + 1);
+                const rangeDebut = Math.max(2, actu - 1);
+                const rangeFin = Math.min(total - 1, actu + 1);
 
-                // Add range of pages
-                for (let i = rangeStart; i <= rangeEnd; i++) {
+                for (let i = rangeDebut; i <= rangeFin; i++) {
                     pages.push(i);
                 }
 
-                // Show dots if not ending at second-to-last page
-                if (current < total - 2) {
+                if (actu < total - 2) {
                     pages.push('...');
                 }
 
-                // Always show last page
                 pages.push(total);
 
                 return pages;
             }
         }
 
-        // Function to change the current page
-        function changePage(newPage) {
-            currentPage = newPage;
+        function changerPage(nvlPage) {
+            pageActu = nvlPage;
             const voyages = document.querySelectorAll('.voyage');
 
             voyages.forEach((voyage, index) => {
-                const startIndex = (currentPage - 1) * itemsPerPage;
-                const endIndex = startIndex + itemsPerPage;
+                const indexDebut = (pageActu - 1) * itemsParPage;
+                const indexFin = indexDebut + itemsParPage;
 
-                if (index >= startIndex && index < endIndex) {
+                if (index >= indexDebut && index < indexFin) {
                     voyage.classList.remove('hidden-voyage');
                 } else {
                     voyage.classList.add('hidden-voyage');
                 }
             });
 
-            // Update pagination
-            createPagination(voyages.length);
+            creationPagination(voyages.length);
 
-            // Scroll to top of results
             voyagesContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // Sort functionality - keep existing code but modify the end
         triSelect.addEventListener('change', function() {
-            const sortBy = this.value;
+            const trierPar = this.value;
             const voyages = Array.from(document.querySelectorAll('.voyage'));
 
             voyages.sort((a, b) => {
-                switch(sortBy) {
-                    case 'prix-c': return extractPrice(a) - extractPrice(b);
-                    case 'prix-dc': return extractPrice(b) - extractPrice(a);
-                    case 'nom-c': return extractText(a).localeCompare(extractText(b));
-                    case 'nom-dc': return extractText(b).localeCompare(extractText(a));
+                switch(trierPar) {
+                    case 'prix-c': return extrairePrice(a) - extrairePrice(b);
+                    case 'prix-dc': return extrairePrice(b) - extrairePrice(a);
+                    case 'nom-c': return extraireTexte(a).localeCompare(extraireTexte(b));
+                    case 'nom-dc': return extraireTexte(b).localeCompare(extraireTexte(a));
                     case 'date-c':
-                        // Get dates from dataset
                         const dateStrA1 = a.dataset.date;
                         const dateStrB1 = b.dataset.date;
 
-                        // Convert DD/MM/YYYY to YYYY/MM/DD for proper sorting
                         const partsA1 = dateStrA1.split('/');
                         const partsB1 = dateStrB1.split('/');
 
-                        // Create sortable date strings (YYYY/MM/DD format)
                         const sortableDateA1 = `${partsA1[2]}/${partsA1[1]}/${partsA1[0]}`;
                         const sortableDateB1 = `${partsB1[2]}/${partsB1[1]}/${partsB1[0]}`;
 
                         console.log(`Comparing: ${dateStrA1} vs ${dateStrB1} → ${sortableDateA1} vs ${sortableDateB1}`);
 
-                        // Simple string comparison works for YYYY/MM/DD format
                         return sortableDateA1.localeCompare(sortableDateB1);
 
                     case 'date-dc':
-                        // Get dates from dataset
                         const dateStrA2 = a.dataset.date;
                         const dateStrB2 = b.dataset.date;
 
-                        // Convert DD/MM/YYYY to YYYY/MM/DD for proper sorting
                         const partsA2 = dateStrA2.split('/');
                         const partsB2 = dateStrB2.split('/');
 
-                        // Create sortable date strings (YYYY/MM/DD format)
                         const sortableDateA2 = `${partsA2[2]}/${partsA2[1]}/${partsA2[0]}`;
                         const sortableDateB2 = `${partsB2[2]}/${partsB2[1]}/${partsB2[0]}`;
 
                         console.log(`Comparing (DC): ${dateStrA2} vs ${dateStrB2} → ${sortableDateA2} vs ${sortableDateB2}`);
 
-                        // Reverse the comparison for descending order
                         return sortableDateB2.localeCompare(sortableDateA2);
                     case 'etapes-c': return parseInt(a.dataset.etapes) - parseInt(b.dataset.etapes);
                     case 'etapes-dc': return parseInt(b.dataset.etapes) - parseInt(a.dataset.etapes);
@@ -375,33 +343,28 @@ afficher_header('recherche');
             voyagesContainer.innerHTML = '';
             voyages.forEach(voyage => voyagesContainer.appendChild(voyage));
 
-            // Reset to page 1 after sorting
-            currentPage = 1;
-            changePage(1);
+            pageActu = 1;
+            changerPage(1);
         });
 
-        function extractPrice(voyageElement) {
-            const priceText = voyageElement.querySelector('p:nth-of-type(3)').textContent;
-            return parseFloat(priceText.replace('€', '').trim());
+        function extrairePrice(voyageElement) {
+            const prixTexte = voyageElement.querySelector('p:nth-of-type(3)').textContent;
+            return parseFloat(prixTexte.replace('€', '').trim());
         }
 
-        function extractText(voyageElement) {
+        function extraireTexte(voyageElement) {
             return voyageElement.querySelector('p:nth-of-type(1)').textContent.trim();
         }
 
-        // Initial setup - hide all voyages except first page
         const allVoyages = document.querySelectorAll('.voyage');
         allVoyages.forEach((voyage, index) => {
-            if (index >= itemsPerPage) {
+            if (index >= itemsParPage) {
                 voyage.classList.add('hidden-voyage');
             }
         });
 
-        // Create initial pagination
-        createPagination(allVoyages.length);
+        creationPagination(allVoyages.length);
 
-        // Remove the old "load more" button if it exists
-        const oldLoadMoreBtn = document.getElementById('load-more-btn');
         const oldLoadMoreContainer = document.querySelector('.load-more-container');
         if (oldLoadMoreContainer) {
             oldLoadMoreContainer.remove();
