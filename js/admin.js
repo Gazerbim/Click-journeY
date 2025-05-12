@@ -1,12 +1,16 @@
 function getUserDetails(id, bouton) {
     // Empêche d'insérer deux fois les détails
     const ligne = bouton.closest("tr");
+    document.body.style.cursor = "wait";
+    bouton.style.cursor = "wait";
     if (ligne.nextElementSibling?.classList.contains("user-details-row")) {
         ligne.nextElementSibling.remove();
+        bouton.style.cursor = "default";
+        document.body.style.cursor = "default";
         return;
     }
 
-    fetch(`admin_fetch.php?id=${id}`)
+    fetch(`admin_fetch.php?id=${id}&action=details`)
         .then(response => response.text())
         .then(data => {
             const nouvelleLigne = document.createElement("tr");
@@ -19,5 +23,72 @@ function getUserDetails(id, bouton) {
         })
         .catch(error => {
             console.error("Erreur:", error);
+        })
+        .finally(() => {
+            // Remet le curseur par défaut
+            bouton.style.cursor = "default";
+            document.body.style.cursor = "default";
         });
 }
+
+function supprimerUtilisateur(id, bouton) {
+    // Empêche d'insérer deux fois les détails
+    const ligne = bouton.closest("tr");
+    document.body.style.cursor = "wait";
+    bouton.style.cursor = "wait";
+
+    fetch(`admin_fetch.php?id=${id}&action=supprimer`)
+        .then(response => response.text())
+        .then(data => {
+            if (data === "success") {
+                // Supprime la ligne de l'utilisateur
+                ligne.remove();
+            } else {
+                alert("Erreur lors de la suppression de l'utilisateur.");
+            }
+        })
+        .catch(error => {
+            console.error("Erreur:", error);
+        })
+        .finally(() => {
+            // Remet le curseur par défaut
+            bouton.style.cursor = "default";
+            document.body.style.cursor = "default";
+        });
+}
+
+function promouvoirUtilisateur(id, bouton) {
+    const ligne = bouton.closest("tr");
+    const roleCell = ligne.querySelector(".role-cell");
+
+    if (!roleCell) return;
+
+    document.body.style.cursor = "wait";
+    bouton.style.cursor = "wait";
+
+    fetch(`admin_fetch.php?id=${id}&action=promouvoir`)
+        .then(response => response.text())
+        .then(data => {
+            if (data === "success") {
+                // Met à jour le rôle dans la cellule
+                if (roleCell.textContent.toLowerCase() === "user") {
+                    roleCell.textContent = "adm";
+                    bouton.textContent = "Rétrograder en User";
+                } else {
+                    roleCell.textContent = "user";
+                    bouton.textContent = "Promouvoir en Admin";
+                }
+            } else {
+                alert("Erreur lors de la promotion de l'utilisateur.");
+            }
+        })
+        .catch(error => {
+            console.error("Erreur:", error);
+        })
+        .finally(() => {
+            bouton.style.cursor = "default";
+            document.body.style.cursor = "default";
+        });
+}
+
+

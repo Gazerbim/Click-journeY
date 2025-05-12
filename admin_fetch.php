@@ -2,7 +2,22 @@
 require("requires/json_utilities.php");
 $users = lireFichierJson("./databases/users.json");
 
-if (isset($_GET['id'])) {
+if(!isset($_GET['id'])) {
+    http_response_code(400);
+    echo "ID non spécifiée.";
+    exit;
+}
+
+if(!isset($_GET['action'])) {
+    http_response_code(400);
+    echo "Action non spécifiée.";
+    exit;
+}
+
+
+
+if ($_GET['action'] == "details") {
+    usleep(150000);
     $id = $_GET['id'];
     $nb_voyages_panier = recupererNombreVoyagesPanier($id);
     $nb_voyages_reserves = recupererNombreVoyageUtilisateur($id);
@@ -30,5 +45,31 @@ if (isset($_GET['id'])) {
         }
     }
 }
+
+if( $_GET['action'] == "supprimer") {
+    $id = $_GET['id'];
+    sleep(1);
+    supprimerUtilisateur($id);
+    echo "success";
+    exit;
+}
+
+if ($_GET['action'] == "promouvoir") {
+    $id = $_GET['id'];
+    sleep(1);
+    foreach ($users as &$user) {
+        if ($user['id'] == $id) {
+            if ($user['role'] == 'user') {
+                modifierRoleUtilisateur($user['id'], 'adm');
+            } else {
+                modifierRoleUtilisateur($user['id'], 'user');
+            }
+            echo "success";
+            exit;
+        }
+    }
+}
+
 http_response_code(404);
 echo "Utilisateur non trouvé.";
+?>

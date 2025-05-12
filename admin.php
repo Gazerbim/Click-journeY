@@ -15,26 +15,6 @@ require("requires/json_utilities.php");
 $tab = lireFichierJson("./databases/users.json");
 const ligneParPage = 10;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['delete_id'])) {
-        $deleteId = $_POST['delete_id'];
-        supprimerUtilisateur($deleteId);
-        header('Location: admin.php');
-    } elseif (isset($_POST['promote_id'])) {
-        $promoteId = $_POST['promote_id'];
-        foreach ($tab as &$user) {
-            if ($user['id'] == $promoteId) {
-                if ($user['role'] == 'user') {
-                    modifierRoleUtilisateur($user['id'], 'adm');
-                } else {
-                    modifierRoleUtilisateur($user['id'], 'user');
-                }
-                break;
-            }
-        }
-        header('Location: admin.php');
-    }
-}
 
 require('requires/header.php');
 afficher_header('admin');
@@ -75,20 +55,12 @@ afficher_header('admin');
                                 echo "<td>" . $line['nom'] . "</td>";
                                 echo "<td>" . $line['prenom'] . "</td>";
                                 echo "<td>" . $line['courriel'] . "</td>";
-                                echo "<td>" . $line['role'] . "</td>";
+                                echo "<td class='role-cell'>" . $line['role'] . "</td>";
                                 echo "<td>";
-                                echo "<form action='admin.php' method='post' style='display:inline;'>";
-                                echo "<input type='hidden' name='promote_id' value='" . $line['id'] . "'>";
-                                if ($line['role'] == 'user') {
-                                    echo "<button type='submit'>Mettre Admin</button>";
-                                } else {
-                                    echo "<button type='submit'>Rendre User</button>";
-                                }
-                                echo "</form>";
-                                echo "<form action='admin.php' method='post' style='display:inline'>";
-                                echo "<input type='hidden' name='delete_id' value='" . $line['id'] . "'>";
-                                echo "<button type='submit'>Supprimer</button>";
-                                echo "</form>";
+                                echo "<button type='button' onclick='promouvoirUtilisateur(" . $line['id'] . ", this)'>";
+                                echo ($line['role'] == 'user') ? "Promouvoir en Admin" : "Rétrograder en User";
+                                echo "</button>";
+                                echo "<button type='button' onclick='supprimerUtilisateur(" . $line['id'] . ", this)'>Supprimer</button>";
                                 echo "<button type='button' onclick='getUserDetails(" . $line['id'] . ", this)'>Détails</button>";
                                 echo "</td>";
                                 echo "</tr>";
@@ -103,18 +75,10 @@ afficher_header('admin');
                                 echo "<td>" . $line['courriel'] . "</td>";
                                 echo "<td>" . $line['role'] . "</td>";
                                 echo "<td>";
-                                echo "<form action='admin.php' method='post' style='display:inline;'>";
-                                echo "<input type='hidden' name='promote_id' value='" . $line['id'] . "'>";
-                                if ($line['role'] == 'user') {
-                                    echo "<button type='submit'>Promouvoir en Admin</button>";
-                                } else {
-                                    echo "<button type='submit'>Rétrograder en User</button>";
-                                }
-                                echo "</form>";
-                                echo "<form action='admin.php' method='post' style='display:inline;'>";
-                                echo "<input type='hidden' name='delete_id' value='" . $line['id'] . "'>";
-                                echo "<button type='submit'>Supprimer</button>";
-                                echo "</form>";
+                                echo "<button type='button' onclick='promouvoirUtilisateur(" . $line['id'] . ", this)'>";
+                                echo ($line['role'] == 'user') ? "Promouvoir en Admin" : "Rétrograder en User";
+                                echo "</button>";
+                                echo "<button type='button' onclick='supprimerUtilisateur(" . $line['id'] . ", this)'>Supprimer</button>";
                                 echo "<button type='button' onclick='getUserDetails(" . $line['id'] . ", this)'>Détails</button>";
                                 echo "</td>";
                                 echo "</tr>";
