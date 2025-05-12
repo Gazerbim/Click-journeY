@@ -122,7 +122,6 @@ $retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
     <div class="espaceur"></div>
     <?php
     echo "<p><strong>Prix estimé :</strong> <span id='prix-estime'>" . $montantTotal . " €</span></p>";
-    echo "Prix de base : ".$montant."€";
     echo "<p>Prix de base : ".$montant."€</p>";
     echo "<p>Options sélectionnées : <br>";
     foreach ($optionsSelectionnees as $option) {
