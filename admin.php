@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="styles.css">
+    <script src="js/admin.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rush&Krous - Gestion Admin</title>
 </head>
@@ -88,7 +89,7 @@ afficher_header('admin');
                                 echo "<input type='hidden' name='delete_id' value='" . $line['id'] . "'>";
                                 echo "<button type='submit'>Supprimer</button>";
                                 echo "</form>";
-                                //echo "<button>Ajouter Reduction</button>";
+                                echo "<button type='button' onclick='getUserDetails(" . $line['id'] . ", this)'>Détails</button>";
                                 echo "</td>";
                                 echo "</tr>";
                             }
@@ -114,7 +115,7 @@ afficher_header('admin');
                                 echo "<input type='hidden' name='delete_id' value='" . $line['id'] . "'>";
                                 echo "<button type='submit'>Supprimer</button>";
                                 echo "</form>";
-                                //echo "<button>Ajouter Reduction</button>";
+                                echo "<button type='button' onclick='getUserDetails(" . $line['id'] . ", this)'>Détails</button>";
                                 echo "</td>";
                                 echo "</tr>";
                             }
