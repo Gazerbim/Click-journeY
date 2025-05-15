@@ -9,7 +9,7 @@ $vendeur = $_GET['vendeur'] ?? '';
 $statut = $_GET['status'] ?? '';
 $control_recu = $_GET['control'] ?? '';
 $idVoyage = $_GET['id'] ?? '';
-$options = $_SESSION['retour'] ?? [];
+$options = $_SESSION['options2'] ?? [];
 
 
 if (empty($transaction) || empty($montant) || empty($vendeur) || empty($statut) || empty($control_recu) || empty($idVoyage)) {
