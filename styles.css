@@ -1105,3 +1105,28 @@ button.yang:hover {
     max-width: 400px;
     margin-right: 10px;
 }
+
+.status-message {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    display: none;
+}
+
+.status-message.loading {
+    display: block;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.status-message.success {
+    display: block;
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-message.error {
+    display: block;
+    background-color: #f8d7da;
+    color: #721c24;
+}
