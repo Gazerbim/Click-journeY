@@ -36,6 +36,7 @@ if ($statut === "accepted") {
     }
     unset($_SESSION['retour']); // enlever les options activées de la session
     unset($_SESSION['options']); // enlever les options de la session
+    unset($_SESSION['options2']);
     supprimerVoyagePanier($id, $idVoyage); // supprimer le voyage du panier de l'utilisateur
 }
 ?>
