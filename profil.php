@@ -259,7 +259,6 @@
             const champsModif = {};
             const inputChamps = document.querySelectorAll('.formulaire-classique input');
 
-            // Status message container
             const statusMessage = document.createElement('div');
             statusMessage.className = 'status-message';
             const formContainer = document.querySelector('.formulaire-classique');
@@ -357,20 +356,16 @@
                 submitBouton.addEventListener('click', function(e) {
                     e.preventDefault();
 
-                    // Create FormData object for AJAX submission
                     const formData = new FormData();
                     formData.append('action', 'update_profil');
 
-                    // Add modified fields to FormData
                     for (const champId in champsModif) {
                         formData.append(champId, champsModif[champId]);
                     }
 
-                    // Show loading message
                     statusMessage.textContent = "Mise à jour en cours...";
                     statusMessage.className = 'status-message loading';
 
-                    // Send AJAX request
                     fetch('modification_profil_ajax.php', {
                         method: 'POST',
                         body: formData
@@ -378,11 +373,9 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                // Success handling
                                 statusMessage.textContent = data.message;
                                 statusMessage.className = 'status-message success';
 
-                                // Update vOrigine with new values
                                 if (data.updates) {
                                     for (const field in data.updates) {
                                         const inputElement = document.getElementById(field);
@@ -392,27 +385,22 @@
                                     }
                                 }
 
-                                // Reset champsModif and hide submit button
                                 Object.keys(champsModif).forEach(key => {
                                     delete champsModif[key];
                                 });
                                 submitBouton.style.display = 'none';
 
-                                // Remove modified class from all inputs
                                 document.querySelectorAll('.field-modified').forEach(el => {
                                     el.classList.remove('field-modified');
                                 });
 
-                                // Hide confirmation password field if it was shown
                                 document.getElementById('confirm-password-field').style.display = 'none';
                                 document.getElementById('mdp').value = '';
                                 document.getElementById('cmdp').value = '';
                             } else {
-                                // Error handling
                                 statusMessage.textContent = data.message || "Une erreur est survenue.";
                                 statusMessage.className = 'status-message error';
 
-                                // Revert fields to original values
                                 for (const champId in champsModif) {
                                     const inputElement = document.getElementById(champId);
                                     if (inputElement) {
@@ -422,7 +410,6 @@
                                 }
                             }
 
-                            // Hide status message after 5 seconds
                             setTimeout(() => {
                                 statusMessage.textContent = '';
                                 statusMessage.className = 'status-message';
@@ -433,7 +420,6 @@
                             statusMessage.textContent = "Une erreur réseau s'est produite.";
                             statusMessage.className = 'status-message error';
 
-                            // Revert fields to original values
                             for (const champId in champsModif) {
                                 const inputElement = document.getElementById(champId);
                                 if (inputElement) {

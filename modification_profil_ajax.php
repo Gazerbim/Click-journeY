@@ -2,19 +2,16 @@
 session_start();
 require("requires/json_utilities.php");
 
-// Check if user is logged in
 if (!isset($_SESSION['id']) || empty($_SESSION['id'])) {
     echo json_encode(['success' => false, 'message' => 'Utilisateur non connecté']);
     exit;
 }
 
-// Check if it's an AJAX request with POST data
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_profil') {
     $id = $_SESSION['id'];
     $modified = false;
     $updates = [];
 
-    // Process each field
     if (isset($_POST['nom']) && !empty($_POST['nom'])) {
         modifierProfileUtilisateur($id, 'nom', $_POST['nom']);
         $_SESSION['nom'] = $_POST['nom'];
