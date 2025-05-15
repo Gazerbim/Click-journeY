@@ -50,7 +50,7 @@ $_SESSION['transaction'] = $transaction;
 
 $vendeur = "MI-4_A";
 $api_key = getAPIKey($vendeur);
-$retour = "http://localhost/Click-journeY-main(35)/Click-journeY-main/retour_paiement.php?id=" . $voyageId;
+$retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
 $control = md5($api_key . "#" . $transaction . "#" . $montantTotal . "#" . $vendeur . "#" . $retour . "#");
 ?>
 
