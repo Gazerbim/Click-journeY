@@ -65,7 +65,7 @@ afficher_header('admin');
                                 echo "</td>";
                                 echo "</tr>";
                             }
-                        }else{
+                        }else {
                             for ($i = $page*ligneParPage; $i < min(($page+1)*ligneParPage, count($tab)); $i++) {
                                 $line = $tab[$i];
                                 echo "<tr>";
@@ -73,7 +73,7 @@ afficher_header('admin');
                                 echo "<td>" . $line['nom'] . "</td>";
                                 echo "<td>" . $line['prenom'] . "</td>";
                                 echo "<td>" . $line['courriel'] . "</td>";
-                                echo "<td>" . $line['role'] . "</td>";
+                                echo "<td class='role-cell'>" . $line['role'] . "</td>";  // Ajout de la classe role-cell
                                 echo "<td>";
                                 echo "<button type='button' onclick='promouvoirUtilisateur(" . $line['id'] . ", this)'>";
                                 echo ($line['role'] == 'user') ? "Promouvoir en Admin" : "Rétrograder en User";

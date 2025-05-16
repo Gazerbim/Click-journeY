@@ -61,17 +61,25 @@ function promouvoirUtilisateur(id, bouton) {
     const ligne = bouton.closest("tr");
     const roleCell = ligne.querySelector(".role-cell");
 
-    if (!roleCell) return;
+    if (!roleCell) {
+        console.error("Cellule de rôle non trouvée");
+        return;
+    }
 
     document.body.style.cursor = "wait";
     bouton.style.cursor = "wait";
 
     fetch(`admin_fetch.php?id=${id}&action=promouvoir`)
-        .then(response => response.text())
+        .then(async response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
         .then(data => {
             if (data === "success") {
-                // Met à jour le rôle dans la cellule
-                if (roleCell.textContent.toLowerCase() === "user") {
+                const currentRole = roleCell.textContent.trim().toLowerCase();
+                if (currentRole === "user") {
                     roleCell.textContent = "adm";
                     bouton.textContent = "Rétrograder en User";
                 } else {
@@ -79,16 +87,15 @@ function promouvoirUtilisateur(id, bouton) {
                     bouton.textContent = "Promouvoir en Admin";
                 }
             } else {
-                alert("Erreur lors de la promotion de l'utilisateur.");
+                throw new Error(data || "Erreur lors de la promotion");
             }
         })
         .catch(error => {
             console.error("Erreur:", error);
+            alert("Erreur lors de la modification du rôle: " + error.message);
         })
         .finally(() => {
             bouton.style.cursor = "default";
             document.body.style.cursor = "default";
         });
 }
-
-
