@@ -550,6 +550,31 @@
 		}
 		return false;
 	}
+
+	function recupererNombreVoyagesPanier($id){
+		$path = "databases/utilisateurs/$id/panier.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		return count($content);
+	}
+
+	function recupererNombreVoyageUtilisateur($id){
+		$path = "databases/utilisateurs/$id/voyages.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		return count($content);
+	}
+
+	function recupererNomsVoyagesUtilisateur($id){
+		$path = "databases/utilisateurs/$id/voyages.json";
+		$file_content = file_get_contents($path);
+		$content = json_decode($file_content, true);
+		$nomVoyages = array();
+		foreach ($content as $key => $value) {
+			$nomVoyages[] = recupererTitreVoyage($value["id"]);
+		}
+		return $nomVoyages;
+	}
 	
 	//EXP UTILISATION
 
