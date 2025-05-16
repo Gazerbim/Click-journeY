@@ -33,8 +33,8 @@ $optionsDisponibles = recupererOptionsVoyage($voyageId);
 $montant = recupererPrixVoyage($voyageId);
 $montantTotal = $montant;
 
-foreach ($optionsSelectionnees as $option) {
-    if (isset($optionsDisponibles[$option])) {
+foreach ($optionsSelectionnees as $option => $valeur) {
+    if (isset($optionsDisponibles[$option]) && $valeur == "true") {
         $montantTotal += $optionsDisponibles[$option];
     }
 }
@@ -44,7 +44,6 @@ if (!existePanierVoyageUtilisateur($id, $voyageId)) {
 } else {
     modifierVoyagePanier($id, $voyageId, $optionsSelectionnees);
 }
-
 $transaction = uniqid();
 $_SESSION['transaction'] = $transaction;
 
@@ -78,7 +77,7 @@ afficher_header('voyages');
                 <tr>
                     <td><label for="<?= $index ?>"><?= $index ?> (+<?= $valeur ?> €)</label></td>
                     <td><input type="checkbox" class="option-checkbox" value="<?= $index ?>" data-price="<?= $valeur ?>"
-                        <?= in_array($index, $optionsSelectionnees) ? 'checked' : '' ?>></td>
+                        <?= in_array($index, $optionsSelectionnees) || $optionsSelectionnees[$index] == "true" ? 'checked' : '' ?>></td>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -88,8 +87,10 @@ afficher_header('voyages');
     <p><strong>Prix estimé :</strong> <span id="prix-estime"><?= $montantTotal ?> €</span></p>
     <p>Prix de base : <span id="prix-base"><?= $montant ?> €</span></p>
     <p>Options sélectionnées : <br><span id="recap-options">
-        <?php foreach ($optionsSelectionnees as $option): ?>
-            <?= $option ?> (+<?= $optionsDisponibles[$option] ?> €),
+        <?php foreach ($optionsSelectionnees as $option => $valeur): ?>
+            <?php if ($valeur == "true" && isset($optionsDisponibles[$option])): ?>
+                <?= $option ?> (+<?= $optionsDisponibles[$option] ?> €),
+            <?php endif; ?>
         <?php endforeach; ?>
     </span></p>
     
