@@ -18,17 +18,18 @@ if (!$voyageId) {
 
 // Récupérer toutes les options possibles pour le voyage
 $dispos = recupererOptionsVoyage($voyageId); // format: [nom => prix]
-
 // Créer un tableau avec toutes les options : true si cochée, false sinon
 $optionsToutes = [];
 foreach ($dispos as $nom => $prix) {
     $optionsToutes[$nom] = in_array($nom, $options) ? "true" : "false";
 }
-
+modifierVoyagePanier($_SESSION['id'], $voyageId, $optionsToutes);
 // Enregistrer toutes les options dans la session
 $_SESSION['options'] = $optionsToutes;
 
 $_SESSION['options2'] = $optionsToutes;
+
+
 
 // Calculer le prix total
 $base = recupererPrixVoyage($voyageId);
