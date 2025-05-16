@@ -3,53 +3,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const voyageId = document.getElementById("voyage-id").value;
 
     checkboxes.forEach(cb => {
-        cb.addEventListener("change", () => {
+        cb.addEventListener("change", async () => {
             const selected = Array.from(checkboxes)
                 .filter(c => c.checked)
                 .map(c => c.value);
 
             const formData = new FormData();
             formData.append("voyageId", voyageId);
-            selected.forEach(opt => formData.append("options[]", opt));
+            formData.append("options", JSON.stringify(selected));
 
-            // 1. Mettre à jour prix & résumé
-            fetch("ajax_update_options.php", {
-                method: "POST",
-                body: formData
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (!data.success) throw new Error(data.message);
+            // Premier try/catch pour la mise à jour des prix
+            try {
+                const priceResponse = await fetch("ajax_update_options.php", {
+                    method: "POST",
+                    body: formData
+                });
+                const priceData = await priceResponse.json();
 
-                document.getElementById("prix-estime").textContent = data.prixTotal + " €";
-                document.getElementById("prix-base").textContent = data.prixBase + " €";
-                document.getElementById("montant-total").textContent = data.prixTotal + " €";
-                document.getElementById("montant-form").value = data.prixTotal;
+                if (!priceData.success) throw new Error(priceData.message);
+
+                // Mise à jour des éléments d'interface
+                document.getElementById("prix-estime").textContent = priceData.prixTotal + " €";
+                document.getElementById("prix-base").textContent = priceData.prixBase + " €";
+                document.getElementById("montant-total").textContent = priceData.prixTotal + " €";
+                document.getElementById("montant-form").value = priceData.prixTotal;
 
                 const recap = document.getElementById("recap-options");
-                recap.innerHTML = data.options.length
-                    ? data.options.map(o => `${o.nom} (+${o.prix} €)`).join(', ')
-                    : "Aucune option sélectionnée";
+                recap.textContent = priceData.options
+                    .map(opt => `${opt.nom} (+${opt.prix} €)`)
+                    .join(', ');
+            } catch (error) {
+                console.error("Erreur mise à jour prix:", error);
+                return; // Arrêter l'exécution si la première requête échoue
+            }
 
-                // 2. Mettre à jour la valeur de contrôle
-                const controlData = new FormData();
-                controlData.append("voyageId", voyageId);
-                selected.forEach(opt => controlData.append("options[]", opt));
-
-                return fetch("ajax_update_control.php", {
+            // Deuxième try/catch pour la mise à jour du control
+            try {
+                const controlResponse = await fetch("ajax_update_control.php", {
                     method: "POST",
-                    body: controlData
+                    body: formData
                 });
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById("control-input").value = data.control;
-                } else {
-                    console.error("Erreur mise à jour control :", data.message);
-                }
-            })
-            .catch(err => console.error("Erreur AJAX :", err));
+                const controlData = await controlResponse.json();
+
+                if (!controlData.success) throw new Error(controlData.message);
+
+                document.getElementById("control-input").value = controlData.control;
+            } catch (error) {
+                console.error("Erreur mise à jour control:", error);
+            }
         });
     });
 });

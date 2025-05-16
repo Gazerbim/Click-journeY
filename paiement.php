@@ -22,14 +22,26 @@ if (existeDejaVoyageUtilisateur($id, $voyageId)) {
     exit;
 }
 
+
 if (existePanierVoyageUtilisateur($id, $voyageId) && empty($_GET['maj'])) {
     $_SESSION['options'] = recupererVoyagePanierUtilisateur($id, $voyageId)['options'];
+    $optionsSelectionnees = donnerTabOptionsSelectionnees($_SESSION['options'], []);
 } elseif (!isset($_SESSION['options'])) {
     $_SESSION['options'] = [];
 }
 
-$optionsSelectionnees = $_SESSION['options'];
+
 $optionsDisponibles = recupererOptionsVoyage($voyageId);
+if(!existePanierVoyageUtilisateur($id, $voyageId)) {
+    $optionsSelectionnees = donnerTabOptionsSelectionnees($optionsDisponibles, []);
+}else{
+    $optionsSelectionnees = $_SESSION['options'];
+}
+
+if($optionsSelectionnees == null) {
+    $optionsSelectionnees = donnerTabOptionsSelectionnees($optionsDisponibles, []);
+}
+
 $montant = recupererPrixVoyage($voyageId);
 $montantTotal = $montant;
 
@@ -64,6 +76,7 @@ $control = md5($api_key . "#" . $transaction . "#" . $montantTotal . "#" . $vend
 <?php
 require('requires/header.php');
 afficher_header('voyages');
+
 ?>
 
 <div class="espaceur"></div>
@@ -77,7 +90,7 @@ afficher_header('voyages');
                 <tr>
                     <td><label for="<?= $index ?>"><?= $index ?> (+<?= $valeur ?> €)</label></td>
                     <td><input type="checkbox" class="option-checkbox" value="<?= $index ?>" data-price="<?= $valeur ?>"
-                        <?= in_array($index, $optionsSelectionnees) || $optionsSelectionnees[$index] == "true" ? 'checked' : '' ?>></td>
+                        <?= $optionsSelectionnees[$index] == "true" ? 'checked' : '' ?>></td>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -98,7 +111,6 @@ afficher_header('voyages');
     <p>Voyage : <?= recupererTitreVoyage($voyageId) ?></p>
     <p>Carte : 5555 1234 5678 9000 — Code : 555 — Expiration : 01/26</p>
     <p>Titulaire : <?= $_SESSION['prenom'] . " " . $_SESSION['nom'] ?></p>
-
     <div class="espaceur"></div>
     <form action="https://www.plateforme-smc.fr/cybank/index.php" method="POST">
         <input type="hidden" name="transaction" value="<?= $transaction ?>">

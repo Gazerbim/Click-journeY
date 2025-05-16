@@ -1,8 +1,12 @@
 <?php
 require('requires/getapikey.php');
-require('requires/json_utilities.php');
 session_start();
 header('Content-Type: application/json');
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
+    exit;
+}
 
 $voyageId = $_POST['voyageId'] ?? null;
 $options = $_POST['options'] ?? [];
@@ -12,27 +16,19 @@ if (!$voyageId) {
     exit;
 }
 
-$_SESSION['options'] = $options;
+// Récupérer le montant total actuel depuis la session
+$montantTotal = $_SESSION['montant_total'] ?? 0;
 
-$base = recupererPrixVoyage($voyageId);
-$dispos = recupererOptionsVoyage($voyageId);
-$total = $base;
-
-foreach ($options as $opt) {
-    if (isset($dispos[$opt])) {
-        $total += $dispos[$opt];
-    }
-}
-
-$transaction = $_SESSION['transaction'] ?? uniqid(); // assure continuité
-$_SESSION['transaction'] = $transaction;
+// Générer la nouvelle valeur de contrôle
 $vendeur = "MI-4_A";
 $api_key = getAPIKey($vendeur);
-$retour = "http://localhost/Click-journeY-main(35)/Click-journeY-main/retour_paiement.php?id=" . $voyageId;
+$transaction = $_SESSION['transaction'];
+$retour = "http://localhost/retour_paiement.php?id=" . $voyageId;
 
-$control = md5($api_key . "#" . $transaction . "#" . $total . "#" . $vendeur . "#" . $retour . "#");
+$control = md5($api_key . "#" . $transaction . "#" . $montantTotal . "#" . $vendeur . "#" . $retour . "#");
 
 echo json_encode([
     'success' => true,
     'control' => $control
 ]);
+?>

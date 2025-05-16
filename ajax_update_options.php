@@ -1,51 +1,60 @@
 <?php
-require('requires/json_utilities.php');
-session_start();
+// Prevent any HTML error output
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
+
 header('Content-Type: application/json');
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    echo json_encode(['success' => false, 'message' => 'Méthode non autorisée']);
-    exit;
-}
+try {
+    require('requires/json_utilities.php');
+    session_start();
 
-$voyageId = $_POST['voyageId'] ?? null;
-$options = $_POST['options'] ?? [];
-
-if (!$voyageId) {
-    echo json_encode(['success' => false, 'message' => 'ID manquant']);
-    exit;
-}
-
-// Récupérer toutes les options possibles pour le voyage
-$dispos = recupererOptionsVoyage($voyageId); // format: [nom => prix]
-// Créer un tableau avec toutes les options : true si cochée, false sinon
-$optionsToutes = [];
-foreach ($dispos as $nom => $prix) {
-    $optionsToutes[$nom] = in_array($nom, $options) ? "true" : "false";
-}
-modifierVoyagePanier($_SESSION['id'], $voyageId, $optionsToutes);
-// Enregistrer toutes les options dans la session
-$_SESSION['options'] = $optionsToutes;
-
-$_SESSION['options2'] = $optionsToutes;
-
-
-
-// Calculer le prix total
-$base = recupererPrixVoyage($voyageId);
-$total = $base;
-$details = [];
-
-foreach ($optionsToutes as $nom => $etat) {
-    if ($etat === "true" && isset($dispos[$nom])) {
-        $total += $dispos[$nom];
-        $details[] = ['nom' => $nom, 'prix' => $dispos[$nom]];
+    if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+        throw new Exception('Méthode non autorisée');
     }
-}
 
-echo json_encode([
-    'success' => true,
-    'prixBase' => $base,
-    'prixTotal' => $total,
-    'options' => $details
-]);
+    $voyageId = $_POST['voyageId'] ?? null;
+    $options = json_decode($_POST['options'], true) ?? [];
+
+    if (!$voyageId) {
+        throw new Exception('ID voyage manquant');
+    }
+
+    // Récupérer toutes les options possibles pour le voyage
+    $dispos = recupererOptionsVoyage($voyageId);
+    $prixBase = recupererPrixVoyage($voyageId);
+    
+    // Créer un tableau avec toutes les options
+    $optionsToutes = [];
+    $montantTotal = $prixBase;
+    $details = [];
+
+    foreach ($dispos as $nom => $prix) {
+        $optionsToutes[$nom] = in_array($nom, $options) ? "true" : "false";
+        if ($optionsToutes[$nom] === "true") {
+            $montantTotal += $prix;
+            $details[] = ['nom' => $nom, 'prix' => $prix];
+        }
+    }
+
+    // Mettre à jour la session et le panier
+    $_SESSION['montant_total'] = $montantTotal;
+    $_SESSION['options'] = $optionsToutes;
+    $_SESSION['options2'] = $optionsToutes;
+    modifierVoyagePanier($_SESSION['id'], $voyageId, $optionsToutes);
+
+    echo json_encode([
+        'success' => true,
+        'prixBase' => $prixBase,
+        'prixTotal' => $montantTotal,
+        'options' => $details
+    ]);
+
+} catch (Exception $e) {
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => $e->getMessage()
+    ]);
+}
+?>
