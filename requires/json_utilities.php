@@ -553,6 +553,9 @@
 
 	function recupererNombreVoyagesPanier($id){
 		$path = "databases/utilisateurs/$id/panier.json";
+		if (!file_exists($path)) {
+			file_put_contents($path, json_encode(array(), JSON_PRETTY_PRINT));
+		}
 		$file_content = file_get_contents($path);
 		$content = json_decode($file_content, true);
 		return count($content);
@@ -560,6 +563,9 @@
 
 	function recupererNombreVoyageUtilisateur($id){
 		$path = "databases/utilisateurs/$id/voyages.json";
+		if (!file_exists($path)) {
+			file_put_contents($path, json_encode(array(), JSON_PRETTY_PRINT));
+		}
 		$file_content = file_get_contents($path);
 		$content = json_decode($file_content, true);
 		return count($content);
@@ -574,6 +580,20 @@
 			$nomVoyages[] = recupererTitreVoyage($value["id"]);
 		}
 		return $nomVoyages;
+	}
+
+	function donnerTabOptionsSelectionnees($tabOptionsDispo, $tabOptionsSelectionnees){
+		echo json_encode($tabOptionsSelectionnees);
+		echo "<br>";
+		$tab = array();
+		foreach ($tabOptionsDispo as $key => $value) {
+			if(isset($tabOptionsSelectionnees[$key])){
+				$tab[$key] = "true";
+			}else{
+				$tab[$key] = "false";
+			}
+		}
+		return $tab;
 	}
 	
 	//EXP UTILISATION
