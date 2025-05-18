@@ -137,7 +137,16 @@
             <div class="form-field">
                 <label for="date_naissance"><strong>Date de naissance :</strong></label>
                 <div class="input-groupe">
-                    <input type="date" id="date_naissance" name="date_naissance" <?php echo "value='$date_naissance'"; ?>>
+                    <?php
+                    $formatted_date_naissance = $date_naissance;
+                    if (!empty($date_naissance)) {
+                        $date = DateTime::createFromFormat('d/m/Y', $date_naissance) ?: DateTime::createFromFormat('Y-m-d', $date_naissance);
+                        if ($date) {
+                            $formatted_date_naissance = $date->format('Y-m-d');
+                        }
+                    }
+                    ?>
+                    <input type="date" id="date_naissance" name="date_naissance" value="<?php echo htmlspecialchars($formatted_date_naissance); ?>">
                     <button type="button" class="edit-btn" data-field="date_naissance">Modifier</button>
                     <button type="button" class="save-btn" data-field="date_naissance" style="display: none;">Valider</button>
                     <button type="button" class="cancel-btn" data-field="date_naissance" style="display: none;">Annuler</button>
